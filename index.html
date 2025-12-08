@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spline 3D场景</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        #canvas3d {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            background: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+        
+        .loading {
+            color: rgb(12, 12, 12);
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>3D交互场景</h1>
+        <canvas id="canvas3d"></canvas>
+        <div id="loading" class="loading">加载3D场景中...</div>
+    </div>
+
+    <!-- 引入Spline运行时库 -->
+    <script type="module">
+        import { Application } from 'https://unpkg.com/@splinetool/runtime@1.0.48/build/runtime.js';
+
+        const canvas = document.getElementById('canvas3d');
+        const loading = document.getElementById('loading');
+        
+        // 创建Spline应用
+        const app = new Application(canvas);
+        
+        // 加载Spline场景
+        app.load('scene.splinecode')
+            .then(() => {
+                loading.style.display = 'none';
+                console.log('Spline场景加载完成');
+                
+                // 查找场景中的对象（根据你的Spline场景中的对象名称）
+                // const myObject = app.findObjectByName('Cube');
+                // 或者通过ID查找
+                // const myObject = app.findObjectById('123456');
+            })
+            .catch((error) => {
+                loading.textContent = '加载失败，请刷新页面重试';
+                console.error('加载失败:', error);
+            });
+
+        // 控制函数示例
+        function startAnimation() {
+            app.play();
+        }
+
+        function stopAnimation() {
+            app.pause();
+        }
+
+        function rotateObject() {
+            // 查找并旋转对象
+            const cube = app.findObjectByName('Cube');
+            if (cube) {
+                cube.rotation.x += Math.PI / 4;
+            }
+        }
+    </script>
+</body>
+</html>
