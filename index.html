@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>席婷作品集</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://unpkg.com/lenis@1.1.4/dist/lenis.min.js"></script>
+    <script src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/libs/ScrollTrigger.min.js"></script>
+    <script src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/libs/gsap.min.js"></script>
+    <script src='https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/libs/SplitText.min.js'></script>
+    <script src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/libs/scrollreveal.min.js"></script>
+    <script src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/font/iconfont/iconfont.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script> -->
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/media.css">
+    <link rel="stylesheet" href="./css/index.css">
+
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.6/build/spline-viewer.js"></script>
+</head>
+<body>
+    <div id="cursor-dot"></div>
+    <div id="cursor-circle"></div>
+    <!---------------------------- 头部 ---------------------------->
+    <div class="header">
+        <div class="wrapper">
+            <!-- logo -->
+            <a href="./index.html" class="mylogo"></a>
+            <!-- 导航 -->
+            <ul class="nav">
+                <!-- <li><a href="#about">about</a></li> -->
+                <li data-lang="zh"><a href="./project.html">项目</a></li>
+                <li data-lang="en" style="display:none"><a href="./project.html">project</a></li>
+  
+                <li data-lang="zh"><a href="./3d.html">三维</a></li>
+                <li data-lang="en" style="display:none"><a href="./3d.html">3D</a></li>
+  
+                <li data-lang="zh"><a href="./motion.html">动效</a></li>
+                <li data-lang="en" style="display:none"><a href="./motion.html">motion</a></li>
+                <div class="language-switcher" >
+                    <button class="lang-btn" id="toggle-lang">中</button>
+                </div>
+  
+  
+  
+            </ul>
+            <!-- 手机显示按钮 -->
+            <div class="burger">
+                <div class="line line-top smooth-animation"></div>
+                <div class="line line-middle "></div>
+                <div class="line line-bottom smooth-animation"></div>
+            </div>
+        </div>
+    </div> 
+    <!------------------------ 1.作品集封面 ---------------------------->
+    
+    <div class="banner">
+        <div class="wrapper">
+            
+            <div class="bannerText-box">
+                    <div class="text-label-box">
+                    <!-- 标签 -->
+                    <svg class="icon text-hello" aria-hidden="true">
+                        <use xlink:href="#icon-hello"></use>
+                    </svg>           
+                
+                        <!-- <div class="lable-container">
+                            <div class="portfolio-lable-box">
+                                <img src="./img/index/portfolio-label-x.png" alt="" class="portfolio-label-x smooth-animation">
+                                <img src="./img/index/portfolio-lable.png" alt="" class="portfolio-label portfolio-label-tag smooth-animation">
+                                <img src="./img/index/portfolio-lable-string.png" alt="" class="portfolio-label">
+                            </div>
+                        </div> -->
+                </div>
+                
+                <svg class="icon text-name" aria-hidden="true">
+                    <use xlink:href="#icon-name"></use>
+                </svg>
+                <svg class="icon pixel-text" aria-hidden="true">
+                    <use xlink:href="#icon-pixel-zuopinji"></use>
+                </svg>
+
+            </div>
+            <div class="banner-bottom-box">
+                <img src="https://framerusercontent.com/images/TtFm4BmVDo3kG2737p9cDHo2kyk.png?width=808&height=214" alt="" class="pixel-portfolio">
+                <img src="https://framerusercontent.com/images/M5DMb3jFdFgljPXmFplFxXn5MfY.png?width=673&height=149" alt="" class="portfolio-mobile">
+                <ul class="banner-tags-container">
+                    <li class="banner-tag">
+                        <div class="black-block"></div>
+                        <span data-lang="zh">多端设计经验</span>
+                        <span data-lang="en" style="display:none">Multiterminal design</span>
+                    </li>
+                    <li class="banner-tag">
+                        <div class="black-block"></div>
+                        <span data-lang="zh">精通上下游流程</span>
+                        <span data-lang="en" style="display:none">Multiterminal design</span>
+                    </li>
+ 
+                    <li class="banner-tag">
+                        <div class="black-block"></div>
+                        <span data-lang="zh">多端设计经验</span>
+                        <span data-lang="en" style="display:none">Multiterminal design experience</span>
+                    </li>
+ 
+ 
+                </ul>
+            </div>
+        </div>
+        <img src="https://framerusercontent.com/images/ost7jxRVN8pX2yII7tTUm1vaIIU.png?width=3840&height=1862" alt="" class="banner-bg">
+        <div class="modeling-box">
+            <spline-viewer loading-anim-type="spinner-small-light" url="https://prod.spline.design/gYU74J9fC-jDAfTg/scene.splinecode"></spline-viewer> 
+        </div>
+        <span data-lang="zh" class="modeling-loading">模型载入中...</span>
+        <span data-lang="en" style="display:none; font-size: 14px;" class="modeling-loading">Model loading...</span>
+
+        <img src="https://framerusercontent.com/images/zkjoHZnytWtgSaPwecbsvZPEz6w.png?width=3840&height=1862" alt="" class="move-bg smooth-animation">
+        <div class="banner-sprite sprite-keycap" id="sprite1" data-frames="20" data-sprite="https://framerusercontent.com/images/EZM54IJqOISNZTrsOy0DlB1p0.png?width=6000&height=300"></div>
+        <div class="banner-sprite sprite-bucket" id="sprite1" data-frames="40" data-sprite="https://framerusercontent.com/images/VQi6GscUGh0VvGFsE5UcBYS8z2Y.png?width=16800&height=400"></div>
+        <!-- <div class="banner-sprite sprite-garbage" id="sprite1" data-frames="27" data-sprite="./img/index/gif/garbage.png"></div> -->
+ 
+    </div>
+
+    <div class="skillRoll">
+        <div class="wrapper">
+            <div class="skillRoll-container" id="skillContainer">
+                <div class="skill-list">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-wangzhanxitong"></use>
+                    </svg>
+                    <span>web design</span>           
+                </div>
+
+                <div class="skill-list">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-keshihua"></use>
+                    </svg>
+                    <span>data visualization</span>           
+                </div>
+
+
+                <div class="skill-list">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-houtai"></use>
+                    </svg>
+                    <span>dashboard</span>           
+                </div>
+
+                <div class="skill-list">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-dongxiao"></use>
+                    </svg>
+                    <span>motion design</span>           
+                </div>
+
+                <div class="skill-list">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-a-3D"></use>
+                    </svg>
+                    <span>3D Modeling</span>           
+                </div>
+
+                <div class="skill-list">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-a-rongqi8"></use>
+                    </svg>
+                    <span>illustration</span>           
+                </div>
+
+                <div class="skill-list">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-h002-aigc"></use>
+                    </svg>
+                    <span>aigc</span>           
+                </div>
+
+                <div class="skill-list">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-yunying1"></use>
+                    </svg>
+                    <span>Operations Design</span>           
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!---------------------------2.个人信息----------------------------->
+    <div style="background: #fff;">
+        <div class="personal basic-padding">
+            <div class="wrapper">
+                <div class="sectionTitle-container">
+                    <div class="subtitle-box">
+                        <svg class="icon highlight " aria-hidden="true">
+                            <use xlink:href="#icon-blockcolor"></use>
+                        </svg>                    
+                        <span class="section-Subtitle">关于我</span>
+                    </div>
+                    <div class="sectionTitle-box">
+                        <h1 class="sectionTitle split-line">some information  <br><span>about me</span></h1>
+                    </div>
+                </div>
+                <div class="personal-information-container">
+                    <div class="photo-frame">
+                        <img src="https://framerusercontent.com/images/k2CzIge9KgBkd7vDXDPBfd5cI.png?width=443&height=609" alt="" class="myphoto photo-2">
+                        <img src="https://framerusercontent.com/images/stnFBTidPD6HMZfApSK5h5ElFgU.png?width=502&height=735" alt="" class="myphoto photo-1">
+                    </div>
+                    <div class="information-box">
+                        <div class="personal-information">
+                            <p >I'm XiTing, a passionate and creative UI/UX designer. <br>I specialize in 
+                                <span class="highlight">data visualization</span>
+                                and digital product design 
+                                <span class="highlight">(apps/websites).</span>
+                            </p>
+                            <h4 class="text-regular">Outside of work, I'm obsessed with modeling and motion design. Exploring the creative boundaries in 3D space and dynamic rhythms.</h4>
+                        </div>
+                        <div class="card-container">
+                            <div class="number-card">
+                                <div class="number-info-box">
+                                    <div class="number-container">
+                                        <h1>8</h1>
+                                        <span>+</span>
+                                    </div>
+                                    <p data-lang="zh">工作经验</p>
+                                    <p data-lang="en" style="display:none">years of experience</p>
+                                </div>
+                                <div class="sprite-frame sprite" style="--step-count:35;--sprite-time:4s; --sprite-width:7vw;"></div>
+                            </div>
+
+                            <div class="number-card">
+                                <div class="number-info-box">
+                                    <div class="number-container">
+                                        <h1>54</h1>
+                                        <span>+</span>
+                                    </div>
+                                    <p data-lang="zh">完成项目</p>
+                                    <p data-lang="en" style="display:none">completed  projects</p>
+                                </div>
+                                <div class="sprite-folder sprite" style="--step-count:40;--sprite-time:4s; --sprite-width:7.5vw;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+
+
+
+
+
+            </div>
+
+        </div>
+
+
+
+
+        <!-- 个人经历 -->
+        <div class="experience-container smooth-animation" id="resume">
+            <div class="rular"></div>
+            <div class="wrapper">
+                <div class="sectionTitle-container dark">
+                    <div class="subtitle-box">
+                        <svg class="icon highlight " aria-hidden="true">
+                            <use xlink:href="#icon-blockcolor"></use>
+                        </svg>                    
+                        <span class="section-Subtitle">工作经历</span>
+                    </div>
+                    <div class="sectionTitle-box">
+                        <h1 class="sectionTitle split-line">explore my  <br><span>work experience</span></h1>
+                        <p data-lang="zh" style="font-weight: 400;">设计对我而言不仅仅是一份工作，更是我的热爱。</p>                
+                        <p data-lang="en" style="display:none;">Design is not just a job for me. - it's my passion.</p>                
+                    </div>
+                </div>
+
+                <div class="resume-container">
+                    <div class="resume-item active">
+                        <div class="resume-item-header ">
+                            <div class="left">
+                                <div class="number">[01]</div>
+                                <div class="time-range">2021.3-2022.4</div>
+                                <div class="company-name">武汉光谷信息技术股份有限公司</div>
+                                <p>UI/UX designer</p>
+                            </div>
+                            <div class="toggle-btn">
+                                <svg class="icon icon-transverse" aria-hidden="true">
+                                    <use xlink:href="#icon-jianhao"></use>
+                                </svg> 
+                                <svg class="icon icon-vertical" aria-hidden="true">
+                                    <use xlink:href="#icon-jianhao"></use>
+                                </svg>           
+                            </div>
+                        </div>
+                        <div class="section-content">                
+                            <p>1.主导设定整体视觉风格和UI设计，包括界面设计、图标设计、配色，负责参与设计体验、交互流程和设计规范的制定<br>
+                                2.跟进产品设计、开发和上线的整个过程，跟进设计还原度，保障产品设计品质的有效落地 <br>
+                                3.根据公司品牌策略，设计各种日常运营活动、banner、海报、单页等
+                            </p>
+
+                            <div class="slideshow-container group1">
+                                <img src="./img/index/experience/1.png" alt="" class="slide">
+                                <img src="./img/index/experience/2.png" alt="" class="slide">
+                                <img src="./img/index/experience/3.png" alt="" class="slide">
+                            </div> 
+
+                        </div>
+                    </div>
+
+                    <div class="resume-item">
+                        <div class="resume-item-header">
+                            <div class="left">
+                                <div class="number">[02]</div>
+                                <div class="time-range">2021.3-present</div>
+                                <div class="company-name">武汉光谷信息技术股份有限公司</div>
+                                <p>UI/UX designer</p>
+                            </div>
+                            <div class="toggle-btn">
+                                <svg class="icon icon-transverse" aria-hidden="true">
+                                    <use xlink:href="#icon-jianhao"></use>
+                                </svg> 
+                                <svg class="icon icon-vertical" aria-hidden="true">
+                                    <use xlink:href="#icon-jianhao"></use>
+                                </svg>           
+                            </div>
+                        </div>
+                        <div class="section-content">
+                            
+                            <p>1.主导设定整体视觉风格和UI设计，包括界面设计、图标设计、配色，负责参与设计体验、交互流程和设计规范的制定
+                                2.跟进产品设计、开发和上线的整个过程，跟进设计还原度，保障产品设计品质的有效落地
+                                3.根据公司品牌策略，设计各种日常运营活动、banner、海报、单页等
+                            </p>
+                            <div class="slideshow-container group2">
+                                <img src="./img/3d/1.png" alt="" class="slide">
+                                <img src="./img/3d/2.png" alt="" class="slide">
+                                <img src="./img/3d/4.png" alt="" class="slide">
+                            </div> 
+
+                            
+                        </div>
+                    </div>
+
+                    <div class="resume-item">
+                        <div class="resume-item-header">
+                            <div class="left">
+                                <div class="number">[03]</div>
+                                <div class="time-range">2021.3-present</div>
+                                <div class="company-name">武汉光谷信息技术股份有限公司</div>
+                                <p>Senior UX/UI Designer</p>
+                            </div>
+                            <div class="toggle-btn">
+                                <svg class="icon icon-transverse" aria-hidden="true">
+                                    <use xlink:href="#icon-jianhao"></use>
+                                </svg> 
+                                <svg class="icon icon-vertical" aria-hidden="true">
+                                    <use xlink:href="#icon-jianhao"></use>
+                                </svg>           
+                            </div>
+                        </div>
+                        <div class="section-content">
+                            
+                            <p>1.主导设定整体视觉风格和UI设计，包括界面设计、图标设计、配色，负责参与设计体验、交互流程和设计规范的制定
+                                2.跟进产品设计、开发和上线的整个过程，跟进设计还原度，保障产品设计品质的有效落地
+                                3.根据公司品牌策略，设计各种日常运营活动、banner、海报、单页等
+                            </p>
+
+                            <div class="slideshow-container group3">
+                                <img src="./img/3d/1.png" alt="" class="slide">
+                                <img src="./img/3d/2.png" alt="" class="slide">
+                                <img src="./img/3d/4.png" alt="" class="slide">
+                            </div> 
+                            
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="btn-centre-container">
+                <button class="btn-download">
+                    <a href="./index.html">
+                        <div class="btn-box">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-xiangsuxiazai"></use>
+                            </svg> 
+                            <span data-lang="zh" style="font-size: 17px; margin-right: 16px;">点击下载简历</span>
+                            <span data-lang="en" style="display:none">Download CV</span>
+                                                
+                        </div>
+                    </a>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!--------------------------- 3.目录 ----------------------------->
+    <div class="content basic-padding">
+        <!-----------------------projects动效 -------------------->
+        <h1 class="content-head">projects.</h1>
+
+        <!--------------------------项目卡片 ---------------------->
+        <div class="project-container"  id="project">
+            <div class="subtitle-box">
+                <svg class="icon highlight " aria-hidden="true">
+                    <use xlink:href="#icon-blockcolor"></use>
+                </svg>                    
+                <span class="section-Subtitle">精选作品</span>
+            </div>
+
+            <div class="wrapper">
+                <div class="grid-system project-items">
+                    <!-- 左边 -->                
+                    <div class="content-info info-left" style="--grid-column:span 3; ">
+                        <div class="project-title-box">
+                            <div class="item-number-box">
+                                <div class="item-number-scroll smooth-animation">
+                                    <h5>01</h5>
+                                    <h5>02</h5>
+                                    <h5>03</h5>
+                                    <h5>04</h5>
+                                </div>
+                                <span class="total">/04</span>
+                            </div>
+                            <div class="line"></div>
+                            <div class="item-title-box">
+
+                                <!-- 4个标题 -->                   
+                                <div class="item-title-scroll smooth-animation">
+                                    <h2 class="item-title">可视化合集</h2>
+                                    <h2 class="item-title">数字能源</h2>
+                                    <h2 class="item-title">即梦</h2>
+                                    <h2 class="item-title">数字能源</h2>
+                                </div>                                
+                            </div>
+                        </div>
+                        <p class="item-description">数字化配电房运维平台依托可靠的物联接入和强大的云端处理能力，建立多维预警体系，实现了对机房设备、能耗、安全、维护等各个方面的全面监控和智能管理，提升配电系统自动化、数智化水平。</p>
+                    </div>
+
+                    <!-- 中间项目图片 -->                
+                    <div class="cards-container project-item" style="--grid-column:span 6;">
+                        <div class="card">
+                            
+                            <div class="card-face card-front front-1 visible" style="opacity: 1;">
+                                <div class="projectImg-container" >  
+                                    <img src="https://framerusercontent.com/images/6rwcdIZ9Y5KVfNjChIO3MtzpxfM.png?width=2213&height=1330"  alt="移动端设计" class="original increase-saturation">
+                                    <img src="https://framerusercontent.com/images/3LbuzjrpfIvM7CC2N5RA5EAAc.gif?width=1770&height=1064" alt="" class="gif-layer gif-mode" >
+                                    <img src="https://framerusercontent.com/images/dKtx5zFMWKXgagcWWKRM9w2DQc.gif?width=1770&height=1064" alt="" class="gif-layer" >
+                                    <div class="ray ray1"></div>
+                                    <div class="ray ray2"></div>
+                                    <div class="ray ray3"></div>
+                                </div>
+                                <div class="hover-info-container">
+                                    <h1>可视化合集</h1>
+                                    <div class="project-tags">
+                                        <span>UI/UX</span>
+                                        <span class="value-category">visualization</span>
+                                    </div>
+
+                                </div>
+
+                                <div class="item-arrow">
+                                    <div class="arrow-gif">
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-xiangsujiantou"></use>
+                                        </svg>           
+                                    </div>
+                                </div>                          
+                            </div>
+                            <div class="card-face card-back back-1" style="opacity: 1;">
+                                <div class="projectImg-container" >
+                                    <!-- 第二张图   -->
+                                    <video src="./video/数字能源banner.mp4"  muted loop autoplay ></video> 
+                                </div>
+
+                                <div class="hover-info-container">
+                                    <h1>可视化合集</h1>
+                                    <div class="project-tags">
+                                        <span>UI/UX</span>
+                                        <span>visualization</span>
+                                    </div>
+
+                                </div>
+
+                                <div class="item-arrow">
+                                    <div class="arrow-gif">
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-xiangsujiantou"></use>
+                                        </svg>           
+                                    </div>
+                                </div>                          
+                            </div>
+
+                            <div class="card-face card-front front-2" style="opacity: 0;">
+                                <div class="projectImg-container" >  
+                                    <!-- 第⬆️张图   -->
+                                     <img src="https://framerusercontent.com/images/FgTLj032ogv94xnYMAsm5iJBM.png?width=2880&height=2142" alt="">
+                                </div>
+
+                                <div class="hover-info-container">
+                                    <h1>可视化合集</h1>
+                                    <div class="project-tags">
+                                        <span>UI/UX</span>
+                                        <span>visualization</span>
+                                    </div>
+
+                                </div>
+
+                                <div class="item-arrow">
+                                    <div class="arrow-gif">
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-xiangsujiantou"></use>
+                                        </svg>           
+                                    </div>
+                                </div>                          
+                            </div>
+
+                            <div class="card-face card-back back-2" style="opacity: 0;">
+                                <div class="projectImg-container" >  
+                                    <video src="./video/项目示例2.mp4"  muted loop autoplay ></video> 
+                                </div>
+
+                                <div class="hover-info-container">
+                                    <h1>可视化合集</h1>
+                                    <div class="project-tags">
+                                        <span>UI/UX</span>
+                                        <span>visualization</span>
+                                    </div>
+
+                                </div>
+
+                                <div class="item-arrow">
+                                    <div class="arrow-gif">
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-xiangsujiantou"></use>
+                                        </svg>           
+                                    </div>
+                                </div>                          
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 右边 -->                
+                    <div class="content-info info-right" style="--grid-column:span 3;">
+                        <div class="detail-info">
+                            <span class="info-lable" data-lang="zh">时间</span>
+                            <span class="info-lable" data-lang="en" style="display:none">time</span>
+                            <div class="item-value-box">
+                                <div class="item-value-scroll smooth-animation">
+                                    <h2 class="item-value value-time"></h2>
+                                    <h2 class="item-value value-time"></h2>
+                                    <h2 class="item-value value-time"></h2>
+                                    <h2 class="item-value value-time"></h2>
+                                </div>                                
+                            </div>
+                        </div>
+
+                        <div class="detail-info">
+                            <span class="info-lable" data-lang="zh">类型</span>
+                            <span class="info-lable" data-lang="en" style="display:none">category</span>
+                            <div class="item-value-box">
+                                <div class="item-value-scroll smooth-animation">
+                                    <h2 class="item-value value-category"></h2>
+                                    <h2 class="item-value value-category"></h2>
+                                    <h2 class="item-value value-category"></h2>
+                                    <h2 class="item-value value-category"></h2>
+                                </div>                                
+                            </div>
+                        </div>
+
+                        <div class="detail-info">
+                            <span class="info-lable" data-lang="zh">行业</span>
+                            <span class="info-lable" data-lang="en" style="display:none">industry</span>
+                            <div class="item-value-box">
+                                <div class="item-value-scroll smooth-animation">
+                                    <h2 class="item-value value-industy"></h2>
+                                    <h2 class="item-value value-industy"></h2>
+                                    <h2 class="item-value value-industy"></h2>
+                                    <h2 class="item-value value-industy"></h2>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+
+
+
+            <!-- 按钮 -->
+            <div class="stroke-button-box">
+                
+                <div class="scroll-content">
+                    <p class="Stroke">see all projects ✦ see all projects ✦ </p>
+                    <p class="Stroke">see all projects ✦ see all projects ✦ </p>
+                </div>
+
+                <div class="btn-centre-container btn-more-container">
+                    <a href="./project.html" target="_blank">
+                        <button class="btn-more">
+                            <div class="btn-box">
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-xiangsujiantouyou"></use>
+                                </svg> 
+                            <span data-lang="zh" style="font-size: 17px;">查看全部项目</span>
+                            <span data-lang="en" style="display:none">all projects</span>
+                            </div>
+                        </button>
+                    </a>
+            </div>
+
+            </div>
+            <div class="line-box wrapper">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                
+            </div>
+
+        </div>
+
+        <!-- 手机端-项目卡片 -->
+        <div class="project-container-phone wrapper" style="display: none;">
+            <div class="sectionTitle-container">
+                <div class="subtitle-box">
+                    <svg class="icon highlight " aria-hidden="true">
+                        <use xlink:href="#icon-blockcolor"></use>
+                    </svg>                    
+                    <span class="section-Subtitle">精选项目</span>
+                </div>
+                <div class="sectionTitle-box otherDesign-text-box">
+                    <h1 class="sectionTitle split-line">featured works <span>of <br> my portfolio</span></h1>
+                </div>
+            </div>
+
+        <div class="projectCards-container one-columns">
+            <!-- 卡片1 -->
+            <div class="project-card itemHover" data-categories="visualization">
+                <a href="./project-Visualization.html">
+                    <div class="projectImg-container" >  
+                        <img src="./img/index/content/8.png"  alt="移动端设计" class="original increase-saturation">
+                        <img src="./img/index/gif/light.gif" alt="" class="gif-layer gif-mode" >
+                        <img src="./img/index/gif/dot.gif" alt="" class="gif-layer" >
+                    </div>
+                    <div class="card-content">
+
+                        <div class="project-title">
+                            <h2 data-lang="zh" data-before="可视化合集" >可视化合集</h2>
+                            <h2 data-lang="en" style="display:none;" data-before="Visualization Collection" >Visualization Collection</h2>
+                            <h3 class="time">2023-2025</h3>
+                        </div>
+                        <span data-lang="zh" class="card-category">可视化 · 3D</span>
+                        <span data-lang="en" style="display:none;" class="card-category">visualization · 3D</span>
+                    </div>
+                    <div class="project-line"></div>
+                </a>
+            </div>
+            
+            <div class="project-card itemHover" data-categories="pc,mobile">
+                <a href="./project-DigitalEnergy.html">
+                    <div class="projectImg-container" >  
+                        <img src="./img/index/content/9.png" alt="移动端设计" class="original">
+                    </div>
+                    <div class="card-content">
+
+                        <div class="project-title">
+                            <h2 data-lang="zh" data-before="数字能源" >数字能源</h2>
+                            <h2 data-lang="en" style="display:none;" data-before="Digital Energy" >Digital Energy</h2>
+                            <h3 class="time">2025</h3>
+                        </div>
+                        <span data-lang="zh" class="card-category">网页设计 · 移动端</span>
+                        <span data-lang="en" style="display:none;" class="card-category">dashboard · mobile</span>
+                    <div class="project-line"></div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="project-card itemHover" data-categories="mobile">
+                <a href="./project-CashMacket.html">
+                    <div class="projectImg-container" >  
+                        <img src="./img/现货app/banner.png" alt="移动端设计" class="original">
+                    </div>
+                    <div class="card-content">
+
+                        <div class="project-title">
+                            <h2 data-lang="zh" data-before="现货市场数据监控" >现货市场数据监控</h2>
+                            <h2 data-lang="en" style="display:none;" data-before="Spot market data monitoring" >Spot market data monitoring</h2>
+                            <h3 class="time">2025</h3>
+                        </div>
+                        <span data-lang="zh" class="card-category">移动端</span>
+                        <span data-lang="en" style="display:none;" class="card-category">mobile</span>
+                    <div class="project-line"></div>
+                    </div>
+                </a>
+            </div>
+            <div class="project-card itemHover" data-categories="mobile">
+                <a href="./project-CashMacket.html">
+                    <div class="projectImg-container" >  
+                        <img src="./img/现货app/banner.png" alt="移动端设计" class="original">
+                    </div>
+                    <div class="card-content">
+
+                        <div class="project-title">
+                            <h2 data-lang="zh" data-before="现货市场数据监控" >现货市场数据监控</h2>
+                            <h2 data-lang="en" style="display:none;" data-before="Spot market data monitoring" >Spot market data monitoring</h2>
+                            <h3 class="time">2025</h3>
+                        </div>
+                        <span data-lang="zh" class="card-category">移动端</span>
+                        <span data-lang="en" style="display:none;" class="card-category">mobile</span>
+                    <div class="project-line"></div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+
+
+
+        </div>
+
+        <!------------------------- 其他设计 --------------------->
+        <div class="wrapper">
+                <div class="otherDesign-container grid-system" id="other">
+
+                    <div class="otherDesign-texts grid-item" style="--grid-column:span 3;">
+                        <div class="sectionTitle-container">
+                            <div class="subtitle-box">
+                                <svg class="icon highlight " aria-hidden="true">
+                                    <use xlink:href="#icon-blockcolor"></use>
+                                </svg>                    
+                                <span class="section-Subtitle">其他设计</span>
+                            </div>
+                            <div class="sectionTitle-box otherDesign-text-box">
+                                <h1 class="sectionTitle split-line">other Designs <span>of my portfolio</span></h1>
+                                <p data-lang="zh" style="font-weight: 400;">探索3D和动效在界面设计和交互中的创意边界。</p>                
+                                <p data-lang="en" style="display:none;">Exploring the creative boundaries in 3D space and dynamic rhythms.</p>                
+                            </div>
+                        </div>
+
+                        <!-- 重力球 -->
+                        <div class="gravity-box">
+                            <div class="tag-canvas-container">
+                                <div class="tag-canvas" id="physics-container">
+                                    <div class="tag">
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-a-3d-box"></use>
+                                        </svg>           
+                                    </div>
+                                    <div class="tag">
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-xingquaihao"></use>
+                                        </svg>           
+                                    </div>
+                                    <div class="tag">
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-AItexiao"></use>
+                                        </svg>           
+                                    </div>
+                                    <div class="tag">
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-a-jihe1"></use>
+                                        </svg>           
+                                    </div>
+                                    <div class="tag">
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-camera2"></use>
+                                        </svg>           
+                                    </div>
+
+                                    <div class="tag">
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-line-paintyouqitong"></use>
+                                        </svg>           
+                                    </div>
+
+                                    <div class="tag">
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-dengpao"></use>
+                                        </svg>           
+                                    </div>
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-------------- 其他设计list ----------------->
+                    <div class="otherDesign-cards grid-item" style="--grid-column:span 9;">
+                        <a href="./3d.html">
+                            <div class="otherDesign-card">
+                                <div class="otherImg-container">
+                                    <div class="sprite-container sprite-3d" style="--sprite-width: 195px; --step-count: 27; --sprite-time: 0.5s;"></div>
+                                </div>
+                                <h1 data-lang="zh" style="font-size: 20px;">三维设计</h1>
+                                <h1 data-lang="en" style="display:none">3d</h1>
+
+                                <p data-lang="zh" style="font-weight: 400;">用立体元素打造独特的视觉层次，为界面注入活力与深度。</p>
+                                <p data-lang="en" style="display:none">Crafting unique visual hierarchy with dimensional elements to bring vitality and depth to interfaces.</p>
+                                
+                                <div class="item-arrow">
+                                    <div class="arrow-gif">
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-xiangsujiantou"></use>
+                                        </svg>           
+                                    </div>
+                                </div>                          
+                            </div>
+                        </a>
+
+                        <a href="./motion.html">
+                            <div class="otherDesign-card">
+                                <div class="otherImg-container">
+                                    <div class="sprite-container sprite-circle" style="--sprite-width: 150px; --step-count: 18; --sprite-time: 0.6s;"></div>
+                                </div>
+                                <h1 data-lang="zh" style="font-size: 20px;">动效设计</h1>
+                                <h1 data-lang="en" style="display:none">motion</h1>
+
+                                <p data-lang="zh" style="font-weight: 400;">用流畅动效增强交互，让界面充满生命力。</p>
+                                <p data-lang="en" style="display:none">Enhancing interactions with smooth animations, bringing interfaces to life.</p>
+                                <div class="item-arrow">
+                                    <div class="arrow-gif">
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-xiangsujiantou"></use>
+                                        </svg>           
+                                    </div>
+                                </div>                          
+                            </div>
+                        </a>
+
+                        <a href="./photo.html" >
+                            <div class="otherDesign-card photo-card">
+                                <div class="otherImg-container">
+                                    <div class="folder-container">
+                                        <div class="folder">
+                                            <div class="folder-lid"></div>
+                                            <div class="paper1 paper"></div>
+                                            <div class="paper2 paper"></div>
+                                            <div class="paper3 paper"></div>
+                                            <div class="folder-base"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h1 data-lang="zh" style="font-size: 20px;">照片</h1>
+                                <h1 data-lang="en" style="display:none">photo</h1>
+
+                                <p data-lang="zh" style="font-weight: 400;">用照片写日记，记录一些我的生活日常和精彩瞬间。</p>
+                                <p data-lang="en" style="display:none">Writing diaries with photos, capturing heartwarming everyday moments.</p>
+                                <div class="item-arrow">
+                                    <div class="arrow-gif">
+                                        <svg class="icon" aria-hidden="true">
+                                            <use xlink:href="#icon-xiangsujiantou"></use>
+                                        </svg>           
+                                    </div>
+                                </div>                          
+                            </div>
+                        </a>
+                    </div>
+                </div>
+        </div>
+        
+    </div>
+
+    <!---------------------------4.图片滚动 ----------------------------->
+    <div class="img-roll smooth-animation">
+        <div class="rular"></div>
+
+        <!-- 向左滚动 -->
+            <ul class="text-scroll">
+            <li>
+                <span class="highlight">⊹</span>
+                <span class="section-Subtitle">Operations Design</span>
+            </li>
+            <li>
+                <span class="highlight">⊹</span>
+                <span class="section-Subtitle">aigc</span>
+            </li>
+
+            <li>
+                <span class="highlight">⊹</span>
+                <span class="section-Subtitle">Graphic Design</span>
+            </li>
+
+            <li>
+                <span class="highlight">⊹</span>
+                <span class="section-Subtitle">Dynamic Design</span>
+            </li>
+            </ul>
+            
+            <div class="scoll-container">
+            <!-- 向右滚动 -->
+            <ul class="scroll-right" id="rightTrack">
+                <li class="right-list scroll-item"><img src="./img/index/img-roll/1.png" alt=""></li>
+                <li class="right-list scroll-item"><img src="./img/index/img-roll/2.png" alt=""></li>
+                <li class="right-list scroll-item"><img src="./img/index/img-roll/3.png" alt=""></li>
+                <li class="right-list scroll-item"><img src="./img/index/img-roll/4.png" alt=""></li>
+
+            </ul>
+            <!-- 向左滚动 -->
+            <ul class="scroll-left " id="leftTrack">
+                <li class="left-list scroll-item"><img src="./img/index/img-roll/7.png" alt=""></li>
+                <li class="left-list scroll-item"><img src="./img/index/img-roll/8.gif" alt=""></li>
+                <li class="left-list scroll-item"><img src="./img/index/img-roll/9.gif" alt=""></li>
+                <li class="left-list scroll-item"><img src="./img/index/img-roll/10.png" alt=""></li>
+            </ul>
+            </div>
+
+    </div>
+
+
+    <!---------------------------6.笔记----------------------------->
+    <div class="notes-section basic-padding footer-mask">
+            <div class="wrapper">
+                <div class="sectionTitle-container">
+                    <div class="subtitle-box">
+                        <svg class="icon highlight " aria-hidden="true">
+                            <use xlink:href="#icon-blockcolor"></use>
+                        </svg>                    
+                        <span class="section-Subtitle">工作经历</span>
+                    </div>
+                    <div class="sectionTitle-box">
+                        <h1 class="sectionTitle split-line">explore my  <br><span>work experience</span></h1>
+                        <p>Design is not just a job for me. - it's my passion.</p>                
+                    </div>
+                </div>
+                <div class="note-lists">
+                        <div class="books-wrapper">
+                            <!-- Book 1 -->
+                            <div class="books__item">
+                                <a href="https://www.yuque.com/u132157/kb/avwghzt5yvfrlzf4?singleDoc# 《代码》" target="_blank">
+                                    <div class="books__container">
+                                    <div class="books__cover">
+                                        <div class="books__back-cover"></div>
+                                        <div class="books__inside">
+                                            <div class="books__page"></div>
+                                            <div class="books__page"></div>
+                                            <div class="books__page"></div>
+                                        </div>
+                                        <div class="books__image">
+                                        <img src="https://i.postimg.cc/4dJjW9GN/html_book.png" alt="Psychedelics and Mental Health by Irene de Caso">
+                                        </div>
+                                    </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- Book 2 -->
+                            <div class="books__item">
+                                <a href="https://www.yuque.com/u132157/kb/yfltkyu75r7a38ii?singleDoc# 《AI关键词》" target="_blank">
+                                    <div class="books__container">
+                                    <div class="books__cover">
+                                        <div class="books__back-cover"></div>
+                                        <div class="books__inside">
+                                            <div class="books__page"></div>
+                                            <div class="books__page"></div>
+                                            <div class="books__page"></div>
+                                        </div>
+                                        <div class="books__image">
+                                        <img src="https://i.postimg.cc/qRm9tv3Y/aicg_book.png" alt="Psychedelics and Mental Health by Irene de Caso">
+                                        </div>
+                                    </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- Book 3 -->
+                            <div class="books__item">
+                                <a href="https://www.yuque.com/u132157/kb/avwghzt5yvfrlzf4?singleDoc# 《代码》" target="_blank">
+                                    <div class="books__container">
+                                    <div class="books__cover">
+                                        <div class="books__back-cover"></div>
+                                        <div class="books__inside">
+                                            <div class="books__page"></div>
+                                            <div class="books__page"></div>
+                                            <div class="books__page"></div>
+                                        </div>
+                                        <div class="books__image">
+                                        <img src="https://i.postimg.cc/DZCtWwXM/ae_book.png" alt="Psychedelics and Mental Health by Irene de Caso">
+                                        </div>
+                                    </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- Book 4 -->
+                            <div class="books__item">
+                                <a href="https://www.yuque.com/u132157/kb/avwghzt5yvfrlzf4?singleDoc# 《代码》" target="_blank">
+                                    <div class="books__container">
+                                    <div class="books__cover">
+                                        <div class="books__back-cover"></div>
+                                        <div class="books__inside">
+                                            <div class="books__page"></div>
+                                            <div class="books__page"></div>
+                                            <div class="books__page"></div>
+
+                                        </div>
+                                        <div class="books__image">
+                                        <img src="https://i.postimg.cc/mDZv2Htn/c4d_book.png" alt="Psychedelics and Mental Health by Irene de Caso">
+                                        </div>
+                                    </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <img src="https://i.postimg.cc/zBDsXgVT/bookshelf.png" alt="" class="bookshelf">
+                </div>
+            </div>
+            <p class="Stroke smooth-animation">aigc ✦ ae ✦ 3d modeling ✦ html+css</p>
+    </div>
+
+
+    <!---------------------------7.footer----------------------------->
+    <footer class="" id="footerContainer">
+        <div class="imgTail"><img src="https://i.postimg.cc/Jz8NJhGS/4.png" alt=""></div>
+        <div class="imgTail"><img src="https://i.postimg.cc/fTm7JdRD/5.png" alt=""></div>
+        <div class="imgTail"><img src="https://i.postimg.cc/sD7PvWgR/2.png" alt=""></div>
+        <div class="imgTail"><img src="https://i.postimg.cc/YqYNhFCK/3.png" alt=""></div>
+        <div class="imgTail"><img src="https://i.postimg.cc/QdDQ5MFx/6.png" alt=""></div>
+
+        <div class="footer-email">
+            <h2>578742871@qq.com</h2>
+        </div>
+        <div class="footerText-container">
+            <h1>Let's start</h1>
+            <div class="text-QRcode">
+                <h1>creating&nbsp;</h1>
+                <h1>something</h1>
+                <div class="QRcode-box smooth-animation">
+                    <img src="https://i.postimg.cc/yxk20Chd/portfolio_label_x.png" alt="" class="footer-label-x smooth-animation">
+                    <img src="https://i.postimg.cc/Vvd2XP9B/QRcode.png" alt="" class="QRcode smooth-animation QRcode-tag">
+                    <img src="https://i.postimg.cc/GtH6vnPz/QRcode_string.png" alt="" class="QRcode smooth-animation">
+                </div>
+            </div>
+            <h1 class="text-final">together.</h1>
+        </div> 
+                
+        <p>I'm ready to work on excinting projects.</p>
+        <!-- <h5>contact me</h5> -->
+            <div class="keyboard smooth-animation">
+            <ul id="navLinks" class="navLinks" >
+
+                <a href="https://www.zcool.com.cn/u/14729612" target="_blank">
+                    <li class="KeyPress KeyPress-blue">
+                        <div class="KeyPress-top blue-top ">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-lingying"></use>
+                            </svg>
+                        </div>
+                    </li>
+                </a>
+
+                <a href="https://dribbble.com/57874287127c4"  target="_blank">
+                    <li class="KeyPress KeyPress-pink">
+                        <div class="KeyPress-top pink-top">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-dribbble"></use>
+                            </svg>
+                        </div>
+                    </li>
+                </a>
+
+                <a href="https://www.zcool.com.cn/u/14729612"  target="_blank">
+                    <li class="KeyPress KeyPress-dark">
+                        <div class="KeyPress-top dark-top">
+                            <svg class="icon icon-yellow" aria-hidden="true">
+                                <use xlink:href="#icon-zhanku1"></use>
+                            </svg>
+                        </div>
+                    </li>
+                </a>
+
+                
+            </ul>
+            </div>
+
+        <!-- <img src="./img/index/footer-img1.png" alt="" class="footer-img1 smooth-animation"> -->
+        <!-- <img src="./img/index/footer-img2.png" alt="" class="footer-img2 smooth-animation"> -->
+    </footer>
+
+  <!-- 引入JS文件 --> 
+     <!-- 波纹 -->
+    <script src='https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/libs/ripple/jquery.min.js'></script>
+    <script src='https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/libs/ripple/ripples.js'></script>
+    <script src="./js/index.js"></script>
+    <!-- 重力 -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js'></script>
+
+</body>
+</html>

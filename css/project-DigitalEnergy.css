@@ -1,0 +1,154 @@
+
+/* ----------------------------------1.作品集封面----------------------------------- */
+
+.viedo-hover {
+    position: absolute;
+    width: 40vw;
+    bottom: 8vw;
+    right: var(--basic-margin);
+    filter: saturate(1.1);
+
+    border-radius: 14px;
+    border: 5px solid #000;
+    box-shadow: 113.895px 16.726px 130.621px 0 rgba(0, 24, 82, 0.05), 50.178px 82.036px 96.373px 0 rgba(0, 24, 82, 0.09), 12.744px 20.708px 53.363px 0 rgba(0, 24, 82, 0.10);
+}
+
+
+
+
+
+
+
+
+
+.tips-container {
+    width: 100%;
+    justify-content: space-between;
+    align-items:center;
+    display: flex;
+}
+.hover-tips {
+    width: 130px;
+    height: auto;
+}
+
+
+
+
+
+/* 雪碧图 */
+.gif-lists {
+    display: flex;
+    justify-content: space-between;
+    overflow: visible;
+    margin-bottom: 10vw;
+    
+}
+.gif-list {
+    /* height: 12.6vw; */
+    height: 300px;
+    width: 18%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   /* 方案1：使用border-image精确控制 */
+   border-radius: 8px;
+    border: 1px dashed rgba(17, 25, 68, 0.2);
+}
+.gif-list h1 {
+    font-size: 20px;
+    margin-top: 50px;
+}
+
+:root {
+    --sprite-width:170px;
+}
+.sprite {
+    width: var(--sprite-width);
+    height: var(--sprite-width);
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    z-index: 1;
+    filter:brightness(1.05) contrast(1.03) ;
+}
+.sprite-house {
+  background-image: url(../img/数字能源/gif/house.png);
+}
+.sprite-wind {
+  background-image: url(../img/数字能源/gif/wind-power.png);
+}
+
+.sprite-nuclear {
+  background-image: url(../img/数字能源/gif/nuclear.png);
+}
+
+.sprite-charging {
+    background-image: url(../img/数字能源/gif/charging-station.png);
+}
+
+
+.sprite-fire {
+  background-image: url(../img/数字能源/gif/fire-fighting.png);
+}
+
+
+
+.gif-list:hover {
+
+    border: 1px solid #d3e5ff;
+    background: #F4F7FF; 
+ 
+    .sprite{
+        animation:play-sprite var(--sprite-time) steps(var(--step-count)) infinite;
+    }
+
+
+}
+
+
+.sprite-container {
+    position: relative;
+    width: var(--sprite-width);
+    height: var(--sprite-width);
+}
+.sprite-container div {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.shadow {
+    background-image: url(../img/数字能源/gif/shadow.png);
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% auto ;
+}
+
+
+
+
+
+
+
+/* ------------------------------- 以上为默认样式 ----------------------------------- */
+
+
+/* ------------------------------手机------------------------------- */
+@media screen and (max-width: 599px) {
+
+    /* ------------雪碧图 ------------------*/
+   .gif-lists {
+        flex-direction: column;
+        align-items: center;
+   }
+   .gif-list {
+        pointer-events: none;
+        width: 90%;
+        margin-bottom: 20px;
+
+   }
+   .sprite {
+        animation:play-sprite var(--sprite-time) steps(var(--step-count)) infinite;
+   }
+
+}
