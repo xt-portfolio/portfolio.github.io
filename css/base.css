@@ -92,33 +92,33 @@ a {
 /* --------------------------------字体引用-------------------------------- */
 @font-face {
   font-family: 'Poppins';
-  src: url("https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/font/Poppins/Poppins-Light.ttf");font-weight: 300;font-style: normal;
+  src: url("../font/Poppins/Poppins-Light.ttf");font-weight: 300;font-style: normal;
 }
 @font-face {
   font-family: 'Poppins';
-  src: url("https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/font/Poppins/Poppins-Regular.ttf");font-weight: 400;font-style: normal;
+  src: url("../font/Poppins/Poppins-Regular.ttf");font-weight: 400;font-style: normal;
 }
 @font-face {
   font-family: 'Poppins';
-  src: url("https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/font/Poppins/Poppins-Medium.ttf");font-weight: 500;font-style: normal;
+  src: url("../font/Poppins/Poppins-Medium.ttf");font-weight: 500;font-style: normal;
 }
 @font-face {
   font-family: 'Poppins';
-  src: url("https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/font/Poppins/Poppins-Bold.ttf");font-weight: 600;font-style: normal;
+  src: url("../font/Poppins/Poppins-Bold.ttf");font-weight: 600;font-style: normal;
 }
 
 @font-face {
   font-family: "DIN-Condensed";
-  src: url("https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/font/DIN-Condensed-Bold-2.ttf");font-weight: normal;font-style: normal;
+  src: url("../font/DIN-Condensed-Bold-2.ttf");font-weight: normal;font-style: normal;
 }
 
 @font-face {
   font-family: 'RobotoMono';
-  src: url("https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/font/RobotoMono-Regular-9.ttf");font-weight: normal;font-style: normal;
+  src: url("../font/RobotoMono-Regular-9.ttf");font-weight: normal;font-style: normal;
 }
 @font-face {
   font-family: 'RobotoMono';
-  src: url("https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/font/RobotoMono-Medium-7.ttf");font-weight: 500;font-style: normal;
+  src: url("../font/RobotoMono-Medium-7.ttf");font-weight: 500;font-style: normal;
 }
 
 

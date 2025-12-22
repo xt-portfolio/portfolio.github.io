@@ -79,65 +79,6 @@ window.addEventListener('wheel', (e) => {
     });
 }, { passive: false });
 
-
-
-// --------------------------------全局动效------------------------------------------
-
-// 通用滑动出现动画配置项（const 名字自定义）
-const staggeringOption = {
-    // 延迟200毫秒
-    delay: 100,
-    // 移动20px
-    distance: "20px",
-    // 持续时间800毫秒
-    duration: 800,
-    // 变量函数
-    easing: "ease-in-out",
-    // 从上到下，如果是left就是从左到右
-    origin: "bottom",
-    opacity:1,
-    // 重复多次
-    // reset:true,
- };
-// ScrollReveal().reveal("需要动的类名", { 引入上方通用配置名字，interval设置等待时间 });
-ScrollReveal().reveal(".show", { ...staggeringOption ,interval:100,});
-ScrollReveal().reveal(".show2", { ...staggeringOption ,interval:100,delay: 300,});
-
-ScrollReveal().reveal(".otherDesign-card", { ...staggeringOption ,opacity:1,scale:0.93,distance: "0px",duration: 900,});
-// -------------------------------手机端导航点击事件-----------------------------------
-// 获取折叠按钮实例
-const burgerEl = document.querySelector(".burger");
-// 监听header
-const headerEl = document.querySelector(".header");
-// 获取所有需要点击后关闭菜单的a标签
-const menuLinks = document.querySelectorAll(".header a"); // 根据实际情况调整选择器
-
-// 切换菜单状态的函数
-function toggleMenu() {
-  headerEl.classList.toggle("open");
-  burgerEl.classList.toggle("close");
-}
-
-// 点击按钮切换菜单
-burgerEl.addEventListener("click", toggleMenu);
-
-// 点击链接后关闭菜单
-menuLinks.forEach(link => {
-  link.addEventListener("click", () => {
-    // 如果菜单是打开状态，则关闭它
-    if (headerEl.classList.contains("open")) {
-      headerEl.classList.remove("open");
-      burgerEl.classList.remove("close");
-    }
-  });
-});
-
-
-
-
-
-
-
 //-----------------------全局文字动效----------------------
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -223,26 +164,7 @@ function updateProgressBar() {
     document.getElementById('progressBar').style.width = scrolled + '%';
 }
 
-
-
-
 // ------------------------------------1.首页---------------------------------
-
-ScrollTrigger.create({
-    trigger:'.banner',// 触发对象
-    start:'top',//开始位置
-    end:'+=900',//结束位置
-    // markers:true,//显示位置标记
-    scrub:true,//随着鼠标上下滚动显示出现
-    // pin:true,
-    animation:
-    gsap.timeline()
-    // .to('.bannerImg-box ',{y:-15,duration: 3,ease: 'power3.out',})
-    .to('.portfolio-lable-box',{rotate:15,duration: 3,ease: 'power3.out',},'<')
-    // .to('.portfolio-label-x',{y:-15,x:10,duration: 3,ease: 'power3.out',},'<')
-
-});
-
 
  document.addEventListener('DOMContentLoaded', function() {
             const bannerBox = document.querySelector('.banner');
@@ -277,8 +199,6 @@ ScrollTrigger.create({
         });
 
 
-
-
 //skill克隆
 document.addEventListener('DOMContentLoaded', function() {
     const container = document.getElementById('skillContainer');
@@ -288,9 +208,6 @@ document.addEventListener('DOMContentLoaded', function() {
     container.innerHTML = items + items;
     
 });
-
-
-
 
 //-------------首页banner4个小元素
 
@@ -361,6 +278,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateFrame();
     });
 });
+
 // 最简单直接的方法
 setTimeout(function() {
     const loadingElements = document.querySelectorAll('.modeling-loading');
@@ -369,8 +287,20 @@ setTimeout(function() {
     });
     console.log('3秒后强制隐藏 loading');
 }, 5000); // 3秒后隐藏
+
+
 // ---------------------------------------2.个人--------------------------------------------
 
+ScrollTrigger.create({
+  trigger: '.personal', // 触发对象
+  start: '-10%', // 开始位置
+  end: '+=500', // 结束位置
+//   markers:true,//显示位置标记
+  scrub: true, // 随着鼠标上下滚动显示出现
+//   pin:true,
+  animation: gsap.timeline()
+    .from('.photo-1', {rotate:-12,duration: 1, ease: 'power3.out'})
+});
 
 
 // // 检查是否不是移动设备（屏幕宽度大于768px）
@@ -387,19 +317,6 @@ if (window.innerWidth > 768) {
   });
 }
 
-
-
-
-ScrollTrigger.create({
-  trigger: '.personal', // 触发对象
-  start: '-10%', // 开始位置
-  end: '+=500', // 结束位置
-//   markers:true,//显示位置标记
-  scrub: true, // 随着鼠标上下滚动显示出现
-//   pin:true,
-  animation: gsap.timeline()
-    .from('.photo-1', {rotate:-12,duration: 1, ease: 'power3.out'})
-});
 
 
 // 添加经验部分展开/折叠事件监听
@@ -423,8 +340,6 @@ document.querySelectorAll('.resume-item-header').forEach(header => {
         setTimeout(() => lenis.resize(), 500);
     });
 });
-
-
 
 // 图片切换
 document.addEventListener('DOMContentLoaded', function() {
@@ -1091,6 +1006,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+
 // --------------------------------------4.其他设计-----------------------------------
 
 
@@ -1154,6 +1070,7 @@ ScrollTrigger.create({
     .to('.footer-mask',{ y:'-48%',duration: 100,ease: 'power1.out',})
     .from('.QRcode-box',{rotate:20,duration: 100,ease: 'power3.out',},'<')
 });
+
 
 // --------------------------鼠标-----------------------------------
 /// 鼠标
@@ -1247,7 +1164,7 @@ document.querySelectorAll('.project-item').forEach(element => {
     // 鼠标悬停图片时，将parts改为5（跟随速度变慢）
     parts = 6;
     circle.style.backgroundColor = '#ffffffff';
-    circle.style.backgroundImage = 'url(../img/index/view.png)';
+    circle.style.backgroundImage = 'url(https://i.postimg.cc/251hWz3X/view.png)';
     circle.style.backgroundSize = 'cover';
     circle.style.width = '70px';
     circle.style.height = '70px';
@@ -1429,6 +1346,5 @@ document.getElementById('stagger').addEventListener('input', function() {
   staggerDelay = parseInt(this.value);
   document.getElementById('staggerValue').textContent = staggerDelay + ' ms';
 }); 
-
 
 
