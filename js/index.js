@@ -1664,68 +1664,59 @@ window.updateBooksLanguage = updateBooksLanguage;
 
 // --------------------------footer-----------------------------------
 
-// 初始化footer动画（含响应式适配）
-function initFooterAnimation() {
-    // 依赖检查：避免GSAP/ScrollTrigger未加载时报错
-    if (!window.gsap || !window.ScrollTrigger) {
-        console.warn('GSAP/ScrollTrigger 未加载，footer动画初始化失败');
-        return;
+// 获取footer元素
+const footerElement = document.querySelector('footer');
+// 获取footer-mask元素
+const footerMask = document.querySelector('.footer-mask');
+// 获取QRcode-box元素
+const qrCodeBox = document.querySelector('.QRcode-box');
+
+// 判断是否为移动端/平板（≤1199px）
+const isTabletOrMobile = window.matchMedia("(max-width: 1199px)").matches;
+
+if (isTabletOrMobile) {
+    // ============ 移动端/平板样式 (≤1199px) ============
+    // 1. 设置footer的margin-top
+    if (footerElement) {
+        footerElement.style.setProperty('margin-top', '-24px', 'important');
     }
-
-    // 清理旧实例：防止窗口缩放重复创建导致动画异常
-    ScrollTrigger.getAll().forEach(trigger => {
-        if (trigger.vars.trigger === 'footer') trigger.kill();
-    });
-
-    // 屏幕尺寸判断（≤1199px为小屏）
-    const isSmallScreen = window.innerWidth <= 1199;
-    // 基础动画配置（统一复用）
-    const baseConfig = { ease: 'power2.out', willChange: 'transform' };
-
-    // 1. 小屏逻辑（≤1199px）：去掉QR动画 + 无scrub + 出现即执行
-    if (isSmallScreen) {
-        // 初始化footer-mask状态，确保动画起点统一
-        gsap.set('.footer-mask', { y: 0 });
-        // 直接执行动画（无滚动触发、无scrub、无QR动画）
-        gsap.timeline()
-            .to('.footer-mask', {
-                y: '-48%',
-                duration: 1.5, // 修正原100秒的不合理时长，改为1.5秒
-                ...baseConfig
-            });
-    } 
-    // 2. 大屏逻辑（>1199px）：保留原有scrub/pin/完整动画
-    else {
+    
+    // 2. 调整footer-mask
+    if (footerMask) {
+        footerMask.style.position = 'relative';
+        footerMask.style.top = 'auto';
+    }
+    
+    // 3. QRcode出现时触发一次动画
+    if (qrCodeBox) {
         ScrollTrigger.create({
             trigger: 'footer',
-            start: '0%',
-            end: 'bottom',
-            scrub: true, // 保留滚动同步
-            pin: true,   // 保留固定效果
-            animation: gsap.timeline()
-                .to('.footer-mask', {
-                    y: '-48%',
-                    duration: 1.5, // 修正原100秒的超长时长
-                    ...baseConfig
-                })
-                .from('.QRcode-box', {
-                    rotate: 20,
-                    duration: 1.5,
-                    ease: 'power3.out',
-                    willChange: 'transform'
-                }, '<') // 与footer-mask动画同时开始
+            start: 'top 80%',
+            once: true,
+            onEnter: () => {
+                gsap.fromTo(qrCodeBox, 
+                    { rotate: 20, opacity: 0.7 },
+                    { rotate: 0, opacity: 1, duration: 1, ease: 'power3.out' }
+                );
+            }
         });
     }
+    
+} else {
+    // ============ PC端：保持原有ScrollTrigger动画 ============
+    ScrollTrigger.create({
+        trigger: 'footer',
+        start: '0%',
+        end: 'bottom',
+        scrub: true,
+        pin: true,
+        animation: gsap.timeline()
+            .to('.footer-mask', { y: '-48%', duration: 100, ease: 'power1.out' })
+            .from('.QRcode-box', { rotate: 20, duration: 100, ease: 'power3.out' }, '<')
+    });
 }
 
-// 页面加载初始化
-window.addEventListener('load', initFooterAnimation);
-// 窗口缩放防抖重初始化（避免频繁触发）
-let resizeTimer;
-window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(initFooterAnimation, 100);
-});
+
 // --------------------------鼠标-----------------------------------
 /// 鼠标
 const dot = document.getElementById('cursor-dot');
