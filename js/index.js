@@ -1678,7 +1678,7 @@ if (isTabletOrMobile) {
     // ============ 移动端/平板样式 (≤1199px) ============
     // 1. 设置footer的margin-top
     if (footerElement) {
-        footerElement.style.setProperty('margin-top', '-24px', 'important');
+        footerElement.style.setProperty('margin-top', '0px', 'important');
     }
     
     // 2. 调整footer-mask
