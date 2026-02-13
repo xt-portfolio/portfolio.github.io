@@ -1,0 +1,340 @@
+.bg {
+    background: 
+    url(../img/3d/3d-bg.png),
+    linear-gradient(180deg, #EEF0F7 0%, rgba(238, 240, 247, 0.00) 30%);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background-repeat: no-repeat;
+    background-color: #fff;
+
+}
+
+/* -------首页 projects 字母--------- */
+.sprite-box {
+    display: flex;
+    align-items: flex-start;
+    transform: translateX(-8px);
+    gap: 12px;
+    margin-top: 7vw;
+}
+.text-gif-box {
+    position: relative;
+    height: 160px;
+    transform-origin: top left;
+    margin-left: -10px;
+    
+}
+
+
+.port-text {
+    font-size: 12vw;
+    color: #161B29;
+    display: none;
+}
+.text-gif-box svg {
+    font-size: 150px;
+    margin-top: 8px;
+    color: #161B29;
+}
+
+
+.sprite-box h1,.sprite-box h2 {
+    font-size: 200px;
+    text-transform: uppercase;
+    color: #161B29;
+    pointer-events: none;
+    transition: all 0.2s ease-out;
+    margin-top: -70px;
+
+}
+.sprite-box .sprite-container {
+    height: 160px;
+    z-index: 2;
+    position: absolute;
+    top: 0;
+
+}
+.sprite-p {background-image: url(../img/project/p.png); transform: scale(0.9);}
+.sprite-r { background-image: url(../img/project/r.png); filter: saturate(1.5);}
+.sprite-o {background-image: url(../img/project/o.png);}
+.sprite-j {background-image: url(../img/project/j.png); }
+.sprite-e {background-image: url(../img/project/e.png); transform: scale(1.14);margin-left: -10px;}
+.sprite-c {background-image: url(../img/project/c.png);  margin-left: 6px;}
+.sprite-t {background-image: url(../img/project/t.png);  transform: scale(1.2); margin-left: 10px;}
+.sprite-s {background-image: url(../img/project/s.png); transform: scale(1.2); margin-top: 10px; margin-left: 10px;}
+
+.text-gif-box:hover {
+    h1 {opacity: 0;}
+}
+
+
+/* 项目数 */
+.number-container {
+    display: flex;
+    width: 56px;
+    align-items: center;
+    margin-left: 24px;
+}
+.number-container .icon {
+    font-size: 16px;
+    color: var(--text-color-3);
+} 
+.number-container .projects-count {
+    font-size: 20px;
+    font-family: 'RobotoMono';
+    color: var(--first-color)
+}
+
+
+
+
+/* --------------筛选---------------- */
+
+/* 更简单的sticky方案 */
+.filter-container {
+    width: 100%;
+    /* position: sticky; */
+    top: 40px; /* 距离顶部80px时固定 */
+    z-index: 100;
+    transition: all 0.3s ease;
+
+}
+.filter-container .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+/* 当固定时添加一些样式增强 */
+.filter-container:not(.sticky-enhanced) {
+    /* background: #fafafc; */
+    /* box-shadow: 0 -60px 0 0 #fafafc; */
+}
+
+
+.filter-tabs {
+    display: flex;
+    gap: 8px;
+}
+.filter-tab {
+    background: white;
+    border: 1px solid #ddd;
+    color: #555;
+    padding: 7px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    text-transform: capitalize;
+    min-height: 36px;
+}
+
+.filter-tab:hover {
+    background: #f0f0f0;
+}
+
+.filter-tab.active {
+    background: var(--text-color-1);
+    color: white;
+    border-color: #2c3e50;
+}
+
+
+.layout-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.layout-btn {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--line-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: none;
+}
+
+.layout-btn:hover {
+    background: #f0f0f0;
+    svg {
+    color:var(--text-color-3) ;
+    }
+
+
+}
+.layout-btn svg {
+    font-size: 22px;
+    color:var(--text-color-4) ;
+}
+
+
+
+/* ---------------------布局--------------------- */
+.projectCards-container {
+    padding-bottom: 8vw;
+}
+
+/* 列表布局 */
+.projectCards-container.list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+.projectCards-container.list .projectImg-container{
+    display: none;
+
+}
+
+.projectCards-container.list .project-line {
+    display: block;
+    height: 1px;
+    width: 100%;
+    background: repeating-linear-gradient(
+        to right,
+        var(--text-color-2) 0px,
+        var(--text-color-2) 4px,   /* 4px实线 */
+        transparent 3px,           /* 开始透明 */
+        transparent 6px            /* 2px间距 */
+    );
+    border: none;
+}
+.projectCards-container.list .card-content {
+    position: relative;
+}
+.projectCards-container.list .card-category {
+    position: absolute;
+    left: 34vw;
+    top: 0;
+    color: var(--text-color-3);
+    
+}
+
+.projectCards-container.list .project-title {
+    margin: 18px 0;
+    h2 {font-size: 16px;}
+    .time {color: var(--text-color-1);}
+}
+
+/* 在列表布局时禁用 hover 效果 */
+.projectCards-container.list .itemHover:hover {
+  h2 {
+    transform: none !important;
+  }
+  h2::before {
+    transform: none !important;
+  }
+  .projectImg-container {
+    transform: none !important;
+  }
+}
+.projectCards-container.list .project-card {
+    cursor: default !important;
+}
+
+
+  /* 项目卡片样式 */
+.project-card {
+    overflow: hidden;
+    transition: all 0.5s ease;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.project-card.hidden {
+    display: none !important; /* 使用!important确保在所有布局下都生效 */
+}
+
+
+
+
+
+
+.card-category {
+    display: inline-block;
+    color: var(--text-color-2);
+    text-transform: capitalize;
+    font-family: 'PingFang SC';
+    margin-top: 6px;
+}
+
+
+/* 跟随鼠标的图片样式 */
+.projectImg-follow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    aspect-ratio: 5/3;
+    object-fit: cover;
+    /* transform: translateX(100px) translateY(20px); */
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease-out;
+}
+
+
+
+/* 确保body可以正常滚动 */
+body {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* 修复可能的高度计算问题 */
+.projectCards-container.two-columns,
+.projectCards-container.three-columns,
+.projectCards-container.list {
+    height: auto;
+}
+
+        
+
+.footer-mask {
+    /* background: 
+    url(../img/3d/3d-bg.png),
+    linear-gradient(180deg, #EEF0F7 0%, rgba(238, 240, 247, 0.00) 80%); */
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-size: 100% auto, 100% 100%;
+    background-position: 0 0;
+}
+
+/* ------------------------------平板横屏------------------------------- */
+@media screen and (max-width: 1199px) {
+    .text-gif-box {display: none;    }
+    .port-text{
+        display: block;
+        font-size: 12vw !important;
+    }
+    .sprite-box {
+        padding-top: 4vw;
+    }
+
+
+}
+
+/* ------------------------------小于等于839px (平板竖屏)------------------------------- */
+@media only screen and (max-width: 839px)  {
+    .layout-controls {
+        display: none;
+    }
+
+}
+
+/* ------------------------------手机------------------------------- */
+@media screen and (max-width: 768px) {
+    .sprite-box {
+        padding-top: 17vh;
+    }
+    .filter-tabs {
+        flex-wrap: wrap;
+    }
+    
+}
+

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>席婷作品集</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://unpkg.com/lenis@1.1.4/dist/lenis.min.js"></script>
+    <script src="./libs/ScrollTrigger.min.js"></script>
+    <script src="./libs/gsap.min.js"></script>
+    <script src='./libs/SplitText.min.js'></script>
+    <script src="./font/iconfont/iconfont.js"></script>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/media.css">
+    <link rel="stylesheet" href="./css/project-DigitalEnergy.css">
+    <style>
+        body,.footer-mask {
+            background: #fff;
+        }
+    </style>
+
+
+</head>
+<body>
+    <div id="cursor-dot"></div>
+    <div id="cursor-circle"></div>
+    <!---------------------------- 头部 ---------------------------->
+    <div class="header">
+        <div class="wrapper">
+            <!-- logo -->
+            <a href="./index.html" class="mylogo"></a>
+            <!-- 导航 -->
+            <ul class="nav">
+                <!-- <li><a href="#about">about</a></li> -->
+                <li data-lang="zh"><a href="./project.html">项目</a></li>
+                <li data-lang="en" style="display:none"><a href="./project.html">project</a></li>
+  
+                <li data-lang="zh"><a href="./3d.html">三维</a></li>
+                <li data-lang="en" style="display:none"><a href="./3d.html">3D</a></li>
+  
+                <li data-lang="zh"><a href="./motion.html">动效</a></li>
+                <li data-lang="en" style="display:none"><a href="./motion.html">motion</a></li>
+                <div class="language-switcher" >
+                    <button class="lang-btn" id="toggle-lang">中</button>
+                </div>
+  
+  
+  
+            </ul>
+            <!-- 手机显示按钮 -->
+            <div class="burger">
+                <div class="line line-top smooth-animation"></div>
+                <div class="line line-middle "></div>
+                <div class="line line-bottom smooth-animation"></div>
+            </div>
+        </div>
+    </div> 
+    <!------------------------ 内容区 ---------------------------->
+
+    <!-- 返回按钮 -->
+    <a href="javascript:history.back()" class="btn-link">
+        <div class="btn-back">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-pixel-back"></use>
+            </svg>
+        </div>
+    </a>
+    
+    <!-- --------------------------banner------------------------- -->
+    <div class="Project-banner">
+        <!-- <img src="./img/现货app/banner.png" alt=""> -->
+        <video src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/cover.mp4" poster="" loop muted autoplay ></video>
+   
+        <div class="scrollIndicator" >
+            <div class="scrollIndicator-dot"></div>
+        </div>
+    </div>
+
+
+
+    <!-- ---------------------------内容区------------------------- -->
+    <div class="project-content">
+        <div class="wrapper">
+
+            <!-- 分割线 -->
+            <div class="dividing-line">
+                <span>⊹</span>
+                <div class="time-box">
+                    <div class="line"></div>
+                </div>
+            </div>
+
+
+            <div class="ProjectTitle-container">
+                <div class="left">
+                    <h1 data-lang="zh" class="DetailPage-title">数字能源</h1>
+                    <h1 data-lang="en" style="display:none" class="DetailPage-title">Digital Energy</h1>
+                    <p data-lang="zh" >这是一个全链路数字能源管理系统，整合发电、配电、能源管理与充电运营等核心模块，通过 PC 与移动端双平台协同与可视化技术，实现能源全生命周期的高效管控与智能运维。</p>
+                    <p  data-lang="en" style="display:none; font-weight: 200;">
+                        This is a full-link digital energy management system that integrates core modules including power generation, distribution, energy management, and charging operation. It enables efficient control and intelligent O&M across the entire energy lifecycle through dual-platform collaboration and visualization.
+                    </p>
+               
+                </div>
+                <div class="info-table">
+                    <div class="info-row">
+                        <div data-lang="zh" class="info-label">时间</div>
+                        <div data-lang="en" style="display:none">time</div>
+                        <div class="info-value info-time">2025</div>
+                    </div>
+                    <div class="info-row">
+                        <div data-lang="zh" class="info-label">类别</div>
+                        <div data-lang="en" style="display:none">category</div>
+                        <div data-lang="zh" class="info-value">后台 · 移动端</div>
+                        <div data-lang="en" style="display:none" class="info-value">dashboard · mobile</div>
+                    </div>
+                    <div class="info-row">
+                        <div data-lang="zh" class="info-label">职责</div>
+                        <div data-lang="en" style="display:none">role</div>
+                        <div data-lang="zh" class="info-value">UI/UX · AI · 交互设计</div>
+                        <div data-lang="en" style="display:none" class="info-value">UI/UX · AI Design · Product Interaction Redesign</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="position: relative;">
+                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/1.png" alt="" class="project-img">
+                <video src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/1-1%E9%A6%96%E9%A1%B5.mp4" poster="" class="video-hover"loop muted autoplay ></video>
+
+            </div>
+
+            <div class="projectContent-container">
+                <h1 data-lang="zh" class="projectContent-title">AI 赋能</h1>
+                <h1 data-lang="en" style="display:none" class="projectContent-title">AI Empowerment</h1>
+                <p data-lang="zh" >通过 AI 生成电力场景 3D 图标及对应动效，将 AI 产出的静态视觉与动态素材整合为产品界面可用的动态演示，实现 AI 全链路赋能，提升数据可视化的科技感与直观性。</p>
+                <p data-lang="en" style="display:none">Generated 3D icons and corresponding animations for power scenarios using AI, and integrated AI-produced static visuals and dynamic assets into dynamic demos for product interfaces. This achieves a fully AI-powered workflow, enhancing the tech appeal and intuitiveness of data visualization.</p>
+            
+            </div>
+
+            <div class="gif-lists">
+                <div class="gif-list">
+                    <div class="sprite-container">
+                        <div class="sprite-house sprite" style="--step-count: 48; --sprite-time: 3s;"></div>
+                        <div class="shadow"></div>
+                    </div>
+                    <h1 data-lang="zh">配电管理</h1>
+                    <h1 data-lang="en" style="display:none; font-weight: 500; font-size: 16px; text-transform: capitalize;" >power distribution</h1>
+                </div>
+
+                <div class="gif-list">
+                    <div class="sprite-container">
+                        <div class="sprite-wind sprite" style="--step-count: 42; --sprite-time: 1.5s;"></div>
+                        <div class="shadow"></div>
+                    </div>
+                    <h1 data-lang="zh">发电管理</h1>
+                    <h1 data-lang="en" style="display:none; font-weight: 500; font-size: 16px; text-transform: capitalize;" >Power generation</h1>
+                </div>
+
+                <div class="gif-list">
+                    <div class="sprite-container">
+                        <div class="sprite-nuclear sprite" style="--step-count: 59; --sprite-time: 2.6s;"></div>
+                        <div class="shadow"></div>
+                    </div>
+                    <h1 data-lang="zh">能源管理</h1>
+                    <h1 data-lang="en" style="display:none; font-weight: 500; font-size: 16px; text-transform: capitalize;" >energy management</h1>
+                </div>
+
+
+                <div class="gif-list">
+                    <div class="sprite-container">
+                        <div class="sprite-charging sprite" style="--step-count: 89; --sprite-time: 2.5s;"></div>
+                        <div class="shadow"></div>
+                    </div>
+                    <h1 data-lang="zh">充电运营</h1>
+                    <h1 data-lang="en" style="display:none; font-weight: 500; font-size: 16px; text-transform: capitalize;" >Charging operation</h1>
+                </div>
+
+                <div class="gif-list">
+                    <div class="sprite-container">
+                        <div class="sprite-fire sprite" style="--step-count: 99; --sprite-time: 4s;"></div>
+                        <div class="shadow"></div>
+                    </div>
+                    <h1 data-lang="zh">电气消防</h1>
+                    <h1 data-lang="en" style="display:none; font-weight: 500; font-size: 16px; text-transform: capitalize;" >firefighting</h1>
+                </div>
+
+            </div>
+
+            <!-- <div class="animation-container">
+                <video src="https://cdn.dribbble.com/userupload/45998992/file/ccc3a30f283987cf7a45dd7024b66237.mp4" poster="" loop muted autoplay style="width: 70%; filter: saturate(1.1);" ></video>
+            </div> -->
+
+
+
+            <!--   图片  -->
+            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/2.png" alt="" class="project-img" >
+            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/3.png" alt="" class="project-img" >
+            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/4.png" alt="" class="project-img" >
+            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/5.png" alt="" class="project-img" >
+            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/6.png" alt="" class="project-img" >
+            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/7.png" alt="" class="project-img" >
+            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/8.png" alt="" class="project-img" >
+       
+       
+            <video src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/%E6%80%BB%E8%A7%88.mp4" class="project-img" poster="" loop muted autoplay ></video>
+
+
+        </div>
+
+
+
+        <!-- <img src="./img/数字能源/2.png" alt="" class="project-img"> -->
+    </div>
+    
+
+
+
+
+    <!---------------------------探索更多----------------------------->
+    <div class="footer-mask">
+        <div class="wrapper">
+            <div class="dividing-line">
+                <span>⊹</span>
+                <div class="time-box">
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>
+        <div class="next-project">
+        <a href="./project-Visualization.html">
+
+            <div class="nextProject-container">
+                <h3>[ next project ]</h3>
+                <h1 data-lang="zh" class="nextProject-title">可视化合集</h1>
+                <h1 data-lang="en" style="display:none" class="nextProject-title">visualization Collection</h1>
+                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/content/8.png" alt="">
+            </div>
+        </a>
+
+        </div>
+    </div>
+
+    <!---------------------------7.footer----------------------------->
+    <footer class="" id="footerContainer">
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/4.png" alt=""></div>
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/5.png" alt=""></div>
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/2.png" alt=""></div>
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/3.png" alt=""></div>
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/6.png" alt=""></div>
+
+        <a href="mailto:578742871@qq.com" class="footer-email no-trail">
+            <h2  data-before="578742871@qq.com" class="text-upward" >578742871@qq.com</h2>
+        </a>
+        <div class="footerText-container">
+            <h1>Let's start</h1>
+            <div class="text-QRcode">
+                <h1>creating&nbsp;</h1>
+                <h1>something</h1>
+                <div class="QRcode-box smooth-animation">
+                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/portfolio-label-x.png" alt="" class="footer-label-x smooth-animation">
+                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/QRcode.png" alt="" class="QRcode smooth-animation QRcode-tag">
+                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/QRcode-string.png" alt="" class="QRcode smooth-animation">
+                </div>
+            </div>
+            <h1 class="text-final">together.</h1>
+        </div> 
+                
+        <p>I'm ready to work on excinting projects.</p>
+        <!-- <h5>contact me</h5> -->
+        <div class="keyboard smooth-animation">
+            <ul id="navLinks" class="navLinks no-trail">
+                <!-- 蓝色按钮：新增自定义提示框 -->
+                <div class="link-placeholder-wrapper">
+                    <a href="javascript:void(0);" class="link-placeholder" tabindex="0">
+                        <li class="KeyPress KeyPress-blue placeholder-btn">
+                            <div class="KeyPress-top blue-top ">
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-lingying"></use>
+                                </svg>
+                            </div>
+                        </li>
+                    </a>
+                    <!-- 自定义提示框：鼠标悬浮立即显示 -->
+                    <div class="custom-tooltip">Coming soon</div>
+                </div>
+
+                <!-- 其他按钮保持不变 -->
+                <a href="https://dribbble.com/57874287127c4"  target="_blank">
+                    <li class="KeyPress KeyPress-pink">
+                        <div class="KeyPress-top pink-top">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-dribbble"></use>
+                            </svg>
+                        </div>
+                    </li>
+                </a>
+
+                <a href="https://www.zcool.com.cn/u/14729612"  target="_blank">
+                    <li class="KeyPress KeyPress-dark">
+                        <div class="KeyPress-top dark-top">
+                            <svg class="icon icon-yellow" aria-hidden="true">
+                                <use xlink:href="#icon-zhanku1"></use>
+                            </svg>
+                        </div>
+                    </li>
+                </a>
+            </ul>
+        </div>
+    </footer>
+  <!-- 引入JS文件 --> 
+     <!-- 波纹 -->
+    <script src="./js/media.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const videos = document.querySelectorAll('video');
+            
+            // 创建IntersectionObserver来检测视频是否进入视口40%
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const video = entry.target;
+                    
+                    if (entry.isIntersecting) {
+                        // 当视频进入视口时开始播放
+                        if (video.paused) {
+                            video.play().catch(e => {
+                                console.log('视频自动播放可能被浏览器阻止，用户需要交互');
+                            });
+                        }
+                    } else {
+                        // 当视频离开视口时暂停
+                        if (!video.paused) {
+                            video.pause();
+                            // 注意：这里不再重置currentTime，否则往上滑时视频会从开头播放
+                        }
+                    }
+                });
+            }, {
+                threshold: 0.4, // 当40%可见时触发
+                // 移除rootMargin，使用默认的视口判断
+            });
+            
+            // 观察所有视频
+            videos.forEach(video => {
+                videoObserver.observe(video);
+                
+                // 设置视频预加载属性为metadata，减少初始加载
+                video.preload = 'metadata';
+                
+                // 确保视频是静音的（已满足autoplay条件）
+                video.muted = true;
+                
+                // 添加错误处理
+                video.addEventListener('error', function() {
+                    console.log('视频加载错误:', this.src);
+                });
+                
+                // 添加加载事件
+                video.addEventListener('loadeddata', function() {
+                    console.log('视频已加载');
+                });
+                
+                // 添加播放状态监听，确保视频在视口内时保持播放
+                video.addEventListener('pause', function() {
+                    // 检查视频是否仍在视口内
+                    const rect = video.getBoundingClientRect();
+                    const viewportHeight = window.innerHeight;
+                    
+                    // 计算视频在视口中的可见比例
+                    const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
+                    const visibleRatio = visibleHeight / rect.height;
+                    
+                    // 如果视频仍在视口40%内但被暂停了，重新播放
+                    if (visibleRatio >= 0.4 && rect.top < viewportHeight * 0.6 && rect.bottom > viewportHeight * 0.4) {
+                        video.play().catch(e => console.log('重新播放失败'));
+                    }
+                });
+            });
+            
+            // 添加页面可见性监听，当页面隐藏时暂停所有视频
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) {
+                    videos.forEach(video => video.pause());
+                } else {
+                    // 页面重新可见时，检查并播放在视口内的视频
+                    videos.forEach(video => {
+                        const rect = video.getBoundingClientRect();
+                        const viewportHeight = window.innerHeight;
+                        
+                        if (rect.top < viewportHeight * 0.6 && 
+                            rect.bottom > viewportHeight * 0.4 && 
+                            video.paused) {
+                            video.play().catch(e => console.log('页面可见后播放失败'));
+                        }
+                    });
+                }
+            });
+            
+            // 添加滚动事件监听，作为IntersectionObserver的补充
+            let scrollTimeout;
+            window.addEventListener('scroll', function() {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    videos.forEach(video => {
+                        const rect = video.getBoundingClientRect();
+                        const viewportHeight = window.innerHeight;
+                        
+                        // 判断视频是否在视口40%区域内
+                        const isInViewport = rect.top < viewportHeight * 0.6 && 
+                                        rect.bottom > viewportHeight * 0.4;
+                        
+                        if (isInViewport && video.paused) {
+                            // 如果在视口内且暂停了，尝试播放
+                            video.play().catch(e => console.log('滚动后播放失败'));
+                        } else if (!isInViewport && !video.paused) {
+                            // 如果不在视口内且正在播放，暂停
+                            video.pause();
+                        }
+                    });
+                }, 100); // 防抖延迟
+            });
+        });
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

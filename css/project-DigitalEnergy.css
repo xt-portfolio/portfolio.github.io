@@ -1,0 +1,186 @@
+
+/* ----------------------------------1.作品集封面----------------------------------- */
+
+.video-hover {
+    position: absolute;
+    width: 40vw;
+    bottom: 8vw;
+    right: var(--basic-margin);
+    filter: saturate(1.2);
+
+    border-radius: 14px;
+    border: 5px solid #000;
+    box-shadow: 113.895px 16.726px 130.621px 0 rgba(0, 24, 82, 0.05), 50.178px 82.036px 96.373px 0 rgba(0, 24, 82, 0.09), 12.744px 20.708px 53.363px 0 rgba(0, 24, 82, 0.10);
+
+    
+}
+
+
+
+
+.animation-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(126deg, #F6F7FA 23.39%, #f4f5f9 62.22%);
+    border-radius: 20px;
+    margin-bottom: 60px;
+}
+
+
+
+
+
+
+
+/* 雪碧图 */
+.gif-lists {
+    overflow: visible;
+    margin-bottom: 10vw;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+
+    row-gap: 20px;
+    column-gap: 20px;
+    
+}
+.gif-list {
+    width: 100%;
+    height: 330px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   /* 方案1：使用border-image精确控制 */
+   border-radius: 8px;
+    border: 1px dashed rgba(17, 25, 68, 0.2);
+}
+.gif-list h1 {
+    font-size: 20px;
+    margin: 40px 0 60px 0;
+}
+
+:root {
+    --sprite-width:170px;
+}
+.sprite-container {
+    margin-top: 20px;
+}
+.sprite {
+    width: var(--sprite-width);
+    height: var(--sprite-width);
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    z-index: 1;
+    filter:brightness(1.05) contrast(1.03) ;
+}
+.sprite-house {
+  background-image: url(https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/gif/house.png);
+}
+.sprite-wind {
+  background-image: url(https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/gif/wind-power.png);
+}
+
+.sprite-nuclear {
+  background-image: url(https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/gif/nuclear.png);
+}
+
+.sprite-charging {
+    background-image: url(https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/gif/charging-station.png);
+}
+
+
+.sprite-fire {
+  background-image: url(https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/gif/fire-fighting.png);
+}
+
+
+
+.gif-list:hover {
+
+    border: 1px solid #d3e5ff;
+    background: #F4F7FF; 
+ 
+    .sprite{
+        animation:play-sprite var(--sprite-time) steps(var(--step-count)) infinite;
+    }
+
+
+}
+
+
+
+
+.sprite-container {
+    position: relative;
+    width: var(--sprite-width);
+    height: var(--sprite-width);
+}
+.sprite-container div {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.shadow {
+    background-image: url(https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/gif/shadow.png);
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% auto ;
+}
+
+.number-container {
+    display: flex;
+    gap: -8px;
+    align-items: center;
+}
+.number-container svg {
+    color: var(--text-color-4);
+    font-size: 20px;
+}
+.sprite-title {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+
+
+
+
+
+/* ------------------------------- 以上为默认样式 ----------------------------------- */
+/* ------------------------------平板横屏------------------------------- */
+@media screen and (max-width: 1199px) {
+    /* ------------雪碧图 ------------------*/
+   .gif-lists {
+    grid-template-columns: repeat(3, 1fr);
+    
+   }
+   .sprite {
+        animation:play-sprite var(--sprite-time) steps(var(--step-count)) infinite;
+   }
+}
+
+/* ------------------------------小于等于839px (平板竖屏)------------------------------- */
+@media only screen and (max-width: 839px) and (orientation: portrait) {
+
+   .gif-lists {
+    grid-template-columns: repeat(2, 1fr);
+    
+   }
+}
+
+/* ------------------------------手机------------------------------- */
+@media screen and (max-width: 599px) {
+
+    /* ------------雪碧图 ------------------*/
+   .gif-lists {
+    grid-template-columns: repeat(1, 1fr);
+   }
+   .gif-list {
+        pointer-events: none;
+        width: 90%;
+        margin-bottom: 20px;
+
+   }
+
+}
