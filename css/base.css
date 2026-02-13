@@ -1054,7 +1054,7 @@ button:hover {
     border-radius: 0px 0px var(--border-radius) var(--border-radius);
     transition: all 0.1s ease-out;
     overflow: hidden;
-    min-height: 100vh;
+    height: 100vh;
 }
 /* 暗色 */
 .footer-mask.dark {
@@ -1746,6 +1746,7 @@ background: var(--linear-2-paints, linear-gradient(319deg, rgba(0, 255, 172, 0.0
     background: var(--line-color-lighter);
     margin-bottom: 24px;
 }
+
 
 
 
