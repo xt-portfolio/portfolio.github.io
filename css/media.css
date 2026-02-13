@@ -3,6 +3,10 @@
 
 /* ------------------------------平板横屏------------------------------- */
 @media screen and (max-width: 1199px) {
+    html, body {
+    overflow-x: hidden; /* 隐藏水平溢出 */
+    width: 100%; /* 确保页面宽度不超过视口 */
+    }
 
     /* 鼠标 */
     #cursor-circle {
@@ -12,7 +16,7 @@
     .project-img {
         width: 100vw;
         border-radius: 0;
-        transform: translateX(-10vw);
+        transform: translateX(-5vw);
         margin-bottom: 0;
     }
 
