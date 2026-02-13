@@ -504,6 +504,7 @@ spline-viewer {
 .sprite-folder {
     background-image: url(https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/gif/folder.png);
     filter: brightness(1) contrast(1.05) saturate(1.1);
+    margin-top: 8px;
 }
 
 @keyframes loop-sprite  {
@@ -1696,6 +1697,13 @@ spline-viewer {
     .personal-information p{
         margin-top: 0;
     }
+
+    .number-card .sprite {
+        transform: scale(0.95);
+    }
+
+
+
     /* ------------其他设计----------------*/
     .otherDesign-cards .sprite-container {
         transform: scale(0.8);
