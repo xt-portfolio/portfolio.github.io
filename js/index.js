@@ -436,32 +436,64 @@ ScrollTrigger.create({
 });
 // ---------------------------------------2.个人--------------------------------------------
 
-ScrollTrigger.create({
-  trigger: '.personal', // 触发对象
-  start: '-12%', // 开始位置
-  end: '+=500', // 结束位置
-//   markers:true,//显示位置标记
-  scrub: true, // 随着鼠标上下滚动显示出现
-//   pin:true,
-  animation: gsap.timeline()
-    .from('.photo-1', {rotate:-12,duration: 1, ease: 'power3.out'})
-});
-
-
-// // 检查是否不是移动设备（屏幕宽度大于768px）
-if (window.innerWidth > 768) {
-  ScrollTrigger.create({
-    trigger: '.experience-container', // 触发对象
-    start: '-75%', // 开始位置
-    end: '+=500', // 结束位置
-    // markers:true,//显示位置标记
-    scrub: true, // 随着鼠标上下滚动显示出现
-    // pin:true,
-    animation: gsap.timeline()
-      .from('.experience-container', {y:80, duration: 1, ease: 'power3.out'})
+// 响应式ScrollTrigger管理器
+function initPersonalAnimation() {
+  // 获取当前屏幕宽度
+  const screenWidth = window.innerWidth;
+  const isMobileLayout = screenWidth <= 1199;
+  
+  // 获取已有的ScrollTrigger实例（如果有）
+  const existingTrigger = ScrollTrigger.getById('personal-animation');
+  if (existingTrigger) {
+    existingTrigger.kill(); // 移除旧实例
+  }
+  
+  // 创建动画时间线
+  const tl = gsap.timeline();
+  tl.from('.photo-1', { 
+    rotate: -12, 
+    duration: isMobileLayout ? 1.2 : 1,
+    ease: 'power3.out' 
   });
+  
+  // 根据屏幕尺寸创建不同的ScrollTrigger配置
+  if (isMobileLayout) {
+    // 移动端/平板：进入视口时播放一次
+    ScrollTrigger.create({
+      id: 'personal-animation',
+      trigger: '.personal',
+      start: 'top 80%',
+      end: '+=100',
+      animation: tl,
+      once: true, // 只播放一次
+      // markers: true
+    });
+  } else {
+    // PC端：滚动驱动动画
+    ScrollTrigger.create({
+      id: 'personal-animation',
+      trigger: '.personal',
+      start: '-12%',
+      end: '+=500',
+      scrub: true, // 滚动驱动
+      animation: tl,
+      // markers: true,
+      // pin: true
+    });
+  }
 }
 
+// 初始化动画
+initPersonalAnimation();
+
+// 监听窗口大小变化，重新初始化动画
+window.addEventListener('resize', () => {
+  // 使用防抖避免频繁触发
+  clearTimeout(window.resizedTimer);
+  window.resizedTimer = setTimeout(() => {
+    initPersonalAnimation();
+  }, 200);
+});
 
 
 
@@ -1386,11 +1418,10 @@ if (window.innerWidth > 768) {
     scrub: true, // 随着鼠标上下滚动显示出现
     // pin:true,
     animation: gsap.timeline()
-      // .from('.img-roll', {y:80,scale:0.98, duration: 1, ease: 'power3.out'})
-
       .from('.img-roll', {y:80, duration: 1, ease: 'power3.out'})
   });
 }
+
 // ---------------图片向右滚动动画----------------
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1633,21 +1664,68 @@ window.updateBooksLanguage = updateBooksLanguage;
 
 // --------------------------footer-----------------------------------
 
+// 初始化footer动画（含响应式适配）
+function initFooterAnimation() {
+    // 依赖检查：避免GSAP/ScrollTrigger未加载时报错
+    if (!window.gsap || !window.ScrollTrigger) {
+        console.warn('GSAP/ScrollTrigger 未加载，footer动画初始化失败');
+        return;
+    }
 
-ScrollTrigger.create({
-    trigger:'footer',// 触发对象
-    start:'0%',//开始位置
-    end:'bottom',//结束位置
-    // markers:true,//显示位置标记
-    scrub:true,//随着鼠标上下滚动显示出现
-    pin:true,
-    animation:
-    gsap.timeline()
-    .to('.footer-mask',{ y:'-48%',duration: 100,ease: 'power1.out',})
-    .from('.QRcode-box',{rotate:20,duration: 100,ease: 'power3.out',},'<')
+    // 清理旧实例：防止窗口缩放重复创建导致动画异常
+    ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.vars.trigger === 'footer') trigger.kill();
+    });
+
+    // 屏幕尺寸判断（≤1199px为小屏）
+    const isSmallScreen = window.innerWidth <= 1199;
+    // 基础动画配置（统一复用）
+    const baseConfig = { ease: 'power2.out', willChange: 'transform' };
+
+    // 1. 小屏逻辑（≤1199px）：去掉QR动画 + 无scrub + 出现即执行
+    if (isSmallScreen) {
+        // 初始化footer-mask状态，确保动画起点统一
+        gsap.set('.footer-mask', { y: 0 });
+        // 直接执行动画（无滚动触发、无scrub、无QR动画）
+        gsap.timeline()
+            .to('.footer-mask', {
+                y: '-48%',
+                duration: 1.5, // 修正原100秒的不合理时长，改为1.5秒
+                ...baseConfig
+            });
+    } 
+    // 2. 大屏逻辑（>1199px）：保留原有scrub/pin/完整动画
+    else {
+        ScrollTrigger.create({
+            trigger: 'footer',
+            start: '0%',
+            end: 'bottom',
+            scrub: true, // 保留滚动同步
+            pin: true,   // 保留固定效果
+            animation: gsap.timeline()
+                .to('.footer-mask', {
+                    y: '-48%',
+                    duration: 1.5, // 修正原100秒的超长时长
+                    ...baseConfig
+                })
+                .from('.QRcode-box', {
+                    rotate: 20,
+                    duration: 1.5,
+                    ease: 'power3.out',
+                    willChange: 'transform'
+                }, '<') // 与footer-mask动画同时开始
+        });
+    }
+}
+
+// 页面加载初始化
+window.addEventListener('load', initFooterAnimation);
+// 窗口缩放防抖重初始化（避免频繁触发）
+let resizeTimer;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(initFooterAnimation, 100);
 });
-
-
 // --------------------------鼠标-----------------------------------
 /// 鼠标
 const dot = document.getElementById('cursor-dot');
