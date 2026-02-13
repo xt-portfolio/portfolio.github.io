@@ -29,31 +29,72 @@ menuLinks.forEach(link => {
 
 //平滑滚动
 // 版本A：保持你的原版，只添加必要优化
+// 替换你原有的 Lenis 初始化代码
 const lenis = new Lenis({
-    smooth: true,
-    direction: 'vertical',
-    gestureDirection: 'vertical',
-    // 只添加这2个关键优化
-    lerp: 0.08,     // 降低卡顿
-    duration: 1.5   // 更平滑
+  smooth: true,
+  direction: 'vertical',
+  gestureDirection: 'vertical',
+  lerp: 0.12, // Safari 下调大 lerp 减少计算压力
+  duration: 2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // 更柔和的缓动
+  touchMultiplier: 2, // 降低触摸设备的滚动倍率
+  syncTouch: false // 关闭触摸同步（Safari 下易卡顿）
 });
 
+// 优化滚动事件监听：防抖 + 降低触发频率
+let scrollTimer;
 window.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    lenis.scrollBy(e.deltaY * 0.004, {  // 降低速度
-        duration: 1.6,
-        easing: (t) => 1 - Math.pow(1 - t, 4)  // 更轻的缓动
+  e.preventDefault();
+  clearTimeout(scrollTimer);
+  scrollTimer = setTimeout(() => {
+    lenis.scrollBy(e.deltaY * 0.003, {
+      duration: 2,
+      easing: (t) => 1 - Math.pow(1 - t, 3) // 简化缓动函数
     });
+  }, 8); // 防抖延迟，降低执行频率
 }, { passive: false });
 
+// 优化 RAF 循环：Safari 下降低帧率优先级
 function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
+  lenis.raf(time);
+  requestAnimationFrame(raf);
 }
 requestAnimationFrame(raf);
 
 
 
+
+// 检测非Chrome浏览器
+function isNonChrome() {
+    const ua = navigator.userAgent.toLowerCase();
+    return !(ua.includes('chrome') && 
+             !ua.includes('edg') && 
+             !ua.includes('opr') && 
+             !ua.includes('qqbrowser') &&
+             !ua.includes('ubrowser') &&
+             !ua.includes('safari') &&
+             !ua.includes('firefox'));
+}
+
+// GSAP 全局配置
+gsap.config({
+  force3D: isNonChrome(), // true: 非Chrome开启硬件加速, false: Chrome保持原样
+  nullTargetWarn: false,
+  trialWarn: false
+});
+
+// ScrollTrigger 优化
+gsap.registerPlugin(ScrollTrigger);
+
+if (isNonChrome()) {
+  // 非Chrome浏览器启用优化
+  ScrollTrigger.config({
+    autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
+    limitCallbacks: true,
+    ignoreMobileResize: true,
+    syncInterval: 50
+  });
+}
 
 //---------------------全局文字动效--------------------------
 
@@ -182,34 +223,44 @@ document.addEventListener('DOMContentLoaded', function() {
 // --------------------------项目首图-----------------------------------
 
 
-// // 检查是否不是移动设备（屏幕宽度大于768px）
+// 替换你原有的 Project-banner ScrollTrigger 代码
 if (window.innerWidth > 839) {
-    ScrollTrigger.create({
-      trigger:'dividing-line',// 触发对象
-      start:'-100%',//开始位置
-      end:'+=900',//结束位置
-      // markers:true,//显示位置标记
-      scrub:true,//随着鼠标上下滚动显示出现
-      pin:true,
-      animation:
-      gsap.timeline()
-      .to('.Project-banner',{ y:-50,duration: 30,ease: 'power3.out',})
+  ScrollTrigger.create({
+    trigger: '.dividing-line',
+    start: '-100% top', // 明确锚点（Safari 需指定参考轴）
+    end: '+=900 bottom',
+    scrub: 1, // 增加 scrub 缓冲值（Safari 更平滑）
+    pin: true,
+    pinSpacing: false, // 关闭自动 pin 间距（避免 Safari 计算错误）
+    animation: gsap.timeline({
+      defaults: {
+        ease: 'power2.out',
+        force3D: false // 强制关闭 3D 加速
+      }
+    }).to('.Project-banner', { 
+      y: -50,
+      duration: 30,
+      transform: 'translateY(-50px)', // 显式写 transform（Safari 兼容）
+      willChange: 'transform' // 精准指定 will-change
+    })
   });
 }
 
-  ScrollTrigger.create({
-      trigger:'project-content',// 触发对象
-      start:'0%',//开始位置
-      end:'+=50',//结束位置
-      // markers:true,//显示位置标记
-      scrub:true,//随着鼠标上下滚动显示出现
-      pin:true,
-      animation:
-      gsap.timeline()
-      .to('.Project-banner',{ opacity:0,duration: 3,ease: 'power2.out',})
-      // .to('.DetailPage-banner',{ y:500,duration: 30,ease: 'power1.out',},'<')
-  });
-
+ScrollTrigger.create({
+  trigger: '.project-content',
+  start: '0% top',
+  end: '+=50 bottom',
+  scrub: 1,
+  pin: true,
+  pinSpacing: false,
+  animation: gsap.timeline({
+    defaults: { force3D: false }
+  }).to('.Project-banner', { 
+    opacity: 0,
+    duration: 3,
+    willChange: 'opacity'
+  })
+});
 
 // --------------------------footer-----------------------------------
 
@@ -627,7 +678,7 @@ document.querySelectorAll('.itemHover').forEach(element => {
     // 鼠标悬停图片时，将parts改为5（跟随速度变慢）
     parts = 6;
     circle.style.backgroundColor = '#ffffff';
-    circle.style.backgroundImage = 'url(https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/view.png)';
+    circle.style.backgroundImage = 'url(../img/index/view.png)';
     circle.style.backgroundSize = 'cover';
     circle.style.width = '70px';
     circle.style.height = '70px';
