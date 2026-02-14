@@ -27,39 +27,28 @@ menuLinks.forEach(link => {
 });
 
 
-//平滑滚动
-// 版本A：保持你的原版，只添加必要优化
-// 替换你原有的 Lenis 初始化代码
-const lenis = new Lenis({
-  smooth: true,
-  direction: 'vertical',
-  gestureDirection: 'vertical',
-  lerp: 0.12, // Safari 下调大 lerp 减少计算压力
-  duration: 2,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // 更柔和的缓动
-  touchMultiplier: 2, // 降低触摸设备的滚动倍率
-  syncTouch: false // 关闭触摸同步（Safari 下易卡顿）
-});
-
-// 优化滚动事件监听：防抖 + 降低触发频率
-let scrollTimer;
-window.addEventListener('wheel', (e) => {
-  e.preventDefault();
-  clearTimeout(scrollTimer);
-  scrollTimer = setTimeout(() => {
-    lenis.scrollBy(e.deltaY * 0.003, {
-      duration: 2,
-      easing: (t) => 1 - Math.pow(1 - t, 3) // 简化缓动函数
+// 平滑滚动 - 桌面版启用，手机平板禁用
+if (window.innerWidth > 1024) {  // 只在桌面端启用
+    const lenis = new Lenis({
+        smooth: true,
+        direction: 'vertical',
+        gestureDirection: 'vertical',
+        lerp: 0.1,
+        duration: 1.5,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        touchMultiplier: 2,
+        syncTouch: false,
+        wheelMultiplier: 1
     });
-  }, 8); // 防抖延迟，降低执行频率
-}, { passive: false });
 
-// 优化 RAF 循环：Safari 下降低帧率优先级
-function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
+    // 简单的 RAF 循环
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
 }
-requestAnimationFrame(raf);
+
 
 
 
@@ -97,7 +86,6 @@ if (isNonChrome()) {
 }
 
 //---------------------全局文字动效--------------------------
-
 document.addEventListener('DOMContentLoaded', () => {
     // 处理.split-line元素（行级动画）
     document.querySelectorAll('.split-line').forEach(el => {
@@ -121,8 +109,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    // 进度条监听（保留一次即可）
-    window.addEventListener('scroll', updateProgressBar);
+    // 进度条监听 - 添加安全检查
+    const progressBar = document.getElementById('progressBar');
+    if (progressBar) {
+        window.addEventListener('scroll', updateProgressBar);
+    } else {
+        console.warn('进度条元素未找到，请确保存在 id="progressBar" 的元素');
+    }
 });
 
 // 行级动画函数（仅整体行动画）
@@ -173,12 +166,19 @@ function animateChars(element) {
     });
 }
 
-// 进度条更新函数
+// 进度条更新函数 - 添加空值检查
 function updateProgressBar() {
+    const progressBar = document.getElementById('progressBar');
+    
+    // 检查元素是否存在
+    if (!progressBar) {
+        return;
+    }
+    
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
     const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const scrolled = (scrollTop / scrollHeight) * 100;
-    document.getElementById('progressBar').style.width = scrolled + '%';
+    progressBar.style.width = scrolled + '%';
 }
 
 
@@ -264,18 +264,58 @@ ScrollTrigger.create({
 
 // --------------------------footer-----------------------------------
 
-ScrollTrigger.create({
-    trigger:'footer',// 触发对象
-    start:'0%',//开始位置
-    end:'bottom',//结束位置
-    // markers:true,//显示位置标记
-    scrub:true,//随着鼠标上下滚动显示出现
-    pin:true,
-    animation:
-    gsap.timeline()
-    .to('.footer-mask',{ y:'-48%',duration: 100,ease: 'power2.out',})
-    .from('.QRcode-box',{rotate:20,duration: 100,ease: 'power3.out',},'<')
-});
+// 获取footer元素
+const footerElement = document.querySelector('footer');
+// 获取footer-mask元素
+const footerMask = document.querySelector('.footer-mask');
+// 获取QRcode-box元素
+const qrCodeBox = document.querySelector('.QRcode-box');
+
+// 判断是否为移动端/平板（≤1199px）
+const isTabletOrMobile = window.matchMedia("(max-width: 1199px)").matches;
+
+if (isTabletOrMobile) {
+    // ============ 移动端/平板样式 (≤1199px) ============
+    // 1. 设置footer的margin-top
+    if (footerElement) {
+        footerElement.style.setProperty('margin-top', '0px', 'important');
+    }
+    
+    // 2. 调整footer-mask
+    if (footerMask) {
+        footerMask.style.position = 'relative';
+        footerMask.style.top = 'auto';
+    }
+    
+    // 3. QRcode出现时触发一次动画
+    if (qrCodeBox) {
+        ScrollTrigger.create({
+            trigger: 'footer',
+            start: 'top 80%',
+            once: true,
+            onEnter: () => {
+                gsap.fromTo(qrCodeBox, 
+                    { rotate: 20, opacity: 0.7 },
+                    { rotate: 0, opacity: 1, duration: 1, ease: 'power3.out' }
+                );
+            }
+        });
+    }
+    
+} else {
+    // ============ PC端：保持原有ScrollTrigger动画 ============
+    ScrollTrigger.create({
+        trigger: 'footer',
+        start: '0%',
+        end: 'bottom',
+        scrub: true,
+        pin: true,
+        animation: gsap.timeline()
+            .to('.footer-mask', { y: '-48%', duration: 100, ease: 'power1.out' })
+            .from('.QRcode-box', { rotate: 20, duration: 100, ease: 'power3.out' }, '<')
+    });
+}
+
 
 // ----------------------------------图片不能下载----------------------------------
 // document.addEventListener('contextmenu', function(e) {
@@ -678,7 +718,7 @@ document.querySelectorAll('.itemHover').forEach(element => {
     // 鼠标悬停图片时，将parts改为5（跟随速度变慢）
     parts = 6;
     circle.style.backgroundColor = '#ffffff';
-    circle.style.backgroundImage = 'url(../img/index/view.png)';
+    circle.style.backgroundImage = 'url(https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/view.png)';
     circle.style.backgroundSize = 'cover';
     circle.style.width = '70px';
     circle.style.height = '70px';
