@@ -264,57 +264,19 @@ ScrollTrigger.create({
 
 // --------------------------footer-----------------------------------
 
-// 获取footer元素
-const footerElement = document.querySelector('footer');
-// 获取footer-mask元素
-const footerMask = document.querySelector('.footer-mask');
-// 获取QRcode-box元素
-const qrCodeBox = document.querySelector('.QRcode-box');
+ScrollTrigger.create({
+    trigger:'footer',// 触发对象
+    start:'0%',//开始位置
+    end:'bottom',//结束位置
+    // markers:true,//显示位置标记
+    scrub:true,//随着鼠标上下滚动显示出现
+    pin:true,
+    animation:
+    gsap.timeline()
+    .to('.footer-mask',{ y:'-48%',duration: 100,ease: 'power1.out',})
+    .from('.QRcode-box',{rotate:20,duration: 100,ease: 'power3.out',},'<')
+});
 
-// 判断是否为移动端/平板（≤1199px）
-const isTabletOrMobile = window.matchMedia("(max-width: 1199px)").matches;
-
-if (isTabletOrMobile) {
-    // ============ 移动端/平板样式 (≤1199px) ============
-    // 1. 设置footer的margin-top
-    if (footerElement) {
-        footerElement.style.setProperty('margin-top', '0px', 'important');
-    }
-    
-    // 2. 调整footer-mask
-    if (footerMask) {
-        footerMask.style.position = 'relative';
-        footerMask.style.top = 'auto';
-    }
-    
-    // 3. QRcode出现时触发一次动画
-    if (qrCodeBox) {
-        ScrollTrigger.create({
-            trigger: 'footer',
-            start: 'top 80%',
-            once: true,
-            onEnter: () => {
-                gsap.fromTo(qrCodeBox, 
-                    { rotate: 20, opacity: 0.7 },
-                    { rotate: 0, opacity: 1, duration: 1, ease: 'power3.out' }
-                );
-            }
-        });
-    }
-    
-} else {
-    // ============ PC端：保持原有ScrollTrigger动画 ============
-    ScrollTrigger.create({
-        trigger: 'footer',
-        start: '0%',
-        end: 'bottom',
-        scrub: true,
-        pin: true,
-        animation: gsap.timeline()
-            .to('.footer-mask', { y: '-48%', duration: 100, ease: 'power1.out' })
-            .from('.QRcode-box', { rotate: 20, duration: 100, ease: 'power3.out' }, '<')
-    });
-}
 
 
 // ----------------------------------图片不能下载----------------------------------
