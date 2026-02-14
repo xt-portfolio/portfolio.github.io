@@ -27,8 +27,11 @@ menuLinks.forEach(link => {
 });
 
 
-// 平滑滚动 - 桌面版启用，手机平板禁用
-if (window.innerWidth > 1024) {  // 只在桌面端启用
+// 平滑滚动 - 检测触摸屏
+const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+// 只在非触摸屏设备上启用平滑滚动
+if (!isTouchDevice) {
     const lenis = new Lenis({
         smooth: true,
         direction: 'vertical',
@@ -41,14 +44,12 @@ if (window.innerWidth > 1024) {  // 只在桌面端启用
         wheelMultiplier: 1
     });
 
-    // 简单的 RAF 循环
     function raf(time) {
         lenis.raf(time);
         requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
 }
-
 
 
 
