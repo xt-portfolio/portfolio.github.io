@@ -1043,29 +1043,35 @@ if (window.gsap && window.ScrollTrigger) {
 // --------------------------------------4.其他设计-----------------------------------
 
 
-// 检查是否不是移动设备（屏幕宽度大于1199px）
-if (window.innerWidth > 1199) {
+// // 检查是否不是移动设备（屏幕宽度大于1199px）
+// if (window.innerWidth > 1199) {
   
-  // 检测Safari浏览器
-  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+//   // 检测Safari浏览器
+//   const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
   
-  if (!isSafari) {
-    // 非Safari浏览器（Chrome/Firefox等）：使用滚动驱动动画
-    ScrollTrigger.create({
-      trigger: '.img-roll', // 触发对象
-      start: '-75%', // 开始位置
-      end: '+=500', // 结束位置
-      // markers:true,//显示位置标记
-      scrub: true, // 随着鼠标上下滚动显示出现
-      // pin:true,
-      animation: gsap.timeline()
-        .to('.img-roll', {y:-80, duration: 1, ease: 'power3.out'})
-    });
-  }
-  // Safari浏览器：什么都不做，完全取消动画
-}
+//   if (!isSafari) {
+//     // 非Safari浏览器（Chrome/Firefox等）：使用滚动驱动动画
+//     ScrollTrigger.create({
+//       trigger: '.img-roll', // 触发对象
+//       start: '-75%', // 开始位置
+//       end: '+=500', // 结束位置
+//       // markers:true,//显示位置标记
+//       scrub: true, // 随着鼠标上下滚动显示出现
+//       // pin:true,
+//       animation: gsap.timeline()
+//         .to('.img-roll', {y:-80, duration: 1, ease: 'power3.out'})
+//     });
+//   }
+//   // Safari浏览器：什么都不做，完全取消动画
+// }
 
-
+gsap.from('.text-scroll li', {
+    scrollTrigger: ".text-scroll",// 此行代码表示触发动画的元素，只需要增加该行代码，就可以实现想要的效果。
+    y: 20,
+    duration: 1,
+    stagger: 0.15 , // 每个元素间隔0.2秒
+    ease: 'power1.out',
+});
 
 
 
