@@ -952,6 +952,7 @@ button:hover {
   justify-content: center;
   flex-direction: column;
   height: 70vh;
+  margin-bottom: 9vw;
 }
 
 .nextProject-container {
