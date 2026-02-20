@@ -1549,7 +1549,7 @@ document.querySelectorAll('.project-item').forEach(element => {
     // 鼠标悬停图片时，将parts改为5（跟随速度变慢）
     parts = 6;
     circle.style.backgroundColor = '#006effd2';
-    circle.style.backgroundImage = 'url(https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/view.png)';
+    circle.style.backgroundImage = 'url(https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/view.png)';
     circle.style.backgroundSize = 'cover';
     circle.style.width = '70px';
     circle.style.height = '70px';
