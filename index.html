@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>席婷作品集</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://unpkg.com/lenis@1.1.4/dist/lenis.min.js"></script>
+    <script src="./libs/gsap.min.js"></script>
+    <script src="./libs/ScrollTrigger.min.js"></script>
+    <script src='./libs/SplitText.min.js'></script>
+    <script src="./font/iconfont/iconfont.js"></script>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/media.css">
+    <link rel="stylesheet" href="./css/index.css">
+
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.57/build/spline-viewer.js" async></script>
+</head>
+<body>
+    <div id="cursor-dot"></div>
+    <div id="cursor-circle"></div>
+    <!---------------------------- 头部 ---------------------------->
+    <div class="header">
+        <div class="wrapper">
+            <!-- logo -->
+            <a href="./index.html" class="mylogo"></a>
+            <!-- 导航 -->
+            <ul class="nav">
+                <div class="language-switcher" >
+                    <button class="lang-btn" id="toggle-lang">中</button>
+                </div>
+                
+                <li data-lang="zh">
+                    <div class="nav-btn-container">
+                        <div class="nav-btn-dot dot-left"></div>
+                        <a href="./project.html">项目</a>
+                        <div class="nav-btn-dot dot-right"></div>
+                    </div>
+                </li>
+                <li data-lang="en" style="display:none">
+                    <div class="nav-btn-container">
+                        <div class="nav-btn-dot dot-left"></div>
+                        <a href="./project.html">work</a>
+                        <div class="nav-btn-dot dot-right"></div>
+                    </div>
+  
+  
+  
+            </ul>
+        </div>
+    </div> 
+
+    <div class="side-nav" id="sideNav">
+        <div class="nav-item" data-target="home">
+            <span class="nav-text">Home</span>
+            <div class="nav-line"></div>
+        </div>
+        <div class="nav-item" data-target="me">
+            <span class="nav-text">Me</span>
+            <div class="nav-line"></div>
+        </div>
+        <div class="nav-item" data-target="skill">
+            <span class="nav-text">Skill</span>
+            <div class="nav-line"></div>
+        </div>
+        <div class="nav-item" data-target="work">
+            <span class="nav-text">work</span>
+            <div class="nav-line"></div>
+        </div>
+        <div class="nav-item" data-target="note">
+            <span class="nav-text">Note</span>
+            <div class="nav-line"></div>
+        </div>
+    </div>
+
+
+
+
+    <!------------------------ 1.作品集封面 ---------------------------->
+    
+    <div class="banner section" id="home">
+        <div class="wrapper">
+            
+            <div class="bannerText-box">
+                    <div class="text-label-box">
+                    <!-- 标签 -->
+                    <svg class="icon text-hello" aria-hidden="true">
+                        <use xlink:href="#icon-hello"></use>
+                    </svg>           
+                
+                        <!-- <div class="lable-container">
+                            <div class="portfolio-lable-box">
+                                <img src="./img/index/portfolio-label-x.png" alt="" class="portfolio-label-x smooth-animation">
+                                <img src="./img/index/portfolio-lable.png" alt="" class="portfolio-label portfolio-label-tag smooth-animation">
+                                <img src="./img/index/portfolio-lable-string.png" alt="" class="portfolio-label">
+                            </div>
+                        </div> -->
+                </div>
+                
+                <svg class="icon text-name" aria-hidden="true">
+                    <use xlink:href="#icon-name"></use>
+                </svg>
+                <svg class="icon pixel-text" aria-hidden="true">
+                    <use xlink:href="#icon-pixel-zuopinji"></use>
+                </svg>
+
+            </div>
+            <div class="banner-bottom-box">
+                <div class="bottom-box-left">
+                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/banner/pixel-portfolio.png" alt="" class="pixel-portfolio">
+                    <ul class="banner-tags-container">
+                        <li class="banner-tag">
+                            <div class="black-block"></div>
+                            <span data-lang="zh">多端设计经验</span>
+                            <span data-lang="en" style="display:none"> Multi-platform</span>
+                        </li>
+                        <li class="banner-tag">
+                            <div class="black-block"></div>
+                            <span data-lang="zh">精通上下游流程</span>
+                            <span data-lang="en" style="display:none">Process mastery</span>
+                        </li>
+    
+                        <li class="banner-tag">
+                            <div class="black-block"></div>
+                            <span data-lang="zh">动效实现</span>
+                            <span data-lang="en" style="display:none">Dynamic visuals</span>
+                        </li>
+    
+    
+                    </ul>
+                </div>
+
+                <!-- <div class="skill-container">
+                    <div class="rectangular-container">
+                        <div class="deco-rectangular"></div>
+                        <div class="deco-rectangular"></div>
+                        <div class="deco-rectangular"></div>
+                    </div>
+                    <p>UI,WEB,INTERACTION <br>MOTION,Visualization</p>
+                </div> -->
+            </div>
+        </div>
+        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/banner/banner-bg.png" alt="" class="banner-bg">
+
+        <div class="modeling-box">
+            <spline-viewer loading-anim-type="none" url="https://prod.spline.design/gYU74J9fC-jDAfTg/scene.splinecode"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAANCAYAAADISGwcAAAG1ElEQVR4AQCBAH7/ALS4whS0uMIPtLjCB7S4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgq0uMIWtLjCIbS4wie0uMIotLjCJLS4wh20uMIRtLjCBbS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCAbS4wgi0uMILAIEAfv8AtLjCDrS4wgq0uMICtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCD7S4why0uMIntLjCLbS4wi+0uMIrtLjCI7S4whe0uMIKtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCBbS4wgkAgQB+/wC0uMIHtLjCBLS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgu0uMIbtLjCKbS4wjW0uMI8tLjCPrS4wjq0uMIxtLjCJLS4wha0uMIHtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIEtLjCBwCBAH7/ALS4wgW0uMIBtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMILtLjCHbS4wi+0uMI/tLjCS7S4wlO0uMJUtLjCULS4wke0uMI5tLjCKbS4whm0uMIKtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCArS4wga0uMIJAIEAfv8AtLjCCLS4wgW0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCDrS4wiC0uMIztLjCRrS4wle0uMJltLjCbbS4wm60uMJqtLjCX7S4wlG0uMI/tLjCLbS4wh20uMIPtLjCBbS4wgC0uMIAtLjCALS4wgS0uMIJtLjCDbS4wg8AgQB+/wC0uMIOtLjCC7S4wge0uMICtLjCALS4wgC0uMIAtLjCBLS4wg+0uMIetLjCMbS4wkW0uMJZtLjCa7S4wnm0uMKBtLjCgrS4wn20uMJytLjCY7S4wlC0uMI9tLjCK7S4why0uMIQtLjCCrS4wge0uMIItLjCC7S4wg+0uMITtLjCFQCBAH7/ALS4whC0uMIOtLjCCrS4wgW0uMICtLjCALS4wgK0uMIJtLjCFLS4wiS0uMI3tLjCTLS4wmC0uMJytLjCf7S4woe0uMKItLjCg7S4wne0uMJntLjCVLS4wkC0uMIutLjCHrS4whK0uMILtLjCCLS4wgm0uMIMtLjCD7S4whO0uMIVAIEAfv8AtLjCDrS4wgu0uMIHtLjCArS4wgC0uMIAtLjCALS4wgO0uMIOtLjCHbS4wi+0uMJDtLjCV7S4wmi0uMJ1tLjCfLS4wn20uMJ3tLjCa7S4wlu0uMJJtLjCNbS4wiO0uMIUtLjCCbS4wgK0uMIAtLjCAbS4wgS0uMIJtLjCDLS4wg8AgQB+/wC0uMIItLjCBbS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMINtLjCHbS4wjC0uMJCtLjCUrS4wl60uMJltLjCZbS4wl+0uMJUtLjCRLS4wjK0uMIgtLjCD7S4wgK0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIEtLjCBgCBAH7/ALS4wgW0uMICtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIKtLjCGrS4wiq0uMI5tLjCRLS4wkq0uMJKtLjCRLS4wjq0uMIrtLjCG7S4wgq0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMICAIEAfv8AtLjCB7S4wgS0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIJtLjCGLS4wiW0uMIvtLjCNLS4wjS0uMIvtLjCJbS4whi0uMIJtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCAbS4wgUAgQB+/wC0uMIOtLjCCrS4wgO0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIOtLjCGrS4wiO0uMIotLjCKLS4wiO0uMIatLjCDrS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgK0uMIJtLjCDQGBAH7/ALS4whS0uMIQtLjCCLS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgq0uMIVtLjCHrS4wiO0uMIjtLjCHrS4whW0uMIKtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCCLS4wg+0uMITc9qwA5X9H+MAAAAASUVORK5CYII=" alt="Spline preview" style="width: 100%; height: 100%;"/></spline-viewer>
+        </div>
+        <!-- <span data-lang="zh" class="modeling-loading">模型载入中...</span> -->
+        <!-- <span data-lang="en" style="display:none; font-size: 14px;" class="modeling-loading">Model loading...</span> -->
+
+        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/banner/banner-move.png" alt="" class="move-bg smooth-animation">
+        <div class="banner-sprite sprite-keycap" id="sprite1" data-frames="20" data-sprite="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/gif/keycap.png"></div>
+        <div class="banner-sprite sprite-bucket" id="sprite1" data-frames="40" data-sprite="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/gif/paint-bucket.png"></div>
+        <!-- <div class="banner-sprite sprite-garbage" id="sprite1" data-frames="27" data-sprite="./img/index/gif/garbage.png"></div> -->
+ 
+    </div>
+
+    <div class="skillRoll">
+        <div class="wrapper">
+            <div class="skillRoll-container" id="skillContainer">
+                <div class="skillRoll-list">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-wangzhanxitong"></use>
+                    </svg>
+                    <span>web design</span>           
+                </div>
+
+                <div class="skillRoll-list">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-keshihua"></use>
+                    </svg>
+                    <span>data visualization</span>           
+                </div>
+
+
+                <div class="skillRoll-list">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-houtai"></use>
+                    </svg>
+                    <span>dashboard</span>           
+                </div>
+
+                <div class="skillRoll-list">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-dongxiao"></use>
+                    </svg>
+                    <span>motion design</span>           
+                </div>
+
+                <div class="skillRoll-list">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-a-3D"></use>
+                    </svg>
+                    <span>3D Modeling</span>           
+                </div>
+
+                <div class="skillRoll-list">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-a-rongqi8"></use>
+                    </svg>
+                    <span>illustration</span>           
+                </div>
+
+                <div class="skillRoll-list">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-h002-aigc"></use>
+                    </svg>
+                    <span>aigc</span>           
+                </div>
+
+                <div class="skillRoll-list">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-yunying1"></use>
+                    </svg>
+                    <span>Operations Design</span>           
+                </div>
+            </div>
+        </div>
+    </div>
+    <!---------------------------2.个人信息----------------------------->
+    <div style="background: #fff;" id="me" class="section">
+        <div class="personal basic-padding">
+            <div class="wrapper">
+                <div class="sectionTitle-container">
+                    <div class="subtitle-box">
+                        <svg class="icon highlight " aria-hidden="true">
+                            <use xlink:href="#icon-blockcolor"></use>
+                        </svg>                    
+                        <span data-lang="zh" class="section-Subtitle">关于我</span>
+                        <span data-lang="en" style="display:none" class="section-Subtitle">about</span>
+                    </div>
+                    <div class="sectionTitle-box">
+                        <h1 class="sectionTitle split-line">My Story in Digital<br> <span>  Design</span></h1>
+                    </div>
+                </div>
+                <div class="personal-information-container">
+                    <div class="photo-frame">
+                        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/photo-2.png" alt="" class="myphoto photo-2">
+                        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/photo-1.png" alt="" class="myphoto photo-1">
+                    </div>
+                    <div class="information-box">
+                        <div class="personal-information">
+                            <p data-lang="zh" >我是席婷，一名热爱设计、善于思考、富有创意的 UI/UX 设计师。我的核心方向为
+                                <span class="highlight">数据可视化</span>
+                                和 数字产品设计
+                                <span class="highlight">(移动端/网页设计).</span>
+                            </p>
+
+
+                            <p data-lang="en" style="display:none">I'm XiTing, a passionate and creative UI/UX designer. <br>I specialize in 
+                                <span class="highlight">data visualization</span>
+                                and digital product design 
+                                <span class="highlight">(apps/websites).</span>
+                            </p>
+
+                            <!-- <p >I'm XiTing, a passionate and creative UI/UX designer. <br>I specialize in translating user needs and business goals into <span class="highlight">intuitive, clean</span> and <span class="highlight">visually appealing</span> interfaces.
+                            </p> -->
+
+                            <h4 data-lang="zh" class="text-regular">我专注于将用户需求与业务目标转化为直观、简洁且富有视觉吸引力的界面。我乐于探索 3D 建模、动效设计与 AI 工具，不断提升创意表达与设计效率，为作品赋予更丰富的层次与生命力。<br>你正在浏览的这个网站，从 3D 效果、动态交互到前端代码，均由我独立设计与实现。</h4>
+                            <h4 data-lang="en" style="display:none"  class="text-regular">I focus on turning user needs and business goals into intuitive, clean and visually appealing interfaces. I love exploring 3D modeling, motion design and AI tools to continuously enhance creative expression and design efficiency, bringing richer depth and vitality to my projects.</h4>
+                        </div>
+                        <div class="card-container">
+                            <div class="number-card">
+                                <div class="number-info-box">
+                                    <div class="number-container">
+                                        <h1>8</h1>
+                                        <span>+</span>
+                                    </div>
+                                    <p data-lang="zh">工作经验</p>
+                                    <p data-lang="en" style="display:none">years of experience</p>
+                                </div>
+                                <div class="sprite-frame sprite" style="--step-count:35;--sprite-time:4s; --sprite-width:120px;"></div>
+                            </div>
+
+                            <div class="number-card">
+                                <div class="number-info-box">
+                                    <div class="number-container">
+                                        <h1>56</h1>
+                                        <span>+</span>
+                                    </div>
+                                    <p data-lang="zh">完成项目</p>
+                                    <p data-lang="en" style="display:none">completed  projects</p>
+                                </div>
+                                <div class="sprite-folder sprite" style="--step-count:40;--sprite-time:4s; --sprite-width:126px;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+
+
+
+
+
+            </div>
+
+        </div>
+
+        <!-- 个人经历 -->
+        <div class="mySkills-container smooth-animation section" id="skill">
+            <div class="rular"></div>
+            <div class="wrapper">
+                <div class="sectionTitle-container dark">
+                    <div class="subtitle-box">
+                        <svg class="icon highlight " aria-hidden="true">
+                            <use xlink:href="#icon-blockcolor"></use>
+                        </svg>                    
+                        <span data-lang="zh" class="section-Subtitle">我的技能</span>
+                        <span data-lang="en" style="display:none" class="section-Subtitle">My Skills</span>
+                    </div>
+                    <div class="sectionTitle-box">
+                        <h1 class="sectionTitle split-line">Unlock My  <span>Core <br>Skills</span></h1>
+                        <p data-lang="zh" style="font-weight: 400;">设计对我而言不仅仅是一份工作，更是我的热爱。</p>                
+                        <p data-lang="en" style="display:none;">Design is not just a job for me. - it's my passion.</p>                
+                    </div>
+                </div>
+
+                <div class="skill-lists">
+                    <div class="skill-list">
+                        <div class="skill-left-container">
+                            <div class="number">[01]</div>
+                            <div class="skill-name">uI/UX design</div>
+                        </div>
+                        <p data-lang="zh" >我将用户需求与业务目标转化为直观美观的界面，从线框图到高保真设计稿，专注打造流畅愉悦的使用体验。</p>
+                        <p data-lang="en" style="display:none;" >
+                            I translate user needs and business goals into intuitive and visually appealing interfaces. From wireframes to high-fidelity mockups, I focus on creating smooth, enjoyable experiences that people love to use.
+                        </p>
+                        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/skills/1.png" alt="">
+                    </div>
+
+                    <div class="skill-list">
+                        <div class="skill-left-container">
+                            <div class="number">[02]</div>
+                            <div class="skill-name">3D modeling & animation</div>
+                        </div>
+                        <p data-lang="zh" >我喜欢探索 3D 世界。无论是在 C4D 里打磨精细模型，还是用关键帧让它们动起来，我认为 3D插图/动效 能为数字产品增加层次感、个性和专业感。</p>
+                        <p data-lang="en" style="display:none;" >
+                            I love exploring the 3D world. Whether I'm crafting detailed models in C4D or bringing them to life with keyframe animations, I use 3D to add depth, personality, and a sense of surprise to digital products.
+                        </p>
+                        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/skills/2.png" alt="">
+                    </div>
+
+                    <div class="skill-list">
+                        <div class="skill-left-container">
+                            <div class="number">[03]</div>
+                            <div class="skill-name">code</div>
+                        </div>
+                        <p data-lang="zh" >我会写规范的 HTML、CSS 和基础 JavaScript。无论是独立搭建网站，还是和开发沟通对接，都能打通设计与开发的衔接环节，将设计精准转化为整洁易维护的代码，实现像素级落地。</p>
+                        <p data-lang="en" style="display:none;" >
+                            I write clean HTML, CSS, and basic JavaScript. Whether building websites independently or communicating with developers, I bridge the gap between design and development, translating designs into clean, maintainable code for pixel-perfect implementation.                        </p>
+                        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/skills/3.png" alt="">
+                    </div>
+
+
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+    <!--------------------------- 3.目录 ----------------------------->
+    <div class="content section" id="work">
+        <!-----------------------projects动效 -------------------->
+        <div class="content-text-scroll">
+            <!-- 第一份内容 -->
+            <div class="textscroll-item">
+                <h1 class="content-head">projects</h1>
+                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/fabric-logo.png" alt="fabric logo">
+                <h1 class="content-head">projects</h1>
+                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/fabric-logo.png" alt="fabric logo">
+            </div>
+            <!-- 第二份内容：用于无缝衔接 -->
+            <div class="textscroll-item">
+                <h1 class="content-head">projects</h1>
+                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/fabric-logo.png" alt="fabric logo">
+                <h1 class="content-head">projects</h1>
+                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/fabric-logo.png" alt="fabric logo">
+            </div>
+        </div>
+        <div class="horizontal-line"></div>
+        <div class="wrapper projects-container">
+                <div class="sectionTitle-container">
+                    <div class="subtitle-box">
+                        <svg class="icon highlight " aria-hidden="true">
+                            <use xlink:href="#icon-blockcolor"></use>
+                        </svg>                    
+                        <span data-lang="zh" class="section-Subtitle">精选作品</span>
+                        <span data-lang="en" style="display:none" class="section-Subtitle">featured works</span>
+                    </div>
+                </div>
+            <div class="grid-system">
+                <!-- 可视化 -->
+                <div class="project-item grid-item" style="--grid-column:span 9; padding-right: var(--project-padding)">
+                    <div class="project-card" data-categories="visualization">
+                        <a href="./project-Visualization.html" class="itemHover">
+                            <div class="projectImg-container" >  
+                                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/visualazation/bg.png"  alt="移动端设计" class="original increase-saturation">
+                                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/visualazation/light.gif" alt="" class="gif-layer gif-mode" >
+                                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/visualazation/dot.gif" alt="" class="gif-layer" >
+                                <div class="ray ray1" style="opacity: 0.3;"></div>
+                                <div class="ray ray2"></div>
+                                <div class="ray ray3"></div>
+                            </div>
+                            <div class="card-content">
+
+                                <div class="project-title">
+                                    <h2 data-lang="zh" data-before="可视化合集" class="text-upward" >可视化合集</h2>
+                                    <h2 data-lang="en" style="display:none;" data-before="Visualization Collection" class="text-upward" >Visualization Collection</h2>
+                                    <h3 class="time">2023-2025</h3>
+                                </div>
+                                <span data-lang="zh" class="card-category">可视化 · 3D</span>
+                                <span data-lang="en" style="display:none;" class="card-category">visualization · 3D</span>
+                            </div>
+                            <div class="project-line"></div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 数字能源 -->
+                <div class="project-item grid-item project-right" style="--grid-column:span 5; padding-left: var(--project-padding)">
+                    <div class="project-card" data-categories="dashboard,mobile">
+                        <a href="./project-DigitalEnergy.html" class="itemHover">
+                            <div class="projectImg-container" >  
+                                <video src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/cover-small.mp4"  muted loop autoplay poster="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/banner.png"></video> 
+                            </div>
+                            <div class="card-content">
+
+                                <div class="project-title">
+                                    <h2 data-lang="zh" data-before="数字能源" class="text-upward">数字能源</h2>
+                                    <h2 data-lang="en" style="display:none;" data-before="Digital Energy" class="text-upward">Digital Energy</h2>
+                                    <h3 class="time">2025</h3>
+                                </div>
+                                <span data-lang="zh" class="card-category">b端 · 移动端</span>
+                                <span data-lang="en" style="display:none;" class="card-category">dashboard · mobile</span>
+                                <div class="project-line"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+
+                <!-- 第二排 -->
+
+                <div class="grid-item item-empty" style="--grid-column:span 12;"></div>
+                <!-- 现货市场 -->
+                <div class="project-item grid-item" style="--grid-column:span 3; padding-right: var(--project-padding)">
+                    <div class="project-card" data-categories="mobile">
+                        <a href="./project-CashMacket.html" class="itemHover">
+                            <div class="projectImg-container" >  
+                                <video src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E7%8E%B0%E8%B4%A7app/phone.mp4"  muted loop autoplay poster="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E7%8E%B0%E8%B4%A7app/banner.png"></video> 
+                            </div>
+                            <div class="card-content">
+
+                                <div class="project-title">
+                                    <h2 data-lang="zh" data-before="现货市场数据监控" class="text-upward">现货市场数据监控</h2>
+                                    <h2 data-lang="en" style="display:none;" data-before="Spot market data monitoring" class="text-upward">Spot market data monitoring</h2>
+                                    <h3 class="time">2025</h3>
+                                </div>
+                                <span data-lang="zh" class="card-category">移动端</span>
+                                <span data-lang="en" style="display:none;" class="card-category">mobile</span>
+                            <div class="project-line"></div>
+                            </div>
+                        </a>
+                    </div>                
+                </div>
+
+                <!-- 3d合集 -->
+                <div class="project-item grid-item project-middle" style="--grid-column:span 6; padding: 0 var(--project-padding)">
+                    <div class="project-card" data-categories="3D">
+                        <a href="./project-3d.html" class="itemHover">
+                            <div class="projectImg-container  small-rounded" >  
+                                <video src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/video/3d-loop.mp4"  muted loop autoplay></video> 
+                            </div>
+                            <div class="card-content">
+
+                                <div class="project-title">
+                                    <h2 data-lang="zh" data-before="三维设计合集" class="text-upward">三维设计合集</h2>
+                                    <h2 data-lang="en" style="display:none;" data-before="3D design collection" class="text-upward">3D design collection</h2>
+                                    <h3 class="time">2023-2026</h3>
+                                </div>
+                                <span data-lang="zh" class="card-category">建模 · 动效</span>
+                                <span data-lang="en" style="display:none;" class="card-category">modeling · animation</span>
+                                <div class="project-line"></div>
+                            </div>
+                        </a>
+                    </div>
+                
+                </div>
+
+                <div class="project-item grid-item project-right" style="--grid-column:span 5; padding-left: var(--project-padding)">
+                    <div class="project-card" data-categories="graphic">
+                        <a href="./project-brochure.html" class="itemHover">
+                            <div class="projectImg-container" >  
+                                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/brochure/cover.png" alt=""> 
+                            </div>
+                            <div class="card-content">
+
+                                <div class="project-title">
+                                    <h2 data-lang="zh" data-before="产品宣传册" class="text-upward">产品宣传册</h2>
+                                    <h2 data-lang="en" style="display:none;" data-before="Product Brochure" class="text-upward">Product Brochure</h2>
+                                    <h3 class="time">2023</h3>
+                                </div>
+                                <span data-lang="zh" class="card-category">平面设计</span>
+                                <span data-lang="en" style="display:none;" class="card-category">graphic</span>
+                            <div class="project-line"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+ 
+ 
+            </div>
+
+
+
+
+            <div class="line-box">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+
+                <div class="line"></div>
+                <div class="line"></div>                       
+            </div>
+
+
+
+        </div>
+
+        <div class="btn-centre-container btn-more-container">
+            <a href="./project.html" target="_blank">
+                <button class="btn-more">
+                    <div class="btn-box">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-xiangsujiantouyou"></use>
+                        </svg> 
+                    <span data-lang="zh" style="font-size: 17px;">查看全部项目</span>
+                    <span data-lang="en" style="display:none">View All Works</span>
+                    </div>
+                </button>
+            </a>
+        </div>
+
+    </div>
+  
+  
+  
+  
+  
+    <!---------------------------4.图片滚动 ----------------------------->
+    <div class="img-roll smooth-animation">
+        <div class="rular"></div>
+
+        <!-- 向左滚动 -->
+            <ul class="text-scroll">
+            <li>
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-blockcolor"></use>
+                </svg>                    
+                <span class="section-Subtitle">Operations Design</span>
+            </li>
+            <li>
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-blockcolor"></use>
+                </svg>                    
+                <span class="section-Subtitle">aigc</span>
+            </li>
+
+            <li>
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-blockcolor"></use>
+                </svg>                    
+                <span class="section-Subtitle">Graphic Design</span>
+            </li>
+
+            <li>
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-blockcolor"></use>
+                </svg>                    
+                <span class="section-Subtitle">Dynamic Design</span>
+            </li>
+            </ul>
+            
+            <div class="scoll-container">
+            <!-- 向右滚动 -->
+                <div class="imgScroll-top-container">
+                    <ul class="scroll-right">
+                        <li class="right-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/1.png" alt=""></li>
+                        <li class="right-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/2.png" alt=""></li>
+                        <li class="right-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/6.png" alt=""></li>
+                        <li class="right-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/4.png" alt=""></li>
+                    </ul>
+                    <!-- 复制一组 -->
+                    <ul class="scroll-right">
+                        <li class="right-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/1.png" alt=""></li>
+                        <li class="right-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/2.png" alt=""></li>
+                        <li class="right-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/6.png" alt=""></li>
+                        <li class="right-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/4.png" alt=""></li>
+                    </ul>
+                </div>
+                <!-- 向左滚动 -->
+                 <div class="imgScroll-bottom-container">
+                    <ul class="scroll-left">
+                        <li class="left-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/7.png" alt=""></li>
+                        <li class="left-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/8.gif" alt=""></li>
+                        <li class="left-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/11.png" alt=""></li>
+                        <li class="left-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/10.png" alt=""></li>
+                    </ul>
+                    <!-- 复制一组 -->
+
+                    <ul class="scroll-left">
+                        <li class="left-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/7.png" alt=""></li>
+                        <li class="left-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/8.gif" alt=""></li>
+                        <li class="left-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/11.png" alt=""></li>
+                        <li class="left-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/10.png" alt=""></li>
+                    </ul>
+                 </div>
+            </div>
+
+    </div>
+
+
+    <!---------------------------6.笔记----------------------------->
+    <div class="notes-section basic-padding footer-mask section" id="note">
+            <div class="wrapper">
+                <div class="sectionTitle-container">
+                    <div class="subtitle-box">
+                        <svg class="icon highlight " aria-hidden="true">
+                            <use xlink:href="#icon-blockcolor"></use>
+                        </svg>                    
+                        <span data-lang="zh" class="section-Subtitle">学习笔记</span>
+                        <span data-lang="en" style="display:none" class="section-Subtitle">Notes</span>
+                    </div>
+                    <div class="sectionTitle-box">
+                        <h1 class="sectionTitle split-line">Dive Into <span>My <br> Insights</span></h1>
+                        <p data-lang="zh" style="font-weight: 400;">在创意成长的旅程中，持续精进。</p>                
+                        <p data-lang="en" style="display:none">Tracking my progress in the journey of creative growth.</p>                
+                    </div>
+                </div>
+                <div class="note-container">
+                    <div class="note-lists">
+                            <div class="books-wrapper">
+                                <!-- Book 1 -->
+                                <div class="books__item">
+                                    <a href="https://www.yuque.com/u132157/kb/avwghzt5yvfrlzf4?singleDoc# 《代码》" target="_blank">
+                                        <div class="books__container">
+                                        <div class="books__cover">
+                                            <div class="books__back-cover"></div>
+                                            <div class="books__inside">
+                                                <div class="books__page"></div>
+                                                <div class="books__page"></div>
+                                                <div class="books__page"></div>
+                                            </div>
+                                            <div class="books__image">
+                                            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/html-book.png" alt="Psychedelics and Mental Health by Irene de Caso">
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!-- Book 2 -->
+                                <div class="books__item">
+                                    <a href="https://www.yuque.com/u132157/kb/yfltkyu75r7a38ii?singleDoc# 《AI关键词》" target="_blank">
+                                        <div class="books__container">
+                                        <div class="books__cover">
+                                            <div class="books__back-cover"></div>
+                                            <div class="books__inside">
+                                                <div class="books__page"></div>
+                                                <div class="books__page"></div>
+                                                <div class="books__page"></div>
+                                            </div>
+                                            <div class="books__image">
+                                            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/aicg-book.png" alt="Psychedelics and Mental Health by Irene de Caso">
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!-- Book 3 -->
+                                <div class="books__item">
+                                    <a href="https://www.yuque.com/u132157/kb/fbyge0?singleDoc# 《AE》" target="_blank">
+                                        <div class="books__container">
+                                        <div class="books__cover">
+                                            <div class="books__back-cover"></div>
+                                            <div class="books__inside">
+                                                <div class="books__page"></div>
+                                                <div class="books__page"></div>
+                                                <div class="books__page"></div>
+                                            </div>
+                                            <div class="books__image">
+                                            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/ae-book.png" alt="Psychedelics and Mental Health by Irene de Caso">
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!-- Book 4 -->
+                                <div class="books__item">
+                                    <a href="https://www.yuque.com/u132157/kb/ubwwkt?singleDoc# 《C4D》" target="_blank">
+                                        <div class="books__container">
+                                        <div class="books__cover">
+                                            <div class="books__back-cover"></div>
+                                            <div class="books__inside">
+                                                <div class="books__page"></div>
+                                                <div class="books__page"></div>
+                                                <div class="books__page"></div>
+
+                                            </div>
+                                            <div class="books__image">
+                                            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/c4d-book.png" alt="Psychedelics and Mental Health by Irene de Caso">
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/bookshelf.png" alt="" class="bookshelf">
+                    </div>
+
+
+                <!-- 修改HTML结构，只保留一组内容区域 -->
+                <div class="note-content-container">
+                    <!-- 只需要一组动态更新的元素 -->
+                    <h1 class="note-title" id="dynamic-title">HTML, CSS, JS</h1>
+                    <p class="note-detail" id="dynamic-description">从页面结构到交互逻辑，系统学习前端开发的核心基础。</p>
+                </div>
+
+                </div>
+            </div>
+            <!-- <p class="Stroke smooth-animation">aigc ✦ ae ✦ 3d modeling ✦ html+css</p> -->
+    </div>
+
+
+    <!---------------------------7.footer----------------------------->
+    <div class="empty-mask"></div>
+    <footer class="" id="footerContainer">
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/4.png" alt=""></div>
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/5.png" alt=""></div>
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/2.png" alt=""></div>
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/3.png" alt=""></div>
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/6.png" alt=""></div>
+
+        <a href="mailto:578742871@qq.com" class="footer-email no-trail">
+            <h2  data-before="578742871@qq.com" class="text-upward" >578742871@qq.com</h2>
+        </a>
+        <div class="footerText-container">
+            <h1>Let's start</h1>
+            <div class="text-QRcode">
+                <h1>creating&nbsp;</h1>
+                <h1>something</h1>
+                <div class="QRcode-box smooth-animation">
+                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/portfolio-label-x.png" alt="" class="footer-label-x smooth-animation">
+                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/QRcode.png" alt="" class="QRcode smooth-animation QRcode-tag">
+                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/QRcode-string.png" alt="" class="QRcode smooth-animation">
+                </div>
+            </div>
+            <h1 class="text-final">together.</h1>
+        </div> 
+                
+        <p>I'm ready to work on excinting projects.</p>
+        <!-- <h5>contact me</h5> -->
+        <div class="keyboard smooth-animation">
+            <ul id="navLinks" class="navLinks no-trail">
+                <!-- 蓝色按钮：新增自定义提示框 -->
+                <div class="link-placeholder-wrapper">
+                    <a href="javascript:void(0);" class="link-placeholder" tabindex="0">
+                        <li class="KeyPress KeyPress-blue placeholder-btn">
+                            <div class="KeyPress-top blue-top ">
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-lingying"></use>
+                                </svg>
+                            </div>
+                        </li>
+                    </a>
+                    <!-- 自定义提示框：鼠标悬浮立即显示 -->
+                    <div class="custom-tooltip">Coming soon</div>
+                </div>
+
+                <!-- 其他按钮保持不变 -->
+                <a href="https://dribbble.com/57874287127c4"  target="_blank">
+                    <li class="KeyPress KeyPress-pink">
+                        <div class="KeyPress-top pink-top">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-dribbble"></use>
+                            </svg>
+                        </div>
+                    </li>
+                </a>
+
+                <a href="https://www.zcool.com.cn/u/14729612"  target="_blank">
+                    <li class="KeyPress KeyPress-dark">
+                        <div class="KeyPress-top dark-top">
+                            <svg class="icon icon-yellow" aria-hidden="true">
+                                <use xlink:href="#icon-zhanku1"></use>
+                            </svg>
+                        </div>
+                    </li>
+                </a>
+            </ul>
+        </div>
+    </footer>
+  <!-- 引入JS文件 --> 
+     <!-- 波纹 -->
+    <script src="./js/index.js"></script>
+    <!-- 重力 -->
+    <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js'></script> -->
+</body>
+</html>

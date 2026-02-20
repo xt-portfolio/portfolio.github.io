@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>席婷作品集</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://unpkg.com/lenis@1.1.4/dist/lenis.min.js"></script>
+    <script src="./libs/gsap.min.js"></script>
+    <script src="./libs/ScrollTrigger.min.js"></script>
+    <!-- <script src='./libs/SplitText.min.js'></script> -->
+    <script src="./font/iconfont/iconfont.js"></script>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/media.css">
+    <style>
+        body,.footer-mask {
+            background: #fff;
+        }
+    </style>
+
+
+</head>
+<body>
+    <div id="cursor-dot"></div>
+    <div id="cursor-circle"></div>
+    <!---------------------------- 头部 ---------------------------->
+    <div class="header">
+        <div class="wrapper">
+            <!-- logo -->
+            <a href="./index.html" class="mylogo"></a>
+            <!-- 导航 -->
+            <ul class="nav">
+                <div class="language-switcher" >
+                    <button class="lang-btn" id="toggle-lang">中</button>
+                </div>
+                
+                <li data-lang="zh">
+                    <div class="nav-btn-container">
+                        <div class="nav-btn-dot dot-left"></div>
+                        <a href="./project.html">项目</a>
+                        <div class="nav-btn-dot dot-right"></div>
+                    </div>
+                </li>
+                <li data-lang="en" style="display:none">
+                    <div class="nav-btn-container">
+                        <div class="nav-btn-dot dot-left"></div>
+                        <a href="./project.html">work</a>
+                        <div class="nav-btn-dot dot-right"></div>
+                    </div>
+  
+  
+  
+            </ul>
+        </div>
+    </div> 
+    <!------------------------ 内容区 ---------------------------->
+
+    <!-- 返回按钮 -->
+    <a href="javascript:history.back()" class="btn-link">
+        <div class="btn-back">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-pixel-back"></use>
+            </svg>
+        </div>
+    </a>
+    
+    <!-- --------------------------banner------------------------- -->
+    <div class="Project-banner">
+        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/3d/portfolio-banner/portfolio-bg.png" alt="">
+        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/3d/portfolio-banner/lable.png" alt="">
+
+        <div class="scrollIndicator" >
+            <div class="scrollIndicator-dot"></div>
+        </div>
+    </div>
+
+
+
+    <!-- ---------------------------内容区------------------------- -->
+    <div class="project-content">
+         <!-- 标题区 -->
+        <div class="wrapper">
+
+            <!-- 分割线 -->
+            <div class="dividing-line">
+                <span>⊹</span>
+                <div class="time-box">
+                    <div class="line"></div>
+                </div>
+            </div>
+
+
+            <div class="ProjectTitle-container">
+                <div class="left">
+                    <h1 data-lang="zh" class="DetailPage-title">三维设计合集</h1>
+                    <h1 data-lang="en" style="display:none" class="DetailPage-title">3D design collection</h1>
+                    <p data-lang="zh" >这里收集了一些我工作和日常练习的三维设计和动效作品，希望通过创意与技术，呈现更具质感与表现力的视觉体验。</p>
+                    <p  data-lang="en" style="display:none; font-weight: 200;">
+                        This collection showcases my 3D design and motion works from both professional projects and daily practices. I hope to deliver vivid, textured visual experiences through creativity and technology.
+                    </p>
+               
+                </div>
+                <div class="info-table">
+                    <div class="info-row">
+                        <div data-lang="zh" class="info-label">时间</div>
+                        <div data-lang="en" style="display:none" class="info-label">time</div>
+                        <div class="info-value info-time">2023-2026</div>
+                    </div>
+                    <div class="info-row">
+                        <div data-lang="zh" class="info-label">类别</div>
+                        <div data-lang="en" style="display:none" class="info-label">category</div>
+                        <div data-lang="zh" class="info-value">3D</div>
+                        <div data-lang="en" style="display:none" class="info-value">mobile</div>
+                    </div>
+                    <div class="info-row">
+                        <div data-lang="zh" class="info-label">职责</div>
+                        <div data-lang="en" style="display:none" class="info-label">role</div>
+                        <div data-lang="zh" class="info-value">建模 · 动效</div>
+                        <div data-lang="en" style="display:none" class="info-value">3D modeling · animation</div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        
+
+
+
+         <!-- 图片区 -->
+        <div class="projectDetail-imgs-container">
+            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/3d/1.png" alt="" class="project-img">
+
+            <!-- 一排两个图片 -->
+             <div class="double-img two-columns">
+                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/3d/2.png" alt="" class="project-img">
+                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/3d/3.png" alt="" class="project-img">
+             </div>
+            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/3d/6.png" alt="" class="project-img">
+
+
+
+        </div>
+
+
+    </div>
+    
+
+
+
+
+    <!---------------------------探索更多----------------------------->
+    <div class="footer-mask">
+        <div class="wrapper">
+            <div class="dividing-line">
+                <span>⊹</span>
+                <div class="time-box">
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>
+        <div class="next-project">
+        <a href="./project-brochure.html">
+
+            <div class="nextProject-container">
+                <h3>[ next project ]</h3>
+                <h1 data-lang="zh" class="nextProject-title">产品宣传册</h1>
+                <h1 data-lang="en" style="display:none" class="nextProject-title">Product Brochure</h1>
+                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/brochure/cover.png" alt=""> 
+            </div>
+        </a>
+
+        </div>
+    </div>
+    <!---------------------------7.footer----------------------------->
+    <div class="empty-mask"></div>
+    <footer class="" id="footerContainer">
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/4.png" alt=""></div>
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/5.png" alt=""></div>
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/2.png" alt=""></div>
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/3.png" alt=""></div>
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/6.png" alt=""></div>
+
+        <a href="mailto:578742871@qq.com" class="footer-email no-trail">
+            <h2  data-before="578742871@qq.com" class="text-upward" >578742871@qq.com</h2>
+        </a>
+        <div class="footerText-container">
+            <h1>Let's start</h1>
+            <div class="text-QRcode">
+                <h1>creating&nbsp;</h1>
+                <h1>something</h1>
+                <div class="QRcode-box smooth-animation">
+                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/portfolio-label-x.png" alt="" class="footer-label-x smooth-animation">
+                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/QRcode.png" alt="" class="QRcode smooth-animation QRcode-tag">
+                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/QRcode-string.png" alt="" class="QRcode smooth-animation">
+                </div>
+            </div>
+            <h1 class="text-final">together.</h1>
+        </div> 
+                
+        <p>I'm ready to work on excinting projects.</p>
+        <!-- <h5>contact me</h5> -->
+        <div class="keyboard smooth-animation">
+            <ul id="navLinks" class="navLinks no-trail">
+                <!-- 蓝色按钮：新增自定义提示框 -->
+                <div class="link-placeholder-wrapper">
+                    <a href="javascript:void(0);" class="link-placeholder" tabindex="0">
+                        <li class="KeyPress KeyPress-blue placeholder-btn">
+                            <div class="KeyPress-top blue-top ">
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-lingying"></use>
+                                </svg>
+                            </div>
+                        </li>
+                    </a>
+                    <!-- 自定义提示框：鼠标悬浮立即显示 -->
+                    <div class="custom-tooltip">Coming soon</div>
+                </div>
+
+                <!-- 其他按钮保持不变 -->
+                <a href="https://dribbble.com/57874287127c4"  target="_blank">
+                    <li class="KeyPress KeyPress-pink">
+                        <div class="KeyPress-top pink-top">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-dribbble"></use>
+                            </svg>
+                        </div>
+                    </li>
+                </a>
+
+                <a href="https://www.zcool.com.cn/u/14729612"  target="_blank">
+                    <li class="KeyPress KeyPress-dark">
+                        <div class="KeyPress-top dark-top">
+                            <svg class="icon icon-yellow" aria-hidden="true">
+                                <use xlink:href="#icon-zhanku1"></use>
+                            </svg>
+                        </div>
+                    </li>
+                </a>
+            </ul>
+        </div>
+    </footer>
+    
+  <!-- 引入JS文件 --> 
+    <script src="./js/project-details.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,219 @@
+/* ------------------------------- 通用样式 ----------------------------------- */
+/* ------------------------------笔记本小尺寸------------------------------- */
+@media screen and (max-width: 1510px) {
+    /* --------------图片全屏------------------*/
+    .projectDetail-imgs-container {
+        width: 100vw;
+    }
+    .projectContent-container {
+        width: var(--basic-wrapper);
+        margin-left: var(--basic-margin);
+    }
+
+
+}
+/* ------------------------------平板横屏------------------------------- */
+@media screen and (max-width: 1199px) {
+
+    /* 鼠标 */
+    #cursor-circle {
+        display: none;
+    }
+    .side-nav {
+        display: none;
+    }
+    /* ------------作品内容小标题 ---------------*/
+    .projectContent-container p {
+        margin-right: 0;
+    }
+    .projectContent-title {
+        color: var(--text-color-1);
+        font-size: 30px;
+        font-weight: 500;
+        text-transform: capitalize;
+        width: 40%;
+    }
+    /* ------------项目 ---------------*/
+    .text-upward {
+        overflow: hidden;
+    }
+    .itemHover:hover {
+    .text-upward {
+        transform: none; /* 上移一个元素的高度 */
+    }
+    h2::before {
+        transform: none; /* 同样上移一个元素的高度 */
+    }
+    .projectImg-container {
+        transform: scale(0.99);
+    }
+    }
+
+
+
+
+
+    /* ------------footer-media------------------*/
+    .keyboard {
+        margin-top: 40px;
+    }
+    .footerText-container {
+        transform: scale(0.9);
+    }
+    footer p {
+        margin-top: 8px;
+    }
+    .footer-email {
+        margin-bottom: 16px;
+        height: auto;
+    }
+    footer .text-upward {
+        font-size: 18px;
+    }
+
+    .footer-email:hover {
+    .text-upward {
+        transform: none; /* 上移一个元素的高度 */
+    }
+}    .mail-contact {
+        display: none;
+    }
+    .footer-text-scroll {
+        transform: translateY(0);
+    }
+    .footer-email:hover .footer-text-scroll {
+    transform: none;
+    /* 或者直接设置回默认值 */
+    /* transform: translateY(0); */
+  }
+
+
+}
+
+/* ------------------------------小于等于839px (平板竖屏)------------------------------- */
+@media only screen and (max-width: 839px)  {
+    :root {
+        --basic-margin:5%;
+        --basic-wrapper: 90%;
+
+    }
+    /* ------------作品详情标题模块 ---------------*/
+    .ProjectTitle-container{
+        flex-direction: column;
+    }
+
+    .ProjectTitle-container .left {width: 100%;}
+
+    .info-row {
+        width: 100%;
+        flex-direction: row;
+    }
+
+    .project-img {
+        border-radius: 8;
+    }
+    /* 项目详情banner大小调整 */
+    .Project-banner {
+        height: 52vw;
+        margin-top: 58px;
+
+    }
+    .project-content {
+        margin-top: calc(52vw + 58px);
+    }
+
+
+    /* ------------作品内容小标题 ---------------*/
+    .projectContent-container {
+        flex-direction: column;
+    }
+    .projectContent-container p {
+        margin-right: 0;
+    }
+    .projectContent-title {
+        font-size: 30px;
+        width: 100%;
+    }
+
+
+    /* --------------更多项目【一排两个】------------------*/
+    .three-columns{
+        grid-template-columns: repeat(2, 1fr) !important;
+
+    }
+
+}
+/* ------------------------------手机------------------------------- */
+@media screen and (max-width: 768px) {
+    :root {
+        --big-font-size:32px;
+    }
+    /* 头部导航样式 */
+    .language-switcher {
+        display: none;
+    }
+    .nav-btn-container {
+        height: 34px;
+    }
+    /* 返回按钮 */
+    .btn-back {opacity: 0;}
+
+    /* -----------foote-media----------- */
+    .sectionTitle-container {
+        margin-bottom: 40px;
+    }
+    .moreProject-items {
+        column-count: 1;
+        margin-top: 0;
+
+    }
+    .moreProject-item {
+        margin-bottom: 20px;
+    }
+
+    .footerText-container {
+        transform: scale(0.8);
+    }
+    footer h1 {
+        font-size: 42px;
+    }
+    .QRcode-box {
+        display: none;
+    }
+    .text-QRcode {
+        margin-left: 0;
+    }
+    .text-final {
+        margin-top: 0;
+    }
+    footer h2 {
+        font-size: 20px;
+    }
+    .project-hidden {
+        display: none;
+    }
+
+
+
+
+    
+    /* ------------作品详情标题模块 ---------------*/
+    .ProjectTitle-container{
+        margin-bottom: 30px;
+    }
+    .dividing-line {
+        margin-top: 0;
+        margin-bottom: 30px;
+    }
+    /* --------------更多项目------------------*/
+    .three-columns{
+        grid-template-columns: repeat(1, 1fr) !important;
+
+    } 
+    .footer-mask .sectionTitle-box {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }   
+}
+

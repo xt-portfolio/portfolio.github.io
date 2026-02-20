@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>可视化</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <script src="https://unpkg.com/lenis@1.1.4/dist/lenis.min.js"></script>
+    <script src="./libs/ScrollTrigger.min.js"></script>
+    <script src="./libs/gsap.min.js"></script>
+    <!-- <script src='./libs/SplitText.min.js'></script> -->
+    <script src="./font/iconfont/iconfont.js"></script>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/media.css">
+    <link rel="stylesheet" href="./css/project-Visualization.css">
+</head>
+<body>
+  <div id="cursor-dot"></div>
+  <div id="cursor-circle"></div>
+  <!---------------------------- 头部 ---------------------------->
+    <div class="header">
+        <div class="wrapper">
+            <!-- logo -->
+            <a href="./index.html" class="mylogo"></a>
+            <!-- 导航 -->
+            <ul class="nav">
+                <div class="language-switcher" >
+                    <button class="lang-btn" id="toggle-lang">中</button>
+                </div>
+                
+                <li data-lang="zh">
+                    <div class="nav-btn-container">
+                        <div class="nav-btn-dot dot-left"></div>
+                        <a href="./project.html">项目</a>
+                        <div class="nav-btn-dot dot-right"></div>
+                    </div>
+                </li>
+                <li data-lang="en" style="display:none">
+                    <div class="nav-btn-container">
+                        <div class="nav-btn-dot dot-left"></div>
+                        <a href="./project.html">work</a>
+                        <div class="nav-btn-dot dot-right"></div>
+                    </div>
+  
+  
+  
+            </ul>
+        </div>
+    </div> 
+
+
+    <!------------------------ 内容区 ---------------------------->
+
+    <!-- 返回按钮 -->
+    <a href="javascript:history.back()" class="btn-link">
+        <div class="btn-back">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-pixel-back"></use>
+            </svg>
+        </div>
+    </a>
+
+    <!-- --------------------------banner------------------------- -->
+    <div class="Project-banner">
+        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/banner-ray.webp" alt="" class="spotlight">
+        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/%E9%A6%96%E5%B1%8Fbanner.png" alt="">
+        <!-- <video src="./video/可视化入场banner.mp4" poster="./img/visualization/bg.png" loop muted autoplay ></video> -->
+        <div class="scrollIndicator dark" >
+            <div class="scrollIndicator-dot"></div>
+        </div>
+    </div>
+
+
+    <!-- ---------------------------内容区------------------------- -->
+    <div class="project-content dark">
+        <!-- 标题 -->
+        <div class="wrapper">
+
+            <!-- 分割线 -->
+            <div class="dividing-line">
+                <span>⊹</span>
+                <div class="time-box">
+                    <div class="line"></div>
+                </div>
+            </div>
+
+            <div class="ProjectTitle-container dark">
+                <div class="left">
+                    <h1 data-lang="zh" class="DetailPage-title">可视化合集</h1>
+                    <h1 data-lang="en" style="display:none" class="DetailPage-title">Visualization Collection</h1>
+                    <p data-lang="zh" >
+                        汇聚近年可视化设计代表作，聚焦电力能源领域核心场景与需求，在项目中我主要负责三维建模、可视化界面设计，动效输出等。通过三维建模还原真实场景、可视化界面梳理复杂信息、动效设计提升交互体验，助力运维人员高效掌控设备状态、优化管理流程，让电力能源领域的可视化应用既具备实用价值。
+                    </p>
+                    <p  data-lang="en" style="display:none; font-weight: 200;">
+                        Gathering representative works of visual design in recent years, focusing on core scenarios and requirements in the field of power energy. In the project, I was mainly responsible for 3D modeling, visual interface design, dynamic effect output, etc. By using 3D modeling to restore real scenes, visualizing complex information through interfaces, and designing dynamic effects to enhance the interactive experience, it helps operation and maintenance personnel efficiently control equipment status and optimize management processes, making visualization applications in the field of power energy both practical and valuable.                    
+                    </p>
+               
+                </div>
+                <div class="info-table">
+                    <div class="info-row">
+                        <div data-lang="zh" class="info-label">时间</div>
+                        <div data-lang="en" style="display:none" class="info-label">time</div>
+                        <div class="info-value info-time">2022-2025</div>
+                    </div>
+                    <div class="info-row">
+                        <div data-lang="zh" class="info-label">类别</div>
+                        <div data-lang="en" style="display:none" class="info-label">category</div>
+                        <div data-lang="zh" class="info-value">可视化 · 3D</div>
+                        <div data-lang="en" style="display:none" class="info-value">visualization</div>
+                    </div>
+                    <div class="info-row">
+                        <div data-lang="zh" class="info-label">职责</div>
+                        <div data-lang="en" style="display:none" class="info-label">role</div>
+                        <div data-lang="zh" class="info-value">UI/UX · 三维建模</div>
+                        <div data-lang="en" style="display:none" class="info-value">UI/UX · 3D modeling</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="pic1 bg-cover">
+            <div class="video-container video-middle">
+                <div class="loading">
+                    <div class="spinner-box">
+                    <div class="leo-border-1">
+                        <div class="leo-core-1"></div>
+                    </div> 
+                    <div class="leo-border-2">
+                        <div class="leo-core-2"></div>
+                    </div> 
+                    </div>
+                    <p>loading...</p>
+                </div>
+                <video muted loop autoplay>
+                <!-- 使用随机视频URL作为示例 -->
+                <source src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/video/%E9%85%8D%E7%94%B5%E6%88%BF%E5%85%A5%E5%9C%BA.mp4" type="video/mp4">
+                </video>
+            </div>
+            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/1-title.png" alt="" class="project-img ">
+        </div>
+        <!-- chart图表组件 -->
+        <div class="card-container bg-cover">
+            <div class="cards">
+                <div class="card">
+                    <div class="card-content"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/charts/1.png" alt=""></div>
+                </div>
+                <div class="card">
+                    <div class="card-content"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/charts/6.png" alt=""></div>
+                </div>
+                <div class="card">
+                    <div class="card-content"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/charts/11.png" alt=""></div>
+                </div>
+                <div class="card">
+                    <div class="card-content"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/charts/2.png" alt=""></div>
+                </div>
+                <div class="card">
+                    <div class="card-content"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/charts/7.png" alt=""></div>
+                </div>
+                <div class="card">
+                    <div class="card-content"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/charts/12.png" alt=""></div>
+                </div>
+                <div class="card">
+                    <div class="card-content"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/charts/3.png" alt=""></div>
+                </div>
+                <div class="card">
+                    <div class="card-content"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/charts/8.png" alt=""></div>
+                </div>
+                <div class="card">
+                    <div class="card-content"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/charts/13.png" alt=""></div>
+                </div>
+                <div class="card">
+                    <div class="card-content"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/charts/4.png" alt=""></div>
+                </div>
+                <div class="card">
+                    <div class="card-content"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/charts/9.png" alt=""></div>
+                </div>
+                <div class="card">
+                    <div class="card-content"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/charts/14.png" alt=""></div>
+                </div>
+                <div class="card">
+                    <div class="card-content"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/charts/5.png" alt=""></div>
+                </div>
+                <div class="card">
+                    <div class="card-content"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/charts/10.png" alt=""></div>
+                </div>
+                <div class="card">
+                    <div class="card-content"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/charts/15.png" alt=""></div>
+                </div>
+
+            </div>
+                <video src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/video/light.mp4" autoplay muted loop class="light"></video>
+
+        </div>
+        <div class="pic3 bg-cover">
+            <div class="video-container video-middle">
+                <div class="loading">
+                    <div class="spinner-box">
+                    <div class="leo-border-1">
+                        <div class="leo-core-1"></div>
+                    </div> 
+                    <div class="leo-border-2">
+                        <div class="leo-core-2"></div>
+                    </div> 
+                    </div>
+                    <p>loading...</p>
+                </div>
+                <video muted loop autoplay>
+                <!-- 使用随机视频URL作为示例 -->
+                <source src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/video/%E9%80%89%E6%8B%A9%E9%85%8D%E7%94%B5%E6%9F%9C.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="video-container video-right">
+                <div class="loading">
+                    <div class="spinner-box">
+                    <div class="leo-border-1">
+                        <div class="leo-core-1"></div>
+                    </div> 
+                    <div class="leo-border-2">
+                        <div class="leo-core-2"></div>
+                    </div> 
+                    </div>
+                    <p>loading...</p>
+                </div>
+                <video muted loop autoplay>
+                <!-- 使用随机视频URL作为示例 -->
+                <source src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/video/%E9%85%8D%E7%94%B5%E6%9F%9C.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+
+        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/4.png" alt="" class="project-img ">
+
+        <!-- --------------通用项目---------------- -->
+        <!-- 左 -->
+        <div class="project bg-right bg-cover">
+            <div class="wrapper">
+                <div class="pad-bg">
+                        <div class="loading">
+                            <div class="spinner-box">
+                            <div class="leo-border-1">
+                                <div class="leo-core-1"></div>
+                            </div> 
+                            <div class="leo-border-2">
+                                <div class="leo-core-2"></div>
+                            </div> 
+                            </div>
+                            <p>loading...</p>
+                        </div>
+                    <video src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/video/%E6%9C%BA%E5%99%A8%E4%BA%BA.mp4" autoplay muted loop ></video>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右 -->
+        <div class="project bg-left  bg-cover">
+            <div class="wrapper">
+                <div class="pad-bg">
+                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/%E4%BA%91%E6%99%BA%E6%85%A7%E7%B3%BB%E7%BB%9F.png" alt=""  loading="lazy">
+                </div>
+            </div>
+        </div>
+
+        <div class="project bg-right  bg-cover">
+            <div class="wrapper">
+                <div class="pad-bg">
+                        <div class="loading">
+                            <div class="spinner-box">
+                            <div class="leo-border-1">
+                                <div class="leo-core-1"></div>
+                            </div> 
+                            <div class="leo-border-2">
+                                <div class="leo-core-2"></div>
+                            </div> 
+                            </div>
+                            <p>loading...</p>
+                        </div>
+                    <video src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/video/%E4%B8%9C%E5%AE%9D.mp4" autoplay muted loop></video>
+                </div>
+            </div>
+        </div>
+
+        <div class="project bg-left  bg-cover">
+            <div class="wrapper">
+                <div class="pad-bg">
+                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/%E4%B8%AD%E8%B6%85.png" alt=""  loading="lazy">
+                </div>
+            </div>
+        </div>
+        
+
+
+    </div>
+
+
+
+    <!---------------------------探索更多----------------------------->
+    <div class="footer-mask">
+        <div class="wrapper">
+            <div class="dividing-line">
+                <span>⊹</span>
+                <div class="time-box">
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>
+        <div class="next-project">
+        <a href="./project-DigitalEnergy.html">
+
+            <div class="nextProject-container">
+                <h3>[ next project ]</h3>
+                <h1 data-lang="zh" class="nextProject-title">数字能源</h1>
+                <h1 data-lang="en" style="display:none" class="nextProject-title">Digital Energy</h1>
+                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/banner.png" alt="">
+            </div>
+        </a>
+
+        </div>
+    </div>
+    
+    <!---------------------------7.footer----------------------------->    
+    <div class="empty-mask"></div>
+    <footer class="" id="footerContainer">
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/4.png" alt=""></div>
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/5.png" alt=""></div>
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/2.png" alt=""></div>
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/3.png" alt=""></div>
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/6.png" alt=""></div>
+
+        <a href="mailto:578742871@qq.com" class="footer-email no-trail">
+            <h2  data-before="578742871@qq.com" class="text-upward" >578742871@qq.com</h2>
+        </a>
+        <div class="footerText-container">
+            <h1>Let's start</h1>
+            <div class="text-QRcode">
+                <h1>creating&nbsp;</h1>
+                <h1>something</h1>
+                <div class="QRcode-box smooth-animation">
+                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/portfolio-label-x.png" alt="" class="footer-label-x smooth-animation">
+                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/QRcode.png" alt="" class="QRcode smooth-animation QRcode-tag">
+                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/QRcode-string.png" alt="" class="QRcode smooth-animation">
+                </div>
+            </div>
+            <h1 class="text-final">together.</h1>
+        </div> 
+                
+        <p>I'm ready to work on excinting projects.</p>
+        <!-- <h5>contact me</h5> -->
+        <div class="keyboard smooth-animation">
+            <ul id="navLinks" class="navLinks no-trail">
+                <!-- 蓝色按钮：新增自定义提示框 -->
+                <div class="link-placeholder-wrapper">
+                    <a href="javascript:void(0);" class="link-placeholder" tabindex="0">
+                        <li class="KeyPress KeyPress-blue placeholder-btn">
+                            <div class="KeyPress-top blue-top ">
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-lingying"></use>
+                                </svg>
+                            </div>
+                        </li>
+                    </a>
+                    <!-- 自定义提示框：鼠标悬浮立即显示 -->
+                    <div class="custom-tooltip">Coming soon</div>
+                </div>
+
+                <!-- 其他按钮保持不变 -->
+                <a href="https://dribbble.com/57874287127c4"  target="_blank">
+                    <li class="KeyPress KeyPress-pink">
+                        <div class="KeyPress-top pink-top">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-dribbble"></use>
+                            </svg>
+                        </div>
+                    </li>
+                </a>
+
+                <a href="https://www.zcool.com.cn/u/14729612"  target="_blank">
+                    <li class="KeyPress KeyPress-dark">
+                        <div class="KeyPress-top dark-top">
+                            <svg class="icon icon-yellow" aria-hidden="true">
+                                <use xlink:href="#icon-zhanku1"></use>
+                            </svg>
+                        </div>
+                    </li>
+                </a>
+            </ul>
+        </div>
+    </footer>
+    
+  <!-- 引入JS文件 --> 
+    <script src="./js/project-details.js"></script>
+
+  <script>
+
+    // chart组建hover动效
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll(".card");
+            const wrapper = document.querySelector(".cards");
+
+            wrapper.addEventListener("mousemove", function ($event) {
+                cards.forEach(card => {
+                    const rect = card.getBoundingClientRect();
+                    const x = $event.clientX - rect.left;
+                    const y = $event.clientY - rect.top;
+
+                    card.style.setProperty("--xPos", `${x}px`);
+                    card.style.setProperty("--yPos", `${y}px`);
+                });
+            });
+        });
+
+  </script>
+
+</body>
+</html>

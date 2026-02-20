@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>席婷作品集</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://unpkg.com/lenis@1.1.4/dist/lenis.min.js"></script>
+    <script src="./libs/ScrollTrigger.min.js"></script>
+    <script src="./libs/gsap.min.js"></script>
+    <script src='./libs/SplitText.min.js'></script>
+    <script src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/font/iconfont/iconfont.js"></script>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/media.css">
+    <link rel="stylesheet" href="./css/project.css">
+
+</head>
+<body>
+    <div id="cursor-dot"></div>
+    <div id="cursor-circle"></div>
+    <!---------------------------- 头部 ---------------------------->
+    <div class="header">
+        <div class="wrapper">
+            <!-- logo -->
+            <a href="./index.html" class="mylogo"></a>
+            <!-- 导航 -->
+            <ul class="nav">
+                <div class="language-switcher" >
+                    <button class="lang-btn" id="toggle-lang">中</button>
+                </div>
+                
+                <li data-lang="zh">
+                    <div class="nav-btn-container">
+                        <div class="nav-btn-dot dot-left"></div>
+                        <a href="./project.html">项目</a>
+                        <div class="nav-btn-dot dot-right"></div>
+                    </div>
+                </li>
+                <li data-lang="en" style="display:none">
+                    <div class="nav-btn-container">
+                        <div class="nav-btn-dot dot-left"></div>
+                        <a href="./project.html">work</a>
+                        <div class="nav-btn-dot dot-right"></div>
+                    </div>
+  
+  
+  
+            </ul>
+        </div>
+    </div> 
+    <!------------------------ 1.作品集封面 ---------------------------->
+    <div class="footer-mask">
+            <!-- projects 标题动画 -->
+        <div class="sprite-box wrapper">
+            <div class="text-gif-box">
+                <h1>p</h1>
+                <!-- <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-p"></use>
+                </svg>  -->
+                <div class="sprite-container sprite-p" style="--sprite-width: 141.5px; --step-count: 45; --sprite-time: 0.5s;"></div>
+            </div>
+            <div class="text-gif-box">
+                <h1>r</h1>
+                <div class="sprite-container sprite-r" style="--sprite-width: 147.5px; --step-count: 27; --sprite-time: 0.5s;"></div>
+            </div>
+            <div class="text-gif-box">
+                <h1>o</h1>
+                <div class="sprite-container sprite-o" style="--sprite-width: 141px; --step-count: 60; --sprite-time: 0.5s;"></div>
+            </div>
+
+            <div class="text-gif-box">
+                <h1>j</h1>
+                <div class="sprite-container sprite-j" style="--sprite-width: 133px; --step-count: 16; --sprite-time: 0.4s;"></div>
+            </div>
+
+            <div class="text-gif-box">
+                <h1>e</h1>
+                <div class="sprite-container sprite-e" style="--sprite-width: 130.5px; --step-count: 32; --sprite-time: 0.8s;"></div>
+            </div>
+
+            <div class="text-gif-box">
+                <h1>c</h1>
+                <div class="sprite-container sprite-c" style="--sprite-width: 140px; --step-count: 37; --sprite-time: 0.7s;"></div>
+            </div>
+
+            <div class="text-gif-box">
+                <h1>t</h1>
+                <div class="sprite-container sprite-t" style="--sprite-width: 95px; --step-count: 30; --sprite-time: 0.5s;"></div>
+            </div>
+            <div class="text-gif-box">
+                <h1>s</h1>
+                <div class="sprite-container sprite-s" style="--sprite-width: 125.5px; --step-count: 30; --sprite-time: 0.5s;"></div>
+            </div>
+            <div class="text-gif-box">
+                <h2>.</h2>
+            </div>
+
+            <h1 class="port-text">portfolio.</h1>
+
+            <div class="number-container">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-kuohao"></use>
+                </svg> 
+                <span class="projects-count">5</span>
+                <svg class="icon" aria-hidden="true" style="transform: rotate(180deg);">
+                    <use xlink:href="#icon-kuohao"></use>
+                </svg> 
+            </div>
+            
+        </div>
+        <!---------------------- 项目 -------------------------->
+
+            <!-- 分割线 -->
+            <div class="dividing-line wrapper">
+                <span>⊹</span>
+                <div class="time-box">
+                    <div class="line"></div>
+                    <p class="time">(©️ 2023-2025)</p>            
+                </div>
+            </div>
+            <!-- 筛选 -->
+            
+            <div class="filter-container">
+                <div class="wrapper">
+                    <div class="filter-tabs">
+                        <button data-lang="zh" class="filter-tab active" data-category="all">全部</button>
+                        <button data-lang="en" style="display:none;" class="filter-tab active" data-category="all">all</button>
+                    
+                        <button data-lang="zh" class="filter-tab" data-category="visualization">可视化</button>
+                        <button data-lang="en" style="display:none;" class="filter-tab" data-category="visualization">visualization</button>
+                    
+                        <button data-lang="zh" class="filter-tab" data-category="mobile">移动端</button>
+                        <button data-lang="en" style="display:none;" class="filter-tab" data-category="mobile">mobile</button>
+        
+                        <button data-lang="zh" class="filter-tab" data-category="dashboard">B端</button>
+                        <button data-lang="en" style="display:none;" class="filter-tab" data-category="dashboard">dashboard</button>
+        
+                        <button data-lang="zh" class="filter-tab" data-category="3D">三维设计</button>
+                        <button data-lang="en" style="display:none;" class="filter-tab" data-category="3D">3D</button>
+
+                        <button data-lang="zh" class="filter-tab" data-category="graphic">平面</button>
+                        <button data-lang="en" style="display:none;" class="filter-tab" data-category="graphic">graphic</button>
+                    </div>
+
+                    <div class="layout-controls"  >
+                        <button class="layout-btn active" data-layout="two-columns" style="display: none;" >
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-erliebuju"></use>
+                            </svg>
+                        </button>
+
+                        <button class="layout-btn" data-layout="three-columns">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-erliebuju"></use>
+                            </svg>            
+                        </button>
+
+                        <button class="layout-btn" data-layout="list" >
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-list"></use>
+                            </svg>            
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+
+
+
+            <!-- 项目 -->
+            
+            <div class="projectCards-container three-columns wrapper">
+                <!-- 卡片1 -->
+                <div class="project-card" data-categories="visualization">
+                    <a href="./project-Visualization.html" class="itemHover">
+                        <div class="projectImg-container" >  
+                            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/visualazation/bg.png"  alt="移动端设计" class="original increase-saturation">
+                            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/visualazation/light.gif" alt="" class="gif-layer gif-mode" >
+                            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/visualazation/dot.gif" alt="" class="gif-layer" >
+                            <div class="ray ray1" style="opacity: 0.3;"></div>
+                            <div class="ray ray2"></div>
+                            <div class="ray ray3"></div>
+                        </div>
+                        <div class="card-content">
+
+                            <div class="project-title">
+                                <h2 data-lang="zh" data-before="可视化合集" class="text-upward" >可视化合集</h2>
+                                <h2 data-lang="en" style="display:none;" data-before="Visualization Collection" class="text-upward" >Visualization Collection</h2>
+                                <h3 class="time">2023-2025</h3>
+                            </div>
+                            <span data-lang="zh" class="card-category">可视化 · 3D</span>
+                            <span data-lang="en" style="display:none;" class="card-category">visualization · 3D</span>
+                        </div>
+                        <div class="project-line"></div>
+                    </a>
+                </div>
+                
+                <div class="project-card" data-categories="dashboard,mobile">
+                    <a href="./project-DigitalEnergy.html" class="itemHover">
+                        <div class="projectImg-container" >  
+                            <video src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/cover-small.mp4"  muted loop autoplay poster="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/banner.png"></video> 
+                        </div>
+                        <div class="card-content">
+
+                            <div class="project-title">
+                                <h2 data-lang="zh" data-before="数字能源" class="text-upward">数字能源</h2>
+                                <h2 data-lang="en" style="display:none;" data-before="Digital Energy" class="text-upward">Digital Energy</h2>
+                                <h3 class="time">2025</h3>
+                            </div>
+                            <span data-lang="zh" class="card-category">b端 · 移动端</span>
+                            <span data-lang="en" style="display:none;" class="card-category">dashboard · mobile</span>
+                            <div class="project-line"></div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="project-card" data-categories="mobile">
+                    <a href="./project-CashMacket.html" class="itemHover">
+                        <div class="projectImg-container" >  
+                            <video src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E7%8E%B0%E8%B4%A7app/phone.mp4"  muted loop autoplay poster="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E7%8E%B0%E8%B4%A7app/banner.png"></video> 
+                        </div>
+                        <div class="card-content">
+
+                            <div class="project-title">
+                                <h2 data-lang="zh" data-before="现货市场数据监控" class="text-upward">现货市场数据监控</h2>
+                                <h2 data-lang="en" style="display:none;" data-before="Spot market data monitoring" class="text-upward">Spot market data monitoring</h2>
+                                <h3 class="time">2025</h3>
+                            </div>
+                            <span data-lang="zh" class="card-category">移动端</span>
+                            <span data-lang="en" style="display:none;" class="card-category">mobile</span>
+                        <div class="project-line"></div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="project-card" data-categories="3D">
+                    <a href="./project-3d.html" class="itemHover">
+                        <div class="projectImg-container  small-rounded" >  
+                            <video src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/video/3d-loop.mp4"  muted loop autoplay poster="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/3d/banner.png"></video> 
+                        </div>
+                        <div class="card-content">
+
+                            <div class="project-title">
+                                <h2 data-lang="zh" data-before="三维设计合集" class="text-upward">三维设计合集</h2>
+                                <h2 data-lang="en" style="display:none;" data-before="3D design collection" class="text-upward">3D design collection</h2>
+                                <h3 class="time">2023-2026</h3>
+                            </div>
+                            <span data-lang="zh" class="card-category">建模 · 动效</span>
+                            <span data-lang="en" style="display:none;" class="card-category">modeling · animation</span>
+                            <div class="project-line"></div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="project-card" data-categories="graphic">
+                    <a href="./project-brochure.html" class="itemHover">
+                        <div class="projectImg-container" >  
+                            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/brochure/cover.png" alt=""> 
+                        </div>
+                        <div class="card-content">
+
+                            <div class="project-title">
+                                <h2 data-lang="zh" data-before="产品宣传册" class="text-upward">产品宣传册</h2>
+                                <h2 data-lang="en" style="display:none;" data-before="Product Brochure" class="text-upward">Product Brochure</h2>
+                                <h3 class="time">2023</h3>
+                            </div>
+                            <span data-lang="zh" class="card-category">平面设计</span>
+                            <span data-lang="en" style="display:none;" class="card-category">graphic</span>
+                        <div class="project-line"></div>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+    </div>
+
+    <!---------------------------7.footer----------------------------->
+    <div class="empty-mask"></div>
+    <footer class="" id="footerContainer">
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/4.png" alt=""></div>
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/5.png" alt=""></div>
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/2.png" alt=""></div>
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/3.png" alt=""></div>
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/6.png" alt=""></div>
+
+        <a href="mailto:578742871@qq.com" class="footer-email no-trail">
+            <h2  data-before="578742871@qq.com" class="text-upward" >578742871@qq.com</h2>
+        </a>
+        <div class="footerText-container">
+            <h1>Let's start</h1>
+            <div class="text-QRcode">
+                <h1>creating&nbsp;</h1>
+                <h1>something</h1>
+                <div class="QRcode-box smooth-animation">
+                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/portfolio-label-x.png" alt="" class="footer-label-x smooth-animation">
+                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/QRcode.png" alt="" class="QRcode smooth-animation QRcode-tag">
+                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/QRcode-string.png" alt="" class="QRcode smooth-animation">
+                </div>
+            </div>
+            <h1 class="text-final">together.</h1>
+        </div> 
+                
+        <p>I'm ready to work on excinting projects.</p>
+        <!-- <h5>contact me</h5> -->
+        <div class="keyboard smooth-animation">
+            <ul id="navLinks" class="navLinks no-trail">
+                <!-- 蓝色按钮：新增自定义提示框 -->
+                <div class="link-placeholder-wrapper">
+                    <a href="javascript:void(0);" class="link-placeholder" tabindex="0">
+                        <li class="KeyPress KeyPress-blue placeholder-btn">
+                            <div class="KeyPress-top blue-top ">
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-lingying"></use>
+                                </svg>
+                            </div>
+                        </li>
+                    </a>
+                    <!-- 自定义提示框：鼠标悬浮立即显示 -->
+                    <div class="custom-tooltip">Coming soon</div>
+                </div>
+
+                <!-- 其他按钮保持不变 -->
+                <a href="https://dribbble.com/57874287127c4"  target="_blank">
+                    <li class="KeyPress KeyPress-pink">
+                        <div class="KeyPress-top pink-top">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-dribbble"></use>
+                            </svg>
+                        </div>
+                    </li>
+                </a>
+
+                <a href="https://www.zcool.com.cn/u/14729612"  target="_blank">
+                    <li class="KeyPress KeyPress-dark">
+                        <div class="KeyPress-top dark-top">
+                            <svg class="icon icon-yellow" aria-hidden="true">
+                                <use xlink:href="#icon-zhanku1"></use>
+                            </svg>
+                        </div>
+                    </li>
+                </a>
+            </ul>
+        </div>
+    </footer>
+  <!-- 引入JS文件 --> 
+    <script src="./js/media.js"></script>
+    <script>
+
+        gsap.from('.text-gif-box', {
+                x: 20,
+                duration: 1,
+                stagger:0.2,//错开
+                ease: 'power1.out',
+        });
+
+
+        // //---------------hover雪碧图播放，移开倒放----------------
+
+        // 获取所有精灵图元素
+        const spriteLogos = document.querySelectorAll('.sprite-container');
+
+        // 为每个精灵图添加事件监听
+        spriteLogos.forEach(sprite => {
+            const card = sprite.closest('.sprite-container');
+            
+            // 鼠标悬停时播放正向动画
+            card.addEventListener('mouseenter', () => {
+                // 先移除可能存在的反向动画类
+                sprite.classList.remove('sprite-reversing');
+                // 添加正向动画类
+                sprite.classList.add('sprite-playing');
+            });
+            
+            // 鼠标离开时播放反向动画
+            card.addEventListener('mouseleave', () => {
+                // 先移除正向动画类
+                sprite.classList.remove('sprite-playing');
+                // 添加反向动画类
+                sprite.classList.add('sprite-reversing');
+            });
+        });
+
+
+        
+        // //---------------筛选----------------
+        document.addEventListener('DOMContentLoaded', function() {
+            const layoutButtons = document.querySelectorAll('.layout-btn');
+            const filterTabs = document.querySelectorAll('.filter-tab');
+            const cardsContainer = document.querySelector('.projectCards-container');
+            const cards = document.querySelectorAll('.project-card');
+            const projectsCount = document.querySelector('.projects-count');
+
+            // 全局变量跟踪跟随状态
+            let followImage = null;
+            let isFollowing = false;
+            let currentAlignFunction = null;
+            
+            // 更新项目数量函数
+            function updateProjectsCount() {
+                const visibleCards = document.querySelectorAll('.project-card:not(.hidden)');
+                const count = visibleCards.length;
+                projectsCount.textContent = count;
+            }  
+
+            // 布局切换功能
+            layoutButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    layoutButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    const layoutType = this.getAttribute('data-layout');
+                    cardsContainer.classList.remove('two-columns', 'three-columns', 'list');
+                    cardsContainer.classList.add(layoutType);
+                    animateCardsEntrance();
+                    if (layoutType === 'list') {
+                        initMouseFollowEffect();
+                    } else {
+                        cleanupMouseFollowEffect();
+                    }
+                });
+            });
+            
+            // 筛选功能
+            filterTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    filterTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    const category = this.getAttribute('data-category');
+                    cards.forEach(card => {
+                        if (category === 'all') {
+                            card.classList.remove('hidden');
+                        } else {
+                            const cardCategories = card.getAttribute('data-categories').split(',');
+                            if (cardCategories.includes(category)) {
+                                card.classList.remove('hidden');
+                            } else {
+                                card.classList.add('hidden');
+                            }
+                        }
+                    });
+                    updateProjectsCount();
+                    animateCardsEntrance();
+                });
+            });
+            
+            // 卡片入场动画函数
+            function animateCardsEntrance() {
+                const visibleCards = document.querySelectorAll('.projectCards-container');
+                gsap.set(visibleCards, {
+                    y: 20,
+                    autoAlpha: 1
+                });
+                gsap.to(visibleCards, {
+                    y: 0,
+                    autoAlpha: 1,
+                    duration: 0.6,
+                    ease: "power2.out",
+                });
+            }
+            
+            // 清理鼠标跟随效果
+            function cleanupMouseFollowEffect() {
+                if (followImage) {
+                    gsap.set(followImage, { autoAlpha: 0 });
+                }
+                if (currentAlignFunction) {
+                    document.removeEventListener("mousemove", currentAlignFunction);
+                    currentAlignFunction = null;
+                }
+                isFollowing = false;
+            }
+            
+            // 初始化鼠标跟随效果（兼容图片/视频）
+            function initMouseFollowEffect() {
+                // 清理原有跟随元素
+                if (followImage && followImage.parentNode) {
+                    followImage.parentNode.removeChild(followImage);
+                    followImage = null;
+                }
+                cleanupMouseFollowEffect();
+                
+                // 创建跟随图片元素
+                followImage = document.createElement('img');
+                followImage.className = 'projectImg-follow';
+                document.body.appendChild(followImage);
+                
+                let firstEnter = true;
+                
+                // 对齐函数
+                const align = (e) => {
+                    if (!followImage || !isFollowing) return;
+                    if (firstEnter) {
+                        gsap.set(followImage, { 
+                            x: e.clientX, 
+                            y: e.clientY 
+                        });
+                        firstEnter = false;
+                    } else {
+                        gsap.to(followImage, { 
+                            x: e.clientX, 
+                            y: e.clientY,
+                            duration: 2,//跟随时间
+                            ease: "power3"
+                        });
+                    }
+                };
+                
+                currentAlignFunction = align;
+                
+                const fade = gsap.to(followImage, {
+                    autoAlpha: 1,
+                    ease: "none",
+                    paused: true,
+                    duration: 0.1,
+                    onReverseComplete: () => {
+                        isFollowing = false;
+                        firstEnter = true;
+                    }
+                });
+                
+                // 为每个项目卡片添加鼠标事件（兼容图片/视频）
+                document.querySelectorAll('.project-card').forEach((el) => {
+                    // 优先找视频元素，没有则找图片元素
+                    const videoEl = el.querySelector('.projectImg-container video');
+                    const imgEl = el.querySelector('.projectImg-container img');
+                    
+                    // 鼠标进入事件：兼容视频/图片
+                    el.addEventListener("mouseenter", (e) => {
+                        if (!cardsContainer.classList.contains('list')) return;
+                        
+                        firstEnter = true;
+                        // 判断是视频还是图片
+                        if (videoEl) {
+                            // 视频卡片：使用poster作为跟随图
+                            followImage.src = videoEl.poster;
+                        } else if (imgEl) {
+                            // 图片卡片：使用图片src
+                            followImage.src = imgEl.src;
+                        } else {
+                            // 无媒体元素，直接返回
+                            return;
+                        }
+                        fade.play();
+                        isFollowing = true;
+                        document.addEventListener("mousemove", align);
+                        align(e);
+                    });
+                    
+                    el.addEventListener("mouseleave", () => {
+                        if (!cardsContainer.classList.contains('list')) return;
+                        fade.reverse();
+                        document.removeEventListener("mousemove", align);
+                    });
+                });
+                
+                // 监听列表容器鼠标离开
+                cardsContainer.addEventListener('mouseleave', (e) => {
+                    if (!cardsContainer.classList.contains('list')) return;
+                    const rect = cardsContainer.getBoundingClientRect();
+                    const isOutsideContainer = 
+                        e.clientY < rect.top - 10 || 
+                        e.clientY > rect.bottom + 10 || 
+                        e.clientX < rect.left - 10 || 
+                        e.clientX > rect.right + 10;
+                    
+                    if (isOutsideContainer && isFollowing) {
+                        gsap.to(followImage, {
+                            autoAlpha: 0,
+                            duration: 0.1,
+                            onComplete: () => {
+                                document.removeEventListener("mousemove", align);
+                                isFollowing = false;
+                                firstEnter = true;
+                            }
+                        });
+                    }
+                });
+                
+                // 监听文档鼠标移动
+                document.addEventListener('mousemove', (e) => {
+                    if (!cardsContainer.classList.contains('list') || !isFollowing) return;
+                    const rect = cardsContainer.getBoundingClientRect();
+                    const isOutsideContainer = 
+                        e.clientY < rect.top - 10 || 
+                        e.clientY > rect.bottom + 10 || 
+                        e.clientX < rect.left - 10 || 
+                        e.clientX > rect.right + 10;
+                    
+                    if (isOutsideContainer) {
+                        gsap.to(followImage, {
+                            autoAlpha: 0,
+                            duration: 0.1,
+                            onComplete: () => {
+                                document.removeEventListener("mousemove", align);
+                                isFollowing = false;
+                                firstEnter = true;
+                            }
+                        });
+                    }
+                });
+            }
+
+        });
+
+
+
+
+    // 核心：hover播放视频，离开暂停并回到开头
+    document.addEventListener('DOMContentLoaded', function() {
+        const initVideoHover = () => {
+            const videos = document.querySelectorAll('.projectImg-container video');
+            const cardsContainer = document.querySelector('.projectCards-container');
+
+            videos.forEach(video => {
+                const card = video.closest('.project-card');
+                if (!card) return;
+
+                // 初始状态：暂停+回到开头
+                video.pause();
+                video.currentTime = 0;
+
+                // 鼠标进入：播放当前视频
+                card.addEventListener('mouseenter', () => {
+                    if (cardsContainer.classList.contains('list')) return;
+                    video.play().catch(err => {
+                        video.muted = true;
+                        video.play();
+                    });
+                });
+
+                // 鼠标离开：暂停 + 回到开头（核心新增）
+                card.addEventListener('mouseleave', () => {
+                    if (cardsContainer.classList.contains('list')) return;
+                    video.pause();
+                    video.currentTime = 0; // 重置到视频开头
+                });
+
+                // 布局切换到list：暂停+回到开头
+                document.querySelectorAll('.layout-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        if (btn.getAttribute('data-layout') === 'list') {
+                            video.pause();
+                            video.currentTime = 0;
+                        }
+                    });
+                });
+            });
+        };
+
+        // 初始化
+        initVideoHover();
+
+        // 筛选切换后重新初始化
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                setTimeout(initVideoHover, 100);
+            });
+        });
+    });
+
+
+    // 移动端筛选栏横向滑动增强（可选）
+    document.addEventListener('DOMContentLoaded', function() {
+    const filterTabs = document.querySelector('.filter-tabs');
+    if (!filterTabs) return;
+
+    let isScrolling = false;
+    let startX = 0;
+    let scrollLeft = 0;
+
+    // 触摸开始
+    filterTabs.addEventListener('touchstart', (e) => {
+        isScrolling = true;
+        startX = e.touches[0].pageX - filterTabs.offsetLeft;
+        scrollLeft = filterTabs.scrollLeft;
+    });
+
+    // 触摸移动
+    filterTabs.addEventListener('touchmove', (e) => {
+        if (!isScrolling) return;
+        const x = e.touches[0].pageX - filterTabs.offsetLeft;
+        const walk = (x - startX) * 1.5; // 滑动系数，越大越灵敏
+        filterTabs.scrollLeft = scrollLeft - walk;
+    });
+
+    // 触摸结束
+    filterTabs.addEventListener('touchend', () => {
+        isScrolling = false;
+    });
+    });
+
+
+</script>
+
+
+</body>
+</html>
