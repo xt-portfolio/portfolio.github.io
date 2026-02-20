@@ -97,6 +97,9 @@
         --basic-wrapper: 90%;
 
     }
+    /* 返回按钮 */
+    .btn-back {opacity: 0;}
+
     /* ------------作品详情标题模块 ---------------*/
     .ProjectTitle-container{
         flex-direction: column;
@@ -155,9 +158,7 @@
     .nav-btn-container {
         height: 34px;
     }
-    /* 返回按钮 */
-    .btn-back {opacity: 0;}
-
+ 
     /* -----------foote-media----------- */
     .sectionTitle-container {
         margin-bottom: 40px;
