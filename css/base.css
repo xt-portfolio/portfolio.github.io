@@ -881,6 +881,7 @@ button:hover {
   transition: all 0.1s ease-out;
   margin-top: 100vh;
   height: auto !important; /* 内容区高度自适应 */
+  overflow-x: hidden;
 }
 
 .project-content.dark {

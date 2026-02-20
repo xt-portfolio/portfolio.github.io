@@ -22,6 +22,11 @@ html,body {
 .text-gray {
     color: var(--text-color-3) !important;
 }
+.wrapper, .section {
+    max-width: 100vw;
+    overflow-x: hidden;
+    position: relative;
+}
 /* ----------------------------------1.作品集封面----------------------------------- */
 
 
