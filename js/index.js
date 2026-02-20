@@ -1323,134 +1323,133 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    const videos = document.querySelectorAll('video');
-    
-    // 检测是否为手机设备
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
-    
-    // 如果是手机端，不执行下面的视频控制逻辑
-    if (isMobile) {
-        console.log('手机端：使用原生视频播放');
-        // 可以简单设置视频属性，但不做复杂的视口控制
-        videos.forEach(video => {
-            video.preload = 'metadata';
-            video.muted = true;
-            video.setAttribute('playsinline', 'true'); // 对于iOS很重要
-            video.setAttribute('webkit-playsinline', 'true');
-        });
-        return; // 直接退出，不执行下面的代码
-    }
-    
-    // 以下代码只在PC和平板上执行
+  // ===================== 1. 视频视口控制逻辑（重点修改手机端部分） =====================
+  const videos = document.querySelectorAll('video');
+  
+  // 检测是否为手机设备
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+  
+  // 手机端配置：添加 autoplay + 确保满足自动播放条件
+  if (isMobile) {
+    console.log('手机端：启用视频自动播放（静音+内联）');
+    videos.forEach(video => {
+      // 核心：添加 autoplay 属性
+      video.setAttribute('autoplay', 'true');
+      video.setAttribute('autoplay', 'autoplay'); // 兼容不同浏览器写法
+      
+      // 必须：静音（移动端 autoplay 强制要求）
+      video.muted = true;
+      video.defaultMuted = true; // 确保默认静音
+      
+      // 必须：内联播放（iOS 核心配置）
+      video.setAttribute('playsinline', 'true');
+      video.setAttribute('webkit-playsinline', 'true');
+      video.setAttribute('x5-playsinline', 'true'); // 兼容微信/X5内核
+      
+      // 预加载优化
+      video.preload = 'auto'; // 移动端改为 auto，确保视频能快速加载播放
+      
+      // 主动触发播放（兼容部分浏览器 autoplay 策略）
+      video.load(); // 重新加载视频源，确保属性生效
+      // 尝试自动播放（包裹在 try/catch 避免报错）
+      video.play().catch(e => {
+        console.log('移动端自动播放需要用户交互触发:', e);
+        // 降级方案：监听用户首次点击页面后播放
+        document.addEventListener('touchstart', function playOnFirstTouch() {
+          video.play().then(() => {
+            console.log('用户交互后视频自动播放成功');
+          }).catch(err => console.log('交互后播放仍失败:', err));
+          // 只触发一次，避免重复绑定
+          document.removeEventListener('touchstart', playOnFirstTouch);
+        }, { once: true });
+      });
+    });
+  } else {
+    // PC/平板端：启用视口视频控制（原有逻辑完全保留）
     console.log('PC/平板端：启用视口视频控制');
     
-    // 创建IntersectionObserver来检测视频是否进入视口40%
+    // 创建视频观察器
     const videoObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const video = entry.target;
-            
-            if (entry.isIntersecting) {
-                // 当视频进入视口时开始播放
-                if (video.paused) {
-                    video.play().catch(e => {
-                        console.log('视频自动播放可能被浏览器阻止，用户需要交互');
-                    });
-                }
-            } else {
-                // 当视频离开视口时暂停
-                if (!video.paused) {
-                    video.pause();
-                    // 注意：这里不再重置currentTime，否则往上滑时视频会从开头播放
-                }
-            }
-        });
-    }, {
-        threshold: 0.4, // 当40%可见时触发
-    });
-    
-    // 观察所有视频
-    videos.forEach(video => {
-        videoObserver.observe(video);
-        
-        // 设置视频预加载属性为metadata，减少初始加载
-        video.preload = 'metadata';
-        
-        // 确保视频是静音的（已满足autoplay条件）
-        video.muted = true;
-        
-        // 对于iOS内联播放很重要
-        video.setAttribute('playsinline', 'true');
-        video.setAttribute('webkit-playsinline', 'true');
-        
-        // 添加错误处理
-        video.addEventListener('error', function() {
-            console.log('视频加载错误:', this.src);
-        });
-        
-        // 添加加载事件
-        video.addEventListener('loadeddata', function() {
-            console.log('视频已加载');
-        });
-        
-        // 添加播放状态监听，确保视频在视口内时保持播放
-        video.addEventListener('pause', function() {
-            // 检查视频是否仍在视口内
-            const rect = video.getBoundingClientRect();
-            const viewportHeight = window.innerHeight;
-            
-            // 计算视频在视口中的可见比例
-            const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
-            const visibleRatio = visibleHeight / rect.height;
-            
-            // 如果视频仍在视口40%内但被暂停了，重新播放
-            if (visibleRatio >= 0.4 && rect.top < viewportHeight * 0.6 && rect.bottom > viewportHeight * 0.4) {
-                video.play().catch(e => console.log('重新播放失败'));
-            }
-        });
-    });
-    
-    // 添加页面可见性监听，当页面隐藏时暂停所有视频
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            videos.forEach(video => video.pause());
-        } else {
-            // 页面重新可见时，检查并播放在视口内的视频
-            videos.forEach(video => {
-                const rect = video.getBoundingClientRect();
-                const viewportHeight = window.innerHeight;
-                
-                if (rect.top < viewportHeight * 0.6 && 
-                    rect.bottom > viewportHeight * 0.4 && 
-                    video.paused) {
-                    video.play().catch(e => console.log('页面可见后播放失败'));
-                }
+      entries.forEach(entry => {
+        const video = entry.target;
+        if (entry.isIntersecting) {
+          if (video.paused) {
+            video.play().catch(e => {
+              console.log('视频自动播放可能被浏览器阻止，用户需要交互');
             });
+          }
+        } else {
+          if (!video.paused) {
+            video.pause();
+          }
         }
+      });
+    }, { threshold: 0.4 });//视频在视口中可见面积 ≥ 40% 的时候，才触发播放。
+    
+    // 初始化视频并绑定监听
+    videos.forEach(video => {
+      videoObserver.observe(video);
+      video.preload = 'metadata';
+      video.muted = true;
+      video.setAttribute('playsinline', 'true');
+      video.setAttribute('webkit-playsinline', 'true');
+      
+      // 视频错误/加载监听
+      video.addEventListener('error', function() {
+        console.log('视频加载错误:', this.src);
+      });
+      video.addEventListener('loadeddata', function() {
+        console.log('视频已加载');
+      });
+      
+      // 播放状态监听
+      video.addEventListener('pause', function() {
+        const rect = video.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
+        const visibleRatio = visibleHeight / rect.height;
+        
+        if (visibleRatio >= 0.4 && rect.top < viewportHeight * 0.6 && rect.bottom > viewportHeight * 0.4) {
+          video.play().catch(e => console.log('重新播放失败'));
+        }
+      });
     });
     
-    // 添加滚动事件监听，作为IntersectionObserver的补充
+    // 页面可见性监听
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden) {
+        videos.forEach(video => video.pause());
+      } else {
+        videos.forEach(video => {
+          const rect = video.getBoundingClientRect();
+          const viewportHeight = window.innerHeight;
+          if (rect.top < viewportHeight * 0.6 && rect.bottom > viewportHeight * 0.4 && video.paused) {
+            video.play().catch(e => console.log('页面可见后播放失败'));
+          }
+        });
+      }
+    });
+    
+    // 滚动防抖监听（补充视频观察器）
     let scrollTimeout;
     window.addEventListener('scroll', function() {
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-            videos.forEach(video => {
-                const rect = video.getBoundingClientRect();
-                const viewportHeight = window.innerHeight;
-                
-                // 判断视频是否在视口40%区域内
-                const isInViewport = rect.top < viewportHeight * 0.6 && 
-                                rect.bottom > viewportHeight * 0.4;
-                
-                if (isInViewport && video.paused) {
-                    // 如果在视口内且暂停了，尝试播放
-                    video.play().catch(e => console.log('滚动后播放失败'));
-                } else if (!isInViewport && !video.paused) {
-                    // 如果不在视口内且正在播放，暂停
-                    video.pause();
-                }
-            });
-        }, 100); // 防抖延迟
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        videos.forEach(video => {
+          const rect = video.getBoundingClientRect();
+          const viewportHeight = window.innerHeight;
+          const isInViewport = rect.top < viewportHeight * 0.6 && rect.bottom > viewportHeight * 0.4;
+          
+          if (isInViewport && video.paused) {
+            video.play().catch(e => console.log('滚动后播放失败'));
+          } else if (!isInViewport && !video.paused) {
+            video.pause();
+          }
+        });
+      }, 100);
     });
+  }
+
 });
 // --------------------------鼠标-----------------------------------
 /// 鼠标
