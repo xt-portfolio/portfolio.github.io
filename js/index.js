@@ -1059,7 +1059,7 @@ if (window.innerWidth > 1199) {
       scrub: true, // 随着鼠标上下滚动显示出现
       // pin:true,
       animation: gsap.timeline()
-        .from('.img-roll', {y:80, duration: 1, ease: 'power3.out'})
+        .to('.img-roll', {y:-80, duration: 1, ease: 'power3.out'})
     });
   }
   // Safari浏览器：什么都不做，完全取消动画
