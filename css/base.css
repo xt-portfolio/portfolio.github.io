@@ -446,13 +446,13 @@ button:hover {
 .dot-right {
   transform: scale(0);  
 }
-.nav-btn-container a, .dot-left  {
+.nav-btn-container span, .dot-left  {
   transform:  translateX(4px);
   transition: all 0.2s ease-out;
 }
 
 
-.nav a {
+.nav span {
   font-size:var(--normal-font-size);
   color: #000000;
   text-decoration: none;
@@ -468,7 +468,7 @@ button:hover {
   .dot-left {
     transform: scale(0) ;
   }
-  a {
+  span {
   transform:  translateX(-4px);
   }
 

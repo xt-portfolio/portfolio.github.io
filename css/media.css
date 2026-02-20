@@ -156,7 +156,8 @@
         display: none;
     }
     .nav-btn-container {
-        height: 34px;
+        height: 32px;
+        width: 74px;
     }
  
     /* -----------foote-media----------- */

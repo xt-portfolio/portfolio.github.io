@@ -310,7 +310,7 @@ body {
 @media screen and (max-width: 1510px) {
 
     .sprite-box {
-        transform: translateX(-8px) scale(0.9);
+        transform: translateX(-8px) scale(0.83);
         transform-origin: left center;
     }
 
@@ -342,6 +342,19 @@ body {
     .sprite-box {
         padding-top: 17vh;
     }
+    .port-text{
+        font-size: 17vw !important;
+    }
+    .number-container {
+        display: none;
+    }
+    .dividing-line {
+        margin-top: -16px;
+    }
+
+
+
+
     .filter-tabs {
         flex-wrap: wrap;
     }
@@ -375,37 +388,3 @@ body {
 
 }
 
-/* 移动端筛选标签横向滚动 + 突破wrapper限制铺满屏幕 + 全部标签固定 */
-@media (max-width: 768px) {
-  /* 允许filter-tabs溢出wrapper容器 */
-  .filter-container .wrapper {
-    position: relative;
-    overflow: visible;
-  }
-
-  .filter-tabs {
-    display: flex;
-    flex-wrap: nowrap; /* 禁止换行，强制一行 */
-    overflow-x: auto;   /* 开启横向滚动 */
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch; /* iOS 流畅滚动 */
-    scrollbar-width: none; /* 隐藏滚动条（Firefox） */
-    -ms-overflow-style: none; /* IE 10+ */
-    gap: 12px; /* 按钮间距，可按设计调整 */
-    padding-bottom: 8px; /* 避免滚动条占位 */
-  }
-
-  /* 隐藏滚动条（Chrome/Safari） */
-  .filter-tabs::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* 按钮自适应宽度，避免挤压 */
-  .filter-tab {
-    flex: 0 0 auto; /* 禁止收缩，保持按钮宽度 */
-    white-space: nowrap; /* 文字不换行 */
-    min-width: auto;
-  }
-
-
-}
