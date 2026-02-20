@@ -1690,6 +1690,10 @@ spline-viewer {
     .sectionTitle-box p {
         display: none !important;
     }
+    .rular {
+        width: 1500px;
+        left: 16px;
+    }
     /* -------banner--------- */
     .banner .wrapper {
         padding: 15% 0 8vw 0;
@@ -1760,6 +1764,9 @@ spline-viewer {
         font-size: 20px;
 
     }
+    .mySkills-container {
+        padding: 20vw 0 6vw 0;
+    }
 
 
     /* ------------项目---------------*/
@@ -1793,6 +1800,9 @@ spline-viewer {
     .img-roll img {
         width: 270px;
         height: 150px;
+    }
+    .text-scroll {
+        margin: 20vw 0 15vw 0;
     }
 
 
