@@ -595,7 +595,7 @@ spline-viewer {
     position: relative;  
     background-repeat: no-repeat;
     background-size:55% auto,contain;
-    padding: 8vw 0 6vw 0;
+    padding: 8vw 0 12vw 0;
     background-color: var(--bg-color-light);
     background-image: 
     url(https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/3d/3d-bg.png),
@@ -648,6 +648,7 @@ spline-viewer {
     animation: scrollAnimation 25s linear infinite;
     /* 防止动画卡顿 */
     will-change: transform;
+
 }
 
 /* 复制一份内容用于无缝衔接 */
@@ -708,9 +709,10 @@ spline-viewer {
 }
 .content .line-box {
     position: absolute;
-    top: 0;
     z-index: 0;
-    width: 100%;
+    width: var(--basic-wrapper);
+    left: var(--basic-margin);
+    /* height: 300vh; */
 
 }
 .content .line-box .line {
@@ -1217,6 +1219,7 @@ spline-viewer {
     background-image: url(https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/notes-bg.png);
     /* box-shadow: 0px -8px 15px 0px #c6ddf2; */
     margin-top: 80px;
+    padding-bottom: 8vw;
 }
 .notes-section .Stroke {
     font-size: 90px;
