@@ -296,7 +296,7 @@ body {
 
 .footer-mask {
     background: 
-    url(../img/index/section-bg.png),
+    url(https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/section-bg.png),
     linear-gradient(180deg, #EEF0F7 0%, rgba(238, 240, 247, 0.00) 80%);
     background-color: #fff;
     background-repeat: no-repeat;
@@ -304,6 +304,17 @@ body {
     background-position: 0 0;
 }
 
+
+
+/* ------------------------------笔记本小尺寸------------------------------- */
+@media screen and (max-width: 1510px) {
+
+    .sprite-box {
+        transform: translateX(-8px) scale(0.9);
+        transform-origin: left center;
+    }
+
+}
 /* ------------------------------平板横屏------------------------------- */
 @media screen and (max-width: 1199px) {
     .text-gif-box {display: none;    }

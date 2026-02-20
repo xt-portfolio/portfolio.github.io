@@ -24,8 +24,9 @@ html,body {
 }
 .wrapper, .section {
     max-width: 100vw;
-    overflow-x: hidden;
+    overflow: hidden;  /* 完全禁用所有滚动 */
     position: relative;
+    height: auto; 
 }
 /* ----------------------------------1.作品集封面----------------------------------- */
 
