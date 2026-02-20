@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/media.css">
     <link rel="stylesheet" href="./css/index.css">
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.58/build/spline-viewer.js"></script>
 
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.57/build/spline-viewer.js" async></script>
 </head>
 <body>
     <div id="cursor-dot"></div>
@@ -31,18 +31,23 @@
                 </div>
                 
                 <li data-lang="zh">
-                    <div class="nav-btn-container">
-                        <div class="nav-btn-dot dot-left"></div>
-                        <a href="./project.html">项目</a>
-                        <div class="nav-btn-dot dot-right"></div>
-                    </div>
+                    <a href="./project.html">
+                        <div class="nav-btn-container">
+                            <div class="nav-btn-dot dot-left"></div>
+                            <span>项目</span>
+                            <div class="nav-btn-dot dot-right"></div>
+                        </div>
+                    </a>
                 </li>
                 <li data-lang="en" style="display:none">
-                    <div class="nav-btn-container">
-                        <div class="nav-btn-dot dot-left"></div>
-                        <a href="./project.html">work</a>
-                        <div class="nav-btn-dot dot-right"></div>
-                    </div>
+                    <a href="./project.html">
+                        <div class="nav-btn-container">
+                            <div class="nav-btn-dot dot-left"></div>
+                            <span>work</span>
+                            <div class="nav-btn-dot dot-right"></div>
+                        </div>
+                    </a>
+                </li>
   
   
   
@@ -107,7 +112,7 @@
             </div>
             <div class="banner-bottom-box">
                 <div class="bottom-box-left">
-                    <img src="./img/index/banner/pixel-portfolio.png" alt="" class="pixel-portfolio">
+                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/banner/pixel-portfolio.png" alt="" class="pixel-portfolio">
                     <ul class="banner-tags-container">
                         <li class="banner-tag">
                             <div class="black-block"></div>
@@ -140,17 +145,17 @@
                 </div> -->
             </div>
         </div>
-        <img src="./img/index/banner/banner-bg.png" alt="" class="banner-bg">
+        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/banner/banner-bg.png" alt="" class="banner-bg">
 
         <div class="modeling-box">
-            <spline-viewer loading-anim-type="none" url="https://prod.spline.design/gYU74J9fC-jDAfTg/scene.splinecode"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAANCAYAAADISGwcAAAG1ElEQVR4AQCBAH7/ALS4whS0uMIPtLjCB7S4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgq0uMIWtLjCIbS4wie0uMIotLjCJLS4wh20uMIRtLjCBbS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCAbS4wgi0uMILAIEAfv8AtLjCDrS4wgq0uMICtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCD7S4why0uMIntLjCLbS4wi+0uMIrtLjCI7S4whe0uMIKtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCBbS4wgkAgQB+/wC0uMIHtLjCBLS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgu0uMIbtLjCKbS4wjW0uMI8tLjCPrS4wjq0uMIxtLjCJLS4wha0uMIHtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIEtLjCBwCBAH7/ALS4wgW0uMIBtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMILtLjCHbS4wi+0uMI/tLjCS7S4wlO0uMJUtLjCULS4wke0uMI5tLjCKbS4whm0uMIKtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCArS4wga0uMIJAIEAfv8AtLjCCLS4wgW0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCDrS4wiC0uMIztLjCRrS4wle0uMJltLjCbbS4wm60uMJqtLjCX7S4wlG0uMI/tLjCLbS4wh20uMIPtLjCBbS4wgC0uMIAtLjCALS4wgS0uMIJtLjCDbS4wg8AgQB+/wC0uMIOtLjCC7S4wge0uMICtLjCALS4wgC0uMIAtLjCBLS4wg+0uMIetLjCMbS4wkW0uMJZtLjCa7S4wnm0uMKBtLjCgrS4wn20uMJytLjCY7S4wlC0uMI9tLjCK7S4why0uMIQtLjCCrS4wge0uMIItLjCC7S4wg+0uMITtLjCFQCBAH7/ALS4whC0uMIOtLjCCrS4wgW0uMICtLjCALS4wgK0uMIJtLjCFLS4wiS0uMI3tLjCTLS4wmC0uMJytLjCf7S4woe0uMKItLjCg7S4wne0uMJntLjCVLS4wkC0uMIutLjCHrS4whK0uMILtLjCCLS4wgm0uMIMtLjCD7S4whO0uMIVAIEAfv8AtLjCDrS4wgu0uMIHtLjCArS4wgC0uMIAtLjCALS4wgO0uMIOtLjCHbS4wi+0uMJDtLjCV7S4wmi0uMJ1tLjCfLS4wn20uMJ3tLjCa7S4wlu0uMJJtLjCNbS4wiO0uMIUtLjCCbS4wgK0uMIAtLjCAbS4wgS0uMIJtLjCDLS4wg8AgQB+/wC0uMIItLjCBbS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMINtLjCHbS4wjC0uMJCtLjCUrS4wl60uMJltLjCZbS4wl+0uMJUtLjCRLS4wjK0uMIgtLjCD7S4wgK0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIEtLjCBgCBAH7/ALS4wgW0uMICtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIKtLjCGrS4wiq0uMI5tLjCRLS4wkq0uMJKtLjCRLS4wjq0uMIrtLjCG7S4wgq0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMICAIEAfv8AtLjCB7S4wgS0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIJtLjCGLS4wiW0uMIvtLjCNLS4wjS0uMIvtLjCJbS4whi0uMIJtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCAbS4wgUAgQB+/wC0uMIOtLjCCrS4wgO0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIOtLjCGrS4wiO0uMIotLjCKLS4wiO0uMIatLjCDrS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgK0uMIJtLjCDQGBAH7/ALS4whS0uMIQtLjCCLS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgq0uMIVtLjCHrS4wiO0uMIjtLjCHrS4whW0uMIKtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCALS4wgC0uMIAtLjCCLS4wg+0uMITc9qwA5X9H+MAAAAASUVORK5CYII=" alt="Spline preview" style="width: 100%; height: 100%;"/></spline-viewer>
+            <spline-viewer loading-anim-type="none" url="https://prod.spline.design/gYU74J9fC-jDAfTg/scene.splinecode"></spline-viewer>
         </div>
         <!-- <span data-lang="zh" class="modeling-loading">模型载入中...</span> -->
         <!-- <span data-lang="en" style="display:none; font-size: 14px;" class="modeling-loading">Model loading...</span> -->
 
-        <img src="./img/index/banner/banner-move.png" alt="" class="move-bg smooth-animation">
-        <div class="banner-sprite sprite-keycap" id="sprite1" data-frames="20" data-sprite="./img/index/gif/keycap.png"></div>
-        <div class="banner-sprite sprite-bucket" id="sprite1" data-frames="40" data-sprite="./img/index/gif/paint-bucket.png"></div>
+        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/banner/banner-move.png" alt="" class="move-bg smooth-animation">
+        <div class="banner-sprite sprite-keycap" id="sprite1" data-frames="20" data-sprite="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/gif/keycap.png"></div>
+        <div class="banner-sprite sprite-bucket" id="sprite1" data-frames="40" data-sprite="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/gif/paint-bucket.png"></div>
         <!-- <div class="banner-sprite sprite-garbage" id="sprite1" data-frames="27" data-sprite="./img/index/gif/garbage.png"></div> -->
  
     </div>
@@ -235,8 +240,8 @@
                 </div>
                 <div class="personal-information-container">
                     <div class="photo-frame">
-                        <img src="./img/index/photo-2.png" alt="" class="myphoto photo-2">
-                        <img src="./img/index/photo-1.png" alt="" class="myphoto photo-1">
+                        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/photo-2.png" alt="" class="myphoto photo-2">
+                        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/photo-1.png" alt="" class="myphoto photo-1">
                     </div>
                     <div class="information-box">
                         <div class="personal-information">
@@ -329,7 +334,7 @@
                         <p data-lang="en" style="display:none;" >
                             I translate user needs and business goals into intuitive and visually appealing interfaces. From wireframes to high-fidelity mockups, I focus on creating smooth, enjoyable experiences that people love to use.
                         </p>
-                        <img src="./img/index/skills/1.png" alt="">
+                        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/skills/1.png" alt="">
                     </div>
 
                     <div class="skill-list">
@@ -341,7 +346,7 @@
                         <p data-lang="en" style="display:none;" >
                             I love exploring the 3D world. Whether I'm crafting detailed models in C4D or bringing them to life with keyframe animations, I use 3D to add depth, personality, and a sense of surprise to digital products.
                         </p>
-                        <img src="./img/index/skills/2.png" alt="">
+                        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/skills/2.png" alt="">
                     </div>
 
                     <div class="skill-list">
@@ -352,7 +357,7 @@
                         <p data-lang="zh" >我会写规范的 HTML、CSS 和基础 JavaScript。无论是独立搭建网站，还是和开发沟通对接，都能打通设计与开发的衔接环节，将设计精准转化为整洁易维护的代码，实现像素级落地。</p>
                         <p data-lang="en" style="display:none;" >
                             I write clean HTML, CSS, and basic JavaScript. Whether building websites independently or communicating with developers, I bridge the gap between design and development, translating designs into clean, maintainable code for pixel-perfect implementation.                        </p>
-                        <img src="./img/index/skills/3.png" alt="">
+                        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/skills/3.png" alt="">
                     </div>
 
 
@@ -372,19 +377,39 @@
             <!-- 第一份内容 -->
             <div class="textscroll-item">
                 <h1 class="content-head">projects</h1>
-                <img src="./img/index/fabric-logo.png" alt="fabric logo">
+                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/fabric-logo.png" alt="fabric logo">
                 <h1 class="content-head">projects</h1>
-                <img src="./img/index/fabric-logo.png" alt="fabric logo">
+                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/fabric-logo.png" alt="fabric logo">
             </div>
             <!-- 第二份内容：用于无缝衔接 -->
             <div class="textscroll-item">
                 <h1 class="content-head">projects</h1>
-                <img src="./img/index/fabric-logo.png" alt="fabric logo">
+                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/fabric-logo.png" alt="fabric logo">
                 <h1 class="content-head">projects</h1>
-                <img src="./img/index/fabric-logo.png" alt="fabric logo">
+                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/fabric-logo.png" alt="fabric logo">
             </div>
         </div>
         <div class="horizontal-line"></div>
+            <div class="line-box">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+
+                <div class="line"></div>
+                <div class="line"></div>                       
+            </div>
+
+
         <div class="wrapper projects-container">
                 <div class="sectionTitle-container">
                     <div class="subtitle-box">
@@ -401,9 +426,9 @@
                     <div class="project-card" data-categories="visualization">
                         <a href="./project-Visualization.html" class="itemHover">
                             <div class="projectImg-container" >  
-                                <img src="./img/index/visualazation/bg.png"  alt="移动端设计" class="original increase-saturation">
-                                <img src="./img/index/visualazation/light.gif" alt="" class="gif-layer gif-mode" >
-                                <img src="./img/index/visualazation/dot.gif" alt="" class="gif-layer" >
+                                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/visualazation/bg.png"  alt="移动端设计" class="original increase-saturation">
+                                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/visualazation/light.gif" alt="" class="gif-layer gif-mode" >
+                                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/visualazation/dot.gif" alt="" class="gif-layer" >
                                 <div class="ray ray1" style="opacity: 0.3;"></div>
                                 <div class="ray ray2"></div>
                                 <div class="ray ray3"></div>
@@ -428,7 +453,7 @@
                     <div class="project-card" data-categories="dashboard,mobile">
                         <a href="./project-DigitalEnergy.html" class="itemHover">
                             <div class="projectImg-container" >  
-                                <video src="./img/数字能源/cover-small.mp4"  muted loop autoplay poster="./img/数字能源/banner.png"></video> 
+                                <video src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/cover-small.mp4"  muted loop autoplay poster="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/banner.png"></video> 
                             </div>
                             <div class="card-content">
 
@@ -454,7 +479,7 @@
                     <div class="project-card" data-categories="mobile">
                         <a href="./project-CashMacket.html" class="itemHover">
                             <div class="projectImg-container" >  
-                                <video src="./img/现货app/phone.mp4"  muted loop autoplay poster="./img/现货app/banner.png"></video> 
+                                <video src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E7%8E%B0%E8%B4%A7app/phone.mp4"  muted loop autoplay poster="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E7%8E%B0%E8%B4%A7app/banner.png"></video> 
                             </div>
                             <div class="card-content">
 
@@ -476,7 +501,7 @@
                     <div class="project-card" data-categories="3D">
                         <a href="./project-3d.html" class="itemHover">
                             <div class="projectImg-container  small-rounded" >  
-                                <video src="./video/3d-loop.mp4"  muted loop autoplay poster="./img/3d/banner.png"></video> 
+                                <video src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/video/3d-loop.mp4"  muted loop autoplay poster="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/3d/banner.png"></video> 
                             </div>
                             <div class="card-content">
 
@@ -498,7 +523,7 @@
                     <div class="project-card" data-categories="graphic">
                         <a href="./project-brochure.html" class="itemHover">
                             <div class="projectImg-container" >  
-                                <img src="./img/brochure/cover.png" alt=""> 
+                                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/brochure/cover.png" alt=""> 
                             </div>
                             <div class="card-content">
 
@@ -519,30 +544,6 @@
  
             </div>
 
-
-
-
-            <div class="line-box">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-
-                <div class="line"></div>
-                <div class="line"></div>                       
-            </div>
-
-
-
         </div>
 
         <div class="btn-centre-container btn-more-container">
@@ -560,6 +561,8 @@
         </div>
 
     </div>
+
+
   
   
   
@@ -603,38 +606,34 @@
             <!-- 向右滚动 -->
                 <div class="imgScroll-top-container">
                     <ul class="scroll-right">
-                        <li class="right-list scroll-item"><img src="./img/index/img-roll/1.png" alt=""></li>
-                        <li class="right-list scroll-item"><img src="./img/index/img-roll/2.png" alt=""></li>
-                        <li class="right-list scroll-item"><img src="./img/index/img-roll/3.png" alt=""></li>
-                        <li class="right-list scroll-item"><img src="./img/index/img-roll/4.png" alt=""></li>
-                        <li class="right-list scroll-item"><img src="./img/index/img-roll/5.png" alt=""></li>
+                        <li class="right-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/1.png" alt=""></li>
+                        <li class="right-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/2.png" alt=""></li>
+                        <li class="right-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/6.png" alt=""></li>
+                        <li class="right-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/4.png" alt=""></li>
                     </ul>
                     <!-- 复制一组 -->
                     <ul class="scroll-right">
-                        <li class="right-list scroll-item"><img src="./img/index/img-roll/1.png" alt=""></li>
-                        <li class="right-list scroll-item"><img src="./img/index/img-roll/2.png" alt=""></li>
-                        <li class="right-list scroll-item"><img src="./img/index/img-roll/3.png" alt=""></li>
-                        <li class="right-list scroll-item"><img src="./img/index/img-roll/4.png" alt=""></li>
-                        <li class="right-list scroll-item"><img src="./img/index/img-roll/5.png" alt=""></li>
+                        <li class="right-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/1.png" alt=""></li>
+                        <li class="right-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/2.png" alt=""></li>
+                        <li class="right-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/6.png" alt=""></li>
+                        <li class="right-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/4.png" alt=""></li>
                     </ul>
                 </div>
                 <!-- 向左滚动 -->
                  <div class="imgScroll-bottom-container">
                     <ul class="scroll-left">
-                        <li class="left-list scroll-item"><img src="./img/index/img-roll/6.png" alt=""></li>
-                        <li class="left-list scroll-item"><img src="./img/index/img-roll/7.png" alt=""></li>
-                        <li class="left-list scroll-item"><img src="./img/index/img-roll/8.gif" alt=""></li>
-                        <li class="left-list scroll-item"><img src="./img/index/img-roll/9.gif" alt=""></li>
-                        <li class="left-list scroll-item"><img src="./img/index/img-roll/10.png" alt=""></li>
+                        <li class="left-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/7.png" alt=""></li>
+                        <li class="left-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/8.gif" alt=""></li>
+                        <li class="left-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/11.png" alt=""></li>
+                        <li class="left-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/10.png" alt=""></li>
                     </ul>
                     <!-- 复制一组 -->
 
                     <ul class="scroll-left">
-                        <li class="left-list scroll-item"><img src="./img/index/img-roll/6.png" alt=""></li>
-                        <li class="left-list scroll-item"><img src="./img/index/img-roll/7.png" alt=""></li>
-                        <li class="left-list scroll-item"><img src="./img/index/img-roll/8.gif" alt=""></li>
-                        <li class="left-list scroll-item"><img src="./img/index/img-roll/9.gif" alt=""></li>
-                        <li class="left-list scroll-item"><img src="./img/index/img-roll/10.png" alt=""></li>
+                        <li class="left-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/7.png" alt=""></li>
+                        <li class="left-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/8.gif" alt=""></li>
+                        <li class="left-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/11.png" alt=""></li>
+                        <li class="left-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/10.png" alt=""></li>
                     </ul>
                  </div>
             </div>
@@ -643,7 +642,7 @@
 
 
     <!---------------------------6.笔记----------------------------->
-    <div class="notes-section basic-padding footer-mask section" id="note">
+    <div class="notes-section footer-mask section" id="note">
             <div class="wrapper">
                 <div class="sectionTitle-container">
                     <div class="subtitle-box">
@@ -674,7 +673,7 @@
                                                 <div class="books__page"></div>
                                             </div>
                                             <div class="books__image">
-                                            <img src="./img/index/html-book.png" alt="Psychedelics and Mental Health by Irene de Caso">
+                                            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/html-book.png" alt="Psychedelics and Mental Health by Irene de Caso">
                                             </div>
                                         </div>
                                         </div>
@@ -692,7 +691,7 @@
                                                 <div class="books__page"></div>
                                             </div>
                                             <div class="books__image">
-                                            <img src="./img/index/aicg-book.png" alt="Psychedelics and Mental Health by Irene de Caso">
+                                            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/aicg-book.png" alt="Psychedelics and Mental Health by Irene de Caso">
                                             </div>
                                         </div>
                                         </div>
@@ -710,7 +709,7 @@
                                                 <div class="books__page"></div>
                                             </div>
                                             <div class="books__image">
-                                            <img src="./img/index/ae-book.png" alt="Psychedelics and Mental Health by Irene de Caso">
+                                            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/ae-book.png" alt="Psychedelics and Mental Health by Irene de Caso">
                                             </div>
                                         </div>
                                         </div>
@@ -729,14 +728,14 @@
 
                                             </div>
                                             <div class="books__image">
-                                            <img src="./img/index/c4d-book.png" alt="Psychedelics and Mental Health by Irene de Caso">
+                                            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/c4d-book.png" alt="Psychedelics and Mental Health by Irene de Caso">
                                             </div>
                                         </div>
                                         </div>
                                     </a>
                                 </div>
                             </div>
-                            <img src="./img/index/bookshelf.png" alt="" class="bookshelf">
+                            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/bookshelf.png" alt="" class="bookshelf">
                     </div>
 
 
@@ -756,11 +755,11 @@
     <!---------------------------7.footer----------------------------->
     <div class="empty-mask"></div>
     <footer class="" id="footerContainer">
-        <div class="imgTail"><img src="./img/index/tail/4.png" alt=""></div>
-        <div class="imgTail"><img src="https://i.postimg.cc/fTm7JdRD/5.png" alt=""></div>
-        <div class="imgTail"><img src="./img/index/tail/2.png" alt=""></div>
-        <div class="imgTail"><img src="./img/index/tail/3.png" alt=""></div>
-        <div class="imgTail"><img src="./img/index/tail/6.png" alt=""></div>
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/4.png" alt=""></div>
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/5.png" alt=""></div>
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/2.png" alt=""></div>
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/3.png" alt=""></div>
+        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/6.png" alt=""></div>
 
         <a href="mailto:578742871@qq.com" class="footer-email no-trail">
             <h2  data-before="578742871@qq.com" class="text-upward" >578742871@qq.com</h2>
@@ -771,9 +770,9 @@
                 <h1>creating&nbsp;</h1>
                 <h1>something</h1>
                 <div class="QRcode-box smooth-animation">
-                    <img src="./img/index/portfolio-label-x.png" alt="" class="footer-label-x smooth-animation">
-                    <img src="./img/index/QRcode.png" alt="" class="QRcode smooth-animation QRcode-tag">
-                    <img src="./img/index/QRcode-string.png" alt="" class="QRcode smooth-animation">
+                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/portfolio-label-x.png" alt="" class="footer-label-x smooth-animation">
+                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/QRcode.png" alt="" class="QRcode smooth-animation QRcode-tag">
+                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/QRcode-string.png" alt="" class="QRcode smooth-animation">
                 </div>
             </div>
             <h1 class="text-final">together.</h1>
