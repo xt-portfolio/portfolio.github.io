@@ -138,7 +138,7 @@ video {z-index: 2;}
 .pic1 {
     height: 47vw;
     background-image: 
-    url(https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/1.png);
+    url(https://res.cloudinary.com/dc7kgomu4/image/upload/v1773071254/1_zbzesx.png);
 }
 .pic1 img {
     
@@ -161,7 +161,7 @@ video {z-index: 2;}
     width: 100%;
     height: 77vw;
     background-image: 
-    url(https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/charts/chart-bg.png);
+    url(https://res.cloudinary.com/dc7kgomu4/image/upload/v1773071240/chart-bg_rm8n0q.png);
 
     background-size: 100% auto;
     background-repeat: no-repeat;
@@ -265,8 +265,8 @@ video {z-index: 2;}
 .pic3 {
     height: 112vw;
     background-image: 
-    url(https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/%E6%96%87%E5%AD%973.png),
-    url(https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/bg3.png);
+    url(https://res.cloudinary.com/dc7kgomu4/image/upload/v1773071246/%E6%96%87%E5%AD%973_tigpbd.png),
+    url(https://res.cloudinary.com/dc7kgomu4/image/upload/v1773071252/bg3_wkuzdx.png);
 }
 
 
@@ -274,7 +274,7 @@ video {z-index: 2;}
 /* ---------4.告警管理-------- */
 .bg-alarm {
     height: 56vw;
-    background-image: url(https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/4%E9%A2%84%E8%AD%A6.png);
+    background-image: url(https://res.cloudinary.com/dc7kgomu4/image/upload/v1773071249/4%E9%A2%84%E8%AD%A6_wmbu3v.png);
 }
 
 /* ---------通用项目-------- */
@@ -290,7 +290,7 @@ video {z-index: 2;}
 .pad-bg {
     width: 61vw;
     height: 34.7vw;
-    background-image: url(https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/pad-bg.png);
+    background-image: url(https://res.cloudinary.com/dc7kgomu4/image/upload/v1773071232/pad-bg_fes6qf.png);
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -305,7 +305,7 @@ video {z-index: 2;}
 
 /* 图片靠右 */
 .bg-right {
-    background-image: url(https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/bg-right.png);
+    background-image: url(https://res.cloudinary.com/dc7kgomu4/image/upload/v1773071248/bg-right_d69y0k.png);
 }
 .bg-right .wrapper {
     display: flex;
@@ -314,7 +314,7 @@ video {z-index: 2;}
 }
 /* 图片靠左 */
 .bg-left {
-    background-image: url(https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/visualization/bg-left.png);
+    background-image: url(https://res.cloudinary.com/dc7kgomu4/image/upload/v1773071251/bg-left_ybao27.png);
 }
 .bg-left  .wrapper {
     display: flex;

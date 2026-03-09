@@ -23,6 +23,37 @@ window.addEventListener('scroll', () => {
 });
 
 
+
+
+// 【Cloudinary图片自动优化】放在你的JS文件任意位置即可
+function optimizeCloudinaryImages() {
+  // 找到所有Cloudinary图片
+  const cloudinaryImages = document.querySelectorAll('img[src*="cloudinary.com"]');
+  
+  cloudinaryImages.forEach(img => {
+    const originalSrc = img.src;
+    // 插入自适应优化参数
+    const optimizedSrc = originalSrc.replace(
+      /image\/upload\//,
+      'image/upload/w_auto,q_auto:eco,f_auto/'
+    );
+    img.src = optimizedSrc;
+  });
+}
+
+// 关键：等页面所有元素加载完成后再执行（兼容所有引入方式）
+if (document.readyState === 'complete') {
+  // 页面已加载完，直接执行
+  optimizeCloudinaryImages();
+} else {
+  // 页面还在加载，等加载完成后执行
+  window.addEventListener('load', optimizeCloudinaryImages);
+}
+
+
+
+
+
 // 平滑滚动 - 检测触摸屏
 const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
@@ -76,6 +107,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+
 
 
 
@@ -261,7 +294,6 @@ window.addEventListener('beforeunload', function() {
     observers.forEach(observer => observer.unobserve(img));
   });
 });
-
 
 
 
@@ -609,37 +641,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // --------------------------鼠标-----------------------------------
 /// 鼠标
-const dot = document.getElementById('cursor-dot');
+// 仅保留circle光标元素
 const circle = document.getElementById('cursor-circle');
 let dotX = 0, dotY = 0, circleX = 0, circleY = 0;
-// 初始parts值
 let parts = 3;
 
-// 新增：检测是否在列表布局中
-function isListLayout() {
-  const cardsContainer = document.querySelector('.projectCards-container');
-  return cardsContainer && cardsContainer.classList.contains('list');
-}
-
-// 更新指针位置
+// 更新指针位置（核心修复：限制鼠标坐标在可视区域内）
 const updateCursorPosition = (e) => {
-  dotX = e.clientX;
-  dotY = e.clientY;
+  // 1. 获取页面可视区域的宽度和高度
+  const viewportWidth = window.innerWidth;
+  const viewportHeight = window.innerHeight;
+  
+  // 2. 限制坐标不超出可视区域范围
+  dotX = Math.min(Math.max(e.clientX, 0), viewportWidth - 1);
+  dotY = Math.min(Math.max(e.clientY, 0), viewportHeight - 1);
+  
   updateCursorStyles();
-  dot.style.opacity = circle.style.opacity = 1;
+  circle.style.opacity = 1; // 仅显示circle
 };
 
-// 更新光标样式（考虑滚动位置）
+// 更新光标样式（仅处理circle）
 const updateCursorStyles = () => {
-  dot.style.top = `${dotY + window.scrollY}px`;
-  dot.style.left = `${dotX + window.scrollX}px`;
-  circle.style.top = `${circleY + window.scrollY}px`;
-  circle.style.left = `${circleX + window.scrollX}px`;
+  circle.style.top = `${circleY}px`;
+  circle.style.left = `${circleX}px`;
 };
 
-// 平滑动画
+// 平滑动画（仅驱动circle）
 const circleAnimation = () => {
-  // 使用当前parts值进行计算
   circleX += (dotX - circleX) / parts;
   circleY += (dotY - circleY) / parts;
   updateCursorStyles();
@@ -649,52 +677,18 @@ const circleAnimation = () => {
 // 事件监听
 document.addEventListener('mousemove', updateCursorPosition);
 
-// 修改滚动事件处理 - 使用防抖优化性能
-let isScrolling;
-window.addEventListener('scroll', () => {
-  cancelAnimationFrame(isScrolling);
-  isScrolling = requestAnimationFrame(() => {
-    updateCursorStyles();
-  });
-});
-
 // 初始化动画
 requestAnimationFrame(circleAnimation);
-
-// 新增：监听布局变化，在列表布局时隐藏 dot
-function observeLayoutChanges() {
-  const layoutButtons = document.querySelectorAll('.layout-btn');
-  layoutButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      const layoutType = this.getAttribute('data-layout');
-      if (layoutType === 'list') {
-        circle.style.display = 'none';
-      } else {
-        // 其他布局时恢复 dot
-        circle.style.display = 'block';
-      }
-    });
-  });
-}
-
-// 初始化布局监听
-observeLayoutChanges();
 
 // 链接/按钮悬停效果
 document.querySelectorAll('a, button').forEach(element => {
   element.addEventListener('mouseover', () => {
-    // 新增：在列表布局时不应用此效果
-    if (isListLayout()) return;
-    
     circle.style.width = '60px';
     circle.style.height = '60px';
     circle.style.border = '1px solid #838383ff';
   });
 
   element.addEventListener('mouseleave', () => {
-    // 新增：在列表布局时不应用此效果
-    if (isListLayout()) return;
-    
     circle.style.border = '1px solid #838383ff';
     circle.style.width = '30px';
     circle.style.height = '30px';
@@ -704,9 +698,6 @@ document.querySelectorAll('a, button').forEach(element => {
 // footer键盘悬停效果
 document.querySelectorAll('.keyboard a,.navLinks').forEach(element => {
   element.addEventListener('mouseover', () => {
-    // 新增：在列表布局时不应用此效果
-    if (isListLayout()) return;
-    
     circle.style.backgroundColor = '#ffffff80';
     circle.style.width = '70px';
     circle.style.height = '70px';
@@ -715,9 +706,6 @@ document.querySelectorAll('.keyboard a,.navLinks').forEach(element => {
   });
 
   element.addEventListener('mouseleave', () => {
-    // 新增：在列表布局时不应用此效果
-    if (isListLayout()) return;
-    
     circle.style.backgroundColor = '#ffffff00';
     circle.style.mixBlendMode = 'normal';
     circle.style.border = '1px solid #838383ff';

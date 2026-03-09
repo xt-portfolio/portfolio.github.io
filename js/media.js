@@ -674,7 +674,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // --------------------------鼠标-----------------------------------
 /// 鼠标
-const dot = document.getElementById('cursor-dot');
+/// 鼠标（仅保留circle + 保留所有原有功能）
 const circle = document.getElementById('cursor-circle');
 let dotX = 0, dotY = 0, circleX = 0, circleY = 0;
 // 初始parts值
@@ -686,23 +686,26 @@ function isListLayout() {
   return cardsContainer && cardsContainer.classList.contains('list');
 }
 
-// 更新指针位置
+// 更新指针位置（移除dot + 限制坐标范围）
 const updateCursorPosition = (e) => {
-  dotX = e.clientX;
-  dotY = e.clientY;
+  // 限制坐标不超出可视区域，避免横向滚动条
+  const viewportWidth = window.innerWidth;
+  const viewportHeight = window.innerHeight;
+  dotX = Math.min(Math.max(e.clientX, 0), viewportWidth - 1);
+  dotY = Math.min(Math.max(e.clientY, 0), viewportHeight - 1);
+  
   updateCursorStyles();
-  dot.style.opacity = circle.style.opacity = 1;
+  circle.style.opacity = 1; // 仅控制circle显示
 };
 
-// 更新光标样式（考虑滚动位置）
+// 更新光标样式（改用fixed定位，移除scrollX/scrollY）
 const updateCursorStyles = () => {
-  dot.style.top = `${dotY + window.scrollY}px`;
-  dot.style.left = `${dotX + window.scrollX}px`;
-  circle.style.top = `${circleY + window.scrollY}px`;
-  circle.style.left = `${circleX + window.scrollX}px`;
+  // fixed定位无需叠加scrollX/scrollY，天然跟随视口
+  circle.style.top = `${circleY}px`;
+  circle.style.left = `${circleX}px`;
 };
 
-// 平滑动画
+// 平滑动画（逻辑不变）
 const circleAnimation = () => {
   // 使用当前parts值进行计算
   circleX += (dotX - circleX) / parts;
@@ -714,19 +717,19 @@ const circleAnimation = () => {
 // 事件监听
 document.addEventListener('mousemove', updateCursorPosition);
 
-// 修改滚动事件处理 - 使用防抖优化性能
-let isScrolling;
-window.addEventListener('scroll', () => {
-  cancelAnimationFrame(isScrolling);
-  isScrolling = requestAnimationFrame(() => {
-    updateCursorStyles();
-  });
-});
+// 移除冗余的scroll事件（fixed定位无需更新）
+// let isScrolling;
+// window.addEventListener('scroll', () => {
+//   cancelAnimationFrame(isScrolling);
+//   isScrolling = requestAnimationFrame(() => {
+//     updateCursorStyles();
+//   });
+// });
 
 // 初始化动画
 requestAnimationFrame(circleAnimation);
 
-// 新增：监听布局变化，在列表布局时隐藏 dot
+// 新增：监听布局变化，在列表布局时隐藏 circle
 function observeLayoutChanges() {
   const layoutButtons = document.querySelectorAll('.layout-btn');
   layoutButtons.forEach(button => {
@@ -735,7 +738,7 @@ function observeLayoutChanges() {
       if (layoutType === 'list') {
         circle.style.display = 'none';
       } else {
-        // 其他布局时恢复 dot
+        // 其他布局时恢复 circle
         circle.style.display = 'block';
       }
     });
@@ -745,7 +748,7 @@ function observeLayoutChanges() {
 // 初始化布局监听
 observeLayoutChanges();
 
-// 链接/按钮悬停效果
+// 链接/按钮悬停效果（保留列表布局判断）
 document.querySelectorAll('a, button').forEach(element => {
   element.addEventListener('mouseover', () => {
     // 新增：在列表布局时不应用此效果
@@ -766,7 +769,7 @@ document.querySelectorAll('a, button').forEach(element => {
   });
 });
 
-// footer键盘悬停效果
+// footer键盘悬停效果（保留列表布局判断）
 document.querySelectorAll('.keyboard a,.navLinks').forEach(element => {
   element.addEventListener('mouseover', () => {
     // 新增：在列表布局时不应用此效果
@@ -792,7 +795,7 @@ document.querySelectorAll('.keyboard a,.navLinks').forEach(element => {
   });
 });
 
-// 图片悬停效果 - 增加parts值修改
+// 图片悬停效果 - 增加parts值修改（保留列表布局判断）
 document.querySelectorAll('.itemHover').forEach(element => {
   element.style.cursor = 'default !important';
   
@@ -806,7 +809,7 @@ document.querySelectorAll('.itemHover').forEach(element => {
     // 鼠标悬停图片时，将parts改为5（跟随速度变慢）
     parts = 6;
     circle.style.backgroundColor = '#006effd2';
-    circle.style.backgroundImage = 'url(https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/view.png)';
+    circle.style.backgroundImage = 'url(../img/index/view.png)';
     circle.style.backgroundSize = 'cover';
     circle.style.width = '70px';
     circle.style.height = '70px';
@@ -832,14 +835,13 @@ document.querySelectorAll('.itemHover').forEach(element => {
   });
 });
 
-// 链接/按钮悬停效果 - 修改：在列表布局时隐藏 dot
+// 布局按钮/筛选标签/列表容器悬停效果（移除dot相关，仅处理circle）
 document.querySelectorAll('.layout-btn,.filter-tab,.projectCards-container.list').forEach(element => {
   element.addEventListener('mouseover', () => {
     // 新增：检查是否是列表容器本身
     if (element.classList.contains('projectCards-container')) {
-      // 列表容器悬停时隐藏 dot
-      dot.style.width = '0px';
-      dot.style.height = '0px';
+      // 列表容器悬停时隐藏 circle（替代原dot隐藏逻辑）
+      circle.style.display = 'none';
     } else {
       // 其他元素保持原有逻辑
       circle.style.width = '0px';
@@ -851,10 +853,11 @@ document.querySelectorAll('.layout-btn,.filter-tab,.projectCards-container.list'
   element.addEventListener('mouseleave', () => {
     // 新增：检查是否是列表容器本身
     if (element.classList.contains('projectCards-container')) {
-      // 离开列表容器时，根据当前布局决定是否恢复 dot
+      // 离开列表容器时，根据当前布局决定是否恢复 circle
       if (!isListLayout()) {
-        dot.style.width = '';
-        dot.style.height = '';
+        circle.style.display = 'block';
+        circle.style.width = '30px';
+        circle.style.height = '30px';
       }
     } else {
       // 其他元素保持原有逻辑
@@ -865,11 +868,10 @@ document.querySelectorAll('.layout-btn,.filter-tab,.projectCards-container.list'
   });
 });
 
-// 新增：页面加载时检查初始布局
+// 新增：页面加载时检查初始布局（移除dot，处理circle）
 document.addEventListener('DOMContentLoaded', function() {
   if (isListLayout()) {
-    dot.style.width = '0px';
-    dot.style.height = '0px';
+    circle.style.display = 'none'; // 列表布局默认隐藏circle
   }
 });
 // --------------------------contact鼠标-----------------------------------

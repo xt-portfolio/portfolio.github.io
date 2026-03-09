@@ -251,21 +251,35 @@ a {
 .increase-saturation {
   filter: saturate(1.06);
 }
+
+
+
 /* 鼠标 */
+/* 自定义鼠标元素核心样式 */
 #cursor-circle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  /* 核心：只给「位置/transform」设置0.1s过渡（鼠标跟随） */
+  transition: top 0.1s ease, left 0.1s ease, transform 0.1s ease;
+
   width: 30px;
   height: 30px;
-  /* background-color: var(--first-color); */
-  border-radius: 50%;
   border: 1px solid #838383ff;
-  box-sizing: border-box;
-  position: absolute;
-  opacity: 0;
-  transform: translate(-50%, -50%);
-  transition: background-color 0.3s linear, border 0.3s linear, width 0.2s linear, height 0.2s linear, opacity 0.7s 0.3s linear;
-  pointer-events: none;
-  z-index:999;
+  background-color: transparent;
+  /* 给circle单独加「样式属性」的0.3s过渡（hover效果） */
+  transition: 
+    top 0.1s ease, left 0.1s ease, /* 位置仍保持0.1s */
+    width 0.2s ease, height 0.2s ease, /* 尺寸变化0.3s */
+    border 0.2s ease, background-color 0.2s ease, /* 边框/背景0.3s */
+    mix-blend-mode 0.2s ease, filter 0.2s ease; /* 混合模式/模糊0.3s */
+
+
 }
+
+
 /* ------语言切换------- */
 
 .lang-btn {
@@ -473,6 +487,7 @@ button:hover {
   }
 
 }
+
 
 
 
@@ -881,7 +896,6 @@ button:hover {
   transition: all 0.1s ease-out;
   margin-top: 100vh;
   height: auto !important; /* 内容区高度自适应 */
-  overflow-x: hidden;
 }
 
 .project-content.dark {
@@ -890,6 +904,9 @@ button:hover {
     .line {background: var(--line-color-dark);}
 }
 
+.project-content .dividing-line {
+    padding-top: 40px;
+}
 
 
 
@@ -949,7 +966,6 @@ button:hover {
   justify-content: center;
   flex-direction: column;
   height: 70vh;
-  margin-bottom: 9vw;
 }
 
 .nextProject-container {
@@ -1202,7 +1218,7 @@ button:hover {
 
 .empty-mask {
   width: 100%;
-  height: 100vh;
+  height: 110vh;
   background: transparent; /* 你的原有透明样式 */
   /* 核心新增：禁用事件响应，让元素“可穿透” */
   pointer-events: none; 
@@ -1223,8 +1239,8 @@ footer {
   height: 100vh;
   z-index: -5; /* 保留你的层级设置 */
   background-image: 
-      url(https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/footer-bg.png), 
-      url(https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/footer-ray.png);
+    url(https://res.cloudinary.com/daurd7ca7/image/upload/v1773067430/footer-bg_ojufe0.png), 
+    url(https://res.cloudinary.com/daurd7ca7/image/upload/v1773067433/footer-ray_mfvuyj.png);
     background-repeat: no-repeat, no-repeat;
     background-size: cover, auto 100%; 
     background-position: center bottom, 0 0; 
@@ -1888,7 +1904,7 @@ background: var(--linear-2-paints, linear-gradient(319deg, rgba(0, 255, 172, 0.0
     margin-top: 3vw;
     display: flex;
     gap: 16px;
-    margin-bottom: 2vw;
+    margin-bottom: 48px;
 
 }
 .dividing-line span {
@@ -1935,3 +1951,7 @@ background: var(--linear-2-paints, linear-gradient(319deg, rgba(0, 255, 172, 0.0
 .project-content + .footer-mask {
     margin-top: 0 !important;
 }
+
+
+
+

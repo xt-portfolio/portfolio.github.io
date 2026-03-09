@@ -13,11 +13,8 @@
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/media.css">
     <link rel="stylesheet" href="./css/index.css">
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.58/build/spline-viewer.js"></script>
-
 </head>
 <body>
-    <div id="cursor-dot"></div>
     <div id="cursor-circle"></div>
     <!---------------------------- 头部 ---------------------------->
     <div class="header">
@@ -82,7 +79,6 @@
 
 
     <!------------------------ 1.作品集封面 ---------------------------->
-    
     <div class="banner section" id="home">
         <div class="wrapper">
             
@@ -112,7 +108,7 @@
             </div>
             <div class="banner-bottom-box">
                 <div class="bottom-box-left">
-                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/banner/pixel-portfolio.png" alt="" class="pixel-portfolio">
+                    <img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773065610/pixel-portfolio_yvlmcf.png" alt="" class="pixel-portfolio">
                     <ul class="banner-tags-container">
                         <li class="banner-tag">
                             <div class="black-block"></div>
@@ -145,17 +141,19 @@
                 </div> -->
             </div>
         </div>
-        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/banner/banner-bg.png" alt="" class="banner-bg">
+        <img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773051590/banner-bg_svwsst.png" alt="" class="banner-bg">
 
-        <div class="modeling-box">
-            <spline-viewer loading-anim-type="none" url="https://prod.spline.design/gYU74J9fC-jDAfTg/scene.splinecode"></spline-viewer>
+        <!-- =====================模型=========================== -->
+        <div id="model-container"></div>
+        
+        <div id="loading-container">
+            <div class="spinner"></div>
+            <div class="loading-text">Loading...</div>
         </div>
-        <!-- <span data-lang="zh" class="modeling-loading">模型载入中...</span> -->
-        <!-- <span data-lang="en" style="display:none; font-size: 14px;" class="modeling-loading">Model loading...</span> -->
 
-        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/banner/banner-move.png" alt="" class="move-bg smooth-animation">
-        <div class="banner-sprite sprite-keycap" id="sprite1" data-frames="20" data-sprite="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/gif/keycap.png"></div>
-        <div class="banner-sprite sprite-bucket" id="sprite1" data-frames="40" data-sprite="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/gif/paint-bucket.png"></div>
+        <img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773059884/banner-move_jfcdgr.png" alt="" class="move-bg smooth-animation">
+        <!-- <div class="banner-sprite sprite-keycap" id="sprite1" data-frames="20" data-sprite="./img/index/gif/keycap.png"></div> -->
+        <div class="banner-sprite sprite-bucket" id="sprite1" data-frames="40" data-sprite="./img/index/gif/paint-bucket.png"></div>
         <!-- <div class="banner-sprite sprite-garbage" id="sprite1" data-frames="27" data-sprite="./img/index/gif/garbage.png"></div> -->
  
     </div>
@@ -240,8 +238,8 @@
                 </div>
                 <div class="personal-information-container">
                     <div class="photo-frame">
-                        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/photo-2.png" alt="" class="myphoto photo-2">
-                        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/photo-1.png" alt="" class="myphoto photo-1">
+                        <img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773065742/photo-2_d5r3su.png" alt="" class="myphoto photo-2">
+                        <img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773065741/photo-1_sifvyh.png" alt="" class="myphoto photo-1">
                     </div>
                     <div class="information-box">
                         <div class="personal-information">
@@ -334,7 +332,7 @@
                         <p data-lang="en" style="display:none;" >
                             I translate user needs and business goals into intuitive and visually appealing interfaces. From wireframes to high-fidelity mockups, I focus on creating smooth, enjoyable experiences that people love to use.
                         </p>
-                        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/skills/1.png" alt="">
+                        <img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773065794/1_akomql.png" alt="">
                     </div>
 
                     <div class="skill-list">
@@ -346,7 +344,7 @@
                         <p data-lang="en" style="display:none;" >
                             I love exploring the 3D world. Whether I'm crafting detailed models in C4D or bringing them to life with keyframe animations, I use 3D to add depth, personality, and a sense of surprise to digital products.
                         </p>
-                        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/skills/2.png" alt="">
+                        <img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773065795/2_tzw7oa.png" alt="">
                     </div>
 
                     <div class="skill-list">
@@ -357,7 +355,7 @@
                         <p data-lang="zh" >我会写规范的 HTML、CSS 和基础 JavaScript。无论是独立搭建网站，还是和开发沟通对接，都能打通设计与开发的衔接环节，将设计精准转化为整洁易维护的代码，实现像素级落地。</p>
                         <p data-lang="en" style="display:none;" >
                             I write clean HTML, CSS, and basic JavaScript. Whether building websites independently or communicating with developers, I bridge the gap between design and development, translating designs into clean, maintainable code for pixel-perfect implementation.                        </p>
-                        <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/skills/3.png" alt="">
+                        <img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773065798/3_i0kcoj.png" alt="">
                     </div>
 
 
@@ -373,43 +371,25 @@
     <!--------------------------- 3.目录 ----------------------------->
     <div class="content section" id="work">
         <!-----------------------projects动效 -------------------->
-        <div class="content-text-scroll">
-            <!-- 第一份内容 -->
-            <div class="textscroll-item">
-                <h1 class="content-head">projects</h1>
-                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/fabric-logo.png" alt="fabric logo">
-                <h1 class="content-head">projects</h1>
-                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/fabric-logo.png" alt="fabric logo">
-            </div>
-            <!-- 第二份内容：用于无缝衔接 -->
-            <div class="textscroll-item">
-                <h1 class="content-head">projects</h1>
-                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/fabric-logo.png" alt="fabric logo">
-                <h1 class="content-head">projects</h1>
-                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/fabric-logo.png" alt="fabric logo">
+        <div class="content-textScroll-container">
+            <div class="content-text-scroll">
+                <!-- 第一份内容 -->
+                <div class="textscroll-item">
+                    <h1 class="content-head">projects</h1>
+                    <img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773065845/fabric-logo_toxndx.png" alt="fabric logo">
+                    <h1 class="content-head">projects</h1>
+                    <img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773065845/fabric-logo_toxndx.png" alt="fabric logo">
+                </div>
+                <!-- 第二份内容：用于无缝衔接 -->
+                <div class="textscroll-item">
+                    <h1 class="content-head">projects</h1>
+                    <img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773065845/fabric-logo_toxndx.png" alt="fabric logo">
+                    <h1 class="content-head">projects</h1>
+                    <img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773065845/fabric-logo_toxndx.png" alt="fabric logo">
+                </div>
             </div>
         </div>
         <div class="horizontal-line"></div>
-            <div class="line-box">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-
-                <div class="line"></div>
-                <div class="line"></div>                       
-            </div>
-
-
         <div class="wrapper projects-container">
                 <div class="sectionTitle-container">
                     <div class="subtitle-box">
@@ -426,9 +406,9 @@
                     <div class="project-card" data-categories="visualization">
                         <a href="./project-Visualization.html" class="itemHover">
                             <div class="projectImg-container" >  
-                                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/visualazation/bg.png"  alt="移动端设计" class="original increase-saturation">
-                                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/visualazation/light.gif" alt="" class="gif-layer gif-mode" >
-                                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/visualazation/dot.gif" alt="" class="gif-layer" >
+                                <img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773065879/bg_pdy7ow.png"  alt="移动端设计" class="original increase-saturation">
+                                <img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773065882/light_attwjf.gif" alt="" class="gif-layer gif-mode" >
+                                <img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773065880/dot_har6tq.gif" alt="" class="gif-layer" >
                                 <div class="ray ray1" style="opacity: 0.3;"></div>
                                 <div class="ray ray2"></div>
                                 <div class="ray ray3"></div>
@@ -453,7 +433,7 @@
                     <div class="project-card" data-categories="dashboard,mobile">
                         <a href="./project-DigitalEnergy.html" class="itemHover">
                             <div class="projectImg-container" >  
-                                <video src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/cover-small.mp4"  muted loop autoplay poster="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E6%95%B0%E5%AD%97%E8%83%BD%E6%BA%90/banner.png"></video> 
+                                <video src="https://lypml5jmfdky7wfp.public.blob.vercel-storage.com/cover-small.mp4"  muted loop autoplay poster="https://res.cloudinary.com/daurd7ca7/image/upload/v1773066272/banner_dloo2v.png"></video> 
                             </div>
                             <div class="card-content">
 
@@ -479,7 +459,7 @@
                     <div class="project-card" data-categories="mobile">
                         <a href="./project-CashMacket.html" class="itemHover">
                             <div class="projectImg-container" >  
-                                <video src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E7%8E%B0%E8%B4%A7app/phone.mp4"  muted loop autoplay poster="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/%E7%8E%B0%E8%B4%A7app/banner.png"></video> 
+                                <video src="https://lypml5jmfdky7wfp.public.blob.vercel-storage.com/phone.mp4"  muted loop autoplay poster="https://res.cloudinary.com/dc7kgomu4/image/upload/v1773066404/banner_tuvqi1.png"></video> 
                             </div>
                             <div class="card-content">
 
@@ -501,7 +481,7 @@
                     <div class="project-card" data-categories="3D">
                         <a href="./project-3d.html" class="itemHover">
                             <div class="projectImg-container  small-rounded" >  
-                                <video src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/video/3d-loop.mp4"  muted loop autoplay poster="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/3d/banner.png"></video> 
+                                <video src="https://lypml5jmfdky7wfp.public.blob.vercel-storage.com/3d-loop.mp4"  muted loop autoplay poster="https://res.cloudinary.com/daurd7ca7/image/upload/v1773066500/banner_plsnul.png"></video> 
                             </div>
                             <div class="card-content">
 
@@ -523,7 +503,7 @@
                     <div class="project-card" data-categories="graphic">
                         <a href="./project-brochure.html" class="itemHover">
                             <div class="projectImg-container" >  
-                                <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/brochure/cover.png" alt=""> 
+                                <img src="https://res.cloudinary.com/dc7kgomu4/image/upload/v1773066808/cover_qkj4af.png" alt=""> 
                             </div>
                             <div class="card-content">
 
@@ -544,6 +524,30 @@
  
             </div>
 
+
+
+
+            <div class="line-box">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+
+                <div class="line"></div>
+                <div class="line"></div>                       
+            </div>
+
+
+
         </div>
 
         <div class="btn-centre-container btn-more-container">
@@ -561,8 +565,6 @@
         </div>
 
     </div>
-
-
   
   
   
@@ -606,34 +608,38 @@
             <!-- 向右滚动 -->
                 <div class="imgScroll-top-container">
                     <ul class="scroll-right">
-                        <li class="right-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/1.png" alt=""></li>
-                        <li class="right-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/2.png" alt=""></li>
-                        <li class="right-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/6.png" alt=""></li>
-                        <li class="right-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/4.png" alt=""></li>
+                        <li class="right-list scroll-item"><img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773066895/1_gzlh2y.png" alt=""></li>
+                        <li class="right-list scroll-item"><img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773066892/2_pgbotm.png" alt=""></li>
+                        <li class="right-list scroll-item"><img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773066893/3_lvbhem.png" alt=""></li>
+                        <li class="right-list scroll-item"><img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773066881/4_yctrsh.png" alt=""></li>
+                        <li class="right-list scroll-item"><img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773066885/5_nwpqa5.png" alt=""></li>
                     </ul>
                     <!-- 复制一组 -->
                     <ul class="scroll-right">
-                        <li class="right-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/1.png" alt=""></li>
-                        <li class="right-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/2.png" alt=""></li>
-                        <li class="right-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/6.png" alt=""></li>
-                        <li class="right-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/4.png" alt=""></li>
+                        <li class="right-list scroll-item"><img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773066895/1_gzlh2y.png" alt=""></li>
+                        <li class="right-list scroll-item"><img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773066892/2_pgbotm.png" alt=""></li>
+                        <li class="right-list scroll-item"><img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773066893/3_lvbhem.png" alt=""></li>
+                        <li class="right-list scroll-item"><img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773066881/4_yctrsh.png" alt=""></li>
+                        <li class="right-list scroll-item"><img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773066885/5_nwpqa5.png" alt=""></li>
                     </ul>
                 </div>
                 <!-- 向左滚动 -->
                  <div class="imgScroll-bottom-container">
                     <ul class="scroll-left">
-                        <li class="left-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/7.png" alt=""></li>
-                        <li class="left-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/8.gif" alt=""></li>
-                        <li class="left-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/11.png" alt=""></li>
-                        <li class="left-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/10.png" alt=""></li>
+                        <li class="left-list scroll-item"><img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773066889/6_xxjcsm.png" alt=""></li>
+                        <li class="left-list scroll-item"><img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773066898/7_ukn5ej.png" alt=""></li>
+                        <li class="left-list scroll-item"><img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773066905/8_s0njsv.gif" alt=""></li>
+                        <li class="left-list scroll-item"><img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773066907/9_r1lwqh.gif" alt=""></li>
+                        <li class="left-list scroll-item"><img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773066877/10_i2jswe.png" alt=""></li>
                     </ul>
                     <!-- 复制一组 -->
 
                     <ul class="scroll-left">
-                        <li class="left-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/7.png" alt=""></li>
-                        <li class="left-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/8.gif" alt=""></li>
-                        <li class="left-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/11.png" alt=""></li>
-                        <li class="left-list scroll-item"><img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/img-roll/10.png" alt=""></li>
+                        <li class="left-list scroll-item"><img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773066889/6_xxjcsm.png" alt=""></li>
+                        <li class="left-list scroll-item"><img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773066898/7_ukn5ej.png" alt=""></li>
+                        <li class="left-list scroll-item"><img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773066905/8_s0njsv.gif" alt=""></li>
+                        <li class="left-list scroll-item"><img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773066907/9_r1lwqh.gif" alt=""></li>
+                        <li class="left-list scroll-item"><img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773066877/10_i2jswe.png" alt=""></li>
                     </ul>
                  </div>
             </div>
@@ -642,7 +648,7 @@
 
 
     <!---------------------------6.笔记----------------------------->
-    <div class="notes-section footer-mask section" id="note">
+    <div class="notes-section basic-padding footer-mask section" id="note">
             <div class="wrapper">
                 <div class="sectionTitle-container">
                     <div class="subtitle-box">
@@ -673,7 +679,7 @@
                                                 <div class="books__page"></div>
                                             </div>
                                             <div class="books__image">
-                                            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/html-book.png" alt="Psychedelics and Mental Health by Irene de Caso">
+                                            <img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773067190/html-book_t7x0bx.png" alt="Psychedelics and Mental Health by Irene de Caso">
                                             </div>
                                         </div>
                                         </div>
@@ -691,7 +697,7 @@
                                                 <div class="books__page"></div>
                                             </div>
                                             <div class="books__image">
-                                            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/aicg-book.png" alt="Psychedelics and Mental Health by Irene de Caso">
+                                            <img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773067197/aicg-book_jiace3.png" alt="Psychedelics and Mental Health by Irene de Caso">
                                             </div>
                                         </div>
                                         </div>
@@ -709,7 +715,7 @@
                                                 <div class="books__page"></div>
                                             </div>
                                             <div class="books__image">
-                                            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/ae-book.png" alt="Psychedelics and Mental Health by Irene de Caso">
+                                            <img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773067192/ae-book_pf8cdn.png" alt="Psychedelics and Mental Health by Irene de Caso">
                                             </div>
                                         </div>
                                         </div>
@@ -728,14 +734,14 @@
 
                                             </div>
                                             <div class="books__image">
-                                            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/c4d-book.png" alt="Psychedelics and Mental Health by Irene de Caso">
+                                            <img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773067195/c4d-book_wxbnsi.png" alt="Psychedelics and Mental Health by Irene de Caso">
                                             </div>
                                         </div>
                                         </div>
                                     </a>
                                 </div>
                             </div>
-                            <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/bookshelf.png" alt="" class="bookshelf">
+                            <img src="https://res.cloudinary.com/daurd7ca7/image/upload/v1773067187/bookshelf_hm4kv8.png" alt="" class="bookshelf">
                     </div>
 
 
@@ -755,11 +761,11 @@
     <!---------------------------7.footer----------------------------->
     <div class="empty-mask"></div>
     <footer class="" id="footerContainer">
-        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/4.png" alt=""></div>
-        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/5.png" alt=""></div>
-        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/2.png" alt=""></div>
-        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/3.png" alt=""></div>
-        <div class="imgTail"><img src="https://pub-ac179314a4564e7fb50bc94b77165669.r2.dev/img/index/tail/6.png" alt=""></div>
+        <div class="imgTail"><img src="https://i.postimg.cc/Jz8NJhGS/4.png" alt=""></div>
+        <div class="imgTail"><img src="https://i.postimg.cc/fTm7JdRD/5.png" alt=""></div>
+        <div class="imgTail"><img src="https://i.postimg.cc/sD7PvWgR/2.png" alt=""></div>
+        <div class="imgTail"><img src="https://i.postimg.cc/YqYNhFCK/3.png" alt=""></div>
+        <div class="imgTail"><img src="https://i.postimg.cc/QdDQ5MFx/6.png" alt=""></div>
 
         <a href="mailto:578742871@qq.com" class="footer-email no-trail">
             <h2  data-before="578742871@qq.com" class="text-upward" >578742871@qq.com</h2>
@@ -770,9 +776,9 @@
                 <h1>creating&nbsp;</h1>
                 <h1>something</h1>
                 <div class="QRcode-box smooth-animation">
-                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/portfolio-label-x.png" alt="" class="footer-label-x smooth-animation">
-                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/QRcode.png" alt="" class="QRcode smooth-animation QRcode-tag">
-                    <img src="https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/QRcode-string.png" alt="" class="QRcode smooth-animation">
+                    <img src="https://i.postimg.cc/yxk20Chd/portfolio_label_x.png" alt="" class="footer-label-x smooth-animation">
+                    <img src="https://i.postimg.cc/Vvd2XP9B/QRcode.png" alt="" class="QRcode smooth-animation QRcode-tag">
+                    <img src="https://i.postimg.cc/GtH6vnPz/QRcode_string.png" alt="" class="QRcode smooth-animation">
                 </div>
             </div>
             <h1 class="text-final">together.</h1>
@@ -821,7 +827,12 @@
         </div>
     </footer>
   <!-- 引入JS文件 --> 
-     <!-- 波纹 -->
+     <!-- three.js -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
     <script src="./js/index.js"></script>
     <!-- 重力 -->
     <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js'></script> -->

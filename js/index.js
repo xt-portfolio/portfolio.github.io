@@ -1,4 +1,604 @@
-// ------------- Header 显示/隐藏（下滑隐藏，上滑出现） -------------
+
+
+// =========================== 电脑模型 ==================================
+// ==================== 设备检测和配置 ====================
+const istouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+const MOBILE_BREAKPOINT = 839;
+const screenWidth = window.innerWidth;
+const isMobileScreen = screenWidth <= MOBILE_BREAKPOINT;
+const HORIZONTAL_OFFSET = isMobileScreen ? -0.6 : 0;
+
+console.log(`触摸屏: ${istouchDevice ? '是' : '否'}, 屏幕: ${screenWidth}px, 偏移: ${HORIZONTAL_OFFSET}`);
+
+// ==================== DOM元素 ====================
+const loadingContainer = document.getElementById('loading-container');
+const modelContainer = document.getElementById('model-container');
+const banner = document.querySelector('.banner');
+
+// ==================== Three.js初始化 ====================
+const scene = new THREE.Scene();
+scene.background = null;
+
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.set(5, 2, 5);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "default" });//可以改成high-performance
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = false;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.2;
+renderer.setClearColor(0x000000, 0);
+modelContainer.appendChild(renderer.domElement);
+
+// ==================== 控制器配置 ====================
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+// 基础配置：禁用所有功能，后面根据设备类型选择性开启
+controls.enableDamping = false;
+controls.enableZoom = false;
+controls.enablePan = false;
+controls.enableRotate = false;
+controls.autoRotate = false;
+
+// 触摸屏设备额外配置
+if (istouchDevice) {
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.enableZoom = true;
+    controls.zoomSpeed = 0.8;
+    controls.enableRotate = true;
+    controls.rotateSpeed = 0.8;
+    controls.maxPolarAngle = Math.PI / 2;
+}
+
+// ==================== 光照（精简）====================
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+scene.add(ambientLight);
+
+const dirLight = new THREE.DirectionalLight(0xffffff, 3);
+dirLight.position.set(8, 12, 2);
+scene.add(dirLight);
+
+const hemiLight = new THREE.HemisphereLight(0x88ccff, 0x442200, 0.5);
+scene.add(hemiLight);
+
+const fillLight = new THREE.PointLight(0xffffff, 1);
+fillLight.position.set(2, 3, 4);
+scene.add(fillLight);
+
+// ==================== 旋转组 ====================
+const rotationGroup = new THREE.Group();
+scene.add(rotationGroup);
+
+// ==================== 视频平面 ====================
+let videoMaterial, videoTexture;
+let isVideoActive = true;
+
+function createVideoPlane() {
+    const video = document.createElement('video');
+    video.src = 'https://lypml5jmfdky7wfp.public.blob.vercel-storage.com/screen.mp4';
+    video.loop = true;
+    video.muted = true;
+    video.playsInline = true;
+    video.crossOrigin = 'anonymous';
+    video.autoplay = true;
+    
+    video.play().catch(() => {
+        document.addEventListener('click', () => video.play(), { once: true });
+    });
+    
+    videoTexture = new THREE.VideoTexture(video);
+    videoTexture.minFilter = THREE.LinearFilter;
+    videoTexture.magFilter = THREE.LinearFilter;
+    
+    const material = new THREE.MeshStandardMaterial({
+        map: videoTexture,
+        emissive: 0x333333,
+        emissiveIntensity: 0.5,
+        roughness: 0.3,
+        metalness: 0.0,
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0,
+        color: 0xffffff
+    });
+    
+    const geometry = new THREE.PlaneGeometry(1.72, 1.37);
+    const plane = new THREE.Mesh(geometry, material);
+    plane.position.set(HORIZONTAL_OFFSET, 0.12, 0.1);
+    rotationGroup.add(plane);
+    
+    return material;
+}
+
+videoMaterial = createVideoPlane();
+
+function toggleVideoBlack() {
+    if (!videoMaterial) return;
+    isVideoActive = !isVideoActive;
+    
+    if (isVideoActive) {
+        videoMaterial.map = videoTexture;
+        videoMaterial.emissive.setHex(0x333333);
+        videoMaterial.color.setHex(0xffffff);
+    } else {
+        videoMaterial.map = null;
+        videoMaterial.emissive.setHex(0x000000);
+        videoMaterial.color.setHex(0x000000);
+    }
+    videoMaterial.needsUpdate = true;
+}
+
+// ==================== 卡片动画变量 ====================
+let cardGroup = null;
+let cardMeshes = [];
+let cardAnimActive = false;
+let cardAnimProgress = 0;
+const cardAnimSpeed = 0.06; // 加快动画速度
+const moveDistance = 0.8;
+const maxRotation = Math.PI;
+const delayBeforeRotate = 300;
+const delayBeforeMoveBack = 300;
+
+const PHASE_MOVE_FORWARD = 0;
+const PHASE_DELAY_1 = 1;
+const PHASE_ROTATE_FORWARD = 2;
+const PHASE_ROTATE_BACK = 3;
+const PHASE_DELAY_2 = 4;
+const PHASE_MOVE_BACK = 5;
+let currentPhase = PHASE_MOVE_FORWARD;
+let delayStartTime = 0;
+
+let initialCardPos = new THREE.Vector3();
+let initialCardRot = new THREE.Euler();
+const finalCardPos = new THREE.Vector3(0.54 + HORIZONTAL_OFFSET, -1.28, 0.23);
+
+// ==================== 旋钮变量 ====================
+let knobLeft = null, knobRight = null;
+let knobLeftRotation = 0, knobRightRotation = 0;
+const knobRotateStep = Math.PI / 4;
+
+let knobAnimActive = false;
+let knobAnimTarget = null;
+let knobAnimStartRotation = 0;
+let knobAnimTargetRotation = 0;
+let knobAnimStartTime = 0;
+const knobAnimDuration = 300;
+
+let cardRotationWrapper = null;
+
+// ==================== 卡片入场动画 ====================
+let cardEntranceActive = false;
+let cardEntranceStartTime = 0;
+const ENTRANCE_PHASE_SCALE = 0;
+const ENTRANCE_PHASE_WAIT = 1;
+const ENTRANCE_PHASE_Z = 2;
+let entrancePhase = ENTRANCE_PHASE_SCALE;
+let entrancePhaseStartTime = 0;
+const scaleDuration = 400;
+const waitDuration = 200;
+const zDuration = 600;
+
+// ==================== 缓动函数 ====================
+const easeInOutQuad = t => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+const easeInOutCubic = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
+
+// ==================== 射线检测 ====================
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+let powerButtonMesh = null;
+
+renderer.domElement.addEventListener('click', (event) => {
+    const rect = renderer.domElement.getBoundingClientRect();
+    mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+    raycaster.setFromCamera(mouse, camera);
+    
+    const clickableObjects = [];
+    if (powerButtonMesh) clickableObjects.push(powerButtonMesh);
+    if (knobLeft) clickableObjects.push(knobLeft);
+    if (knobRight) clickableObjects.push(knobRight);
+    if (cardMeshes.length) cardMeshes.forEach(m => clickableObjects.push(m));
+    else if (cardGroup) clickableObjects.push(cardGroup);
+    
+    if (!clickableObjects.length) return;
+    
+    const intersects = raycaster.intersectObjects(clickableObjects, true);
+    if (!intersects.length) return;
+    
+    const hitObject = intersects[0].object;
+    
+    // 电源按钮
+    if (powerButtonMesh && (hitObject === powerButtonMesh || powerButtonMesh.children.includes(hitObject))) {
+        toggleVideoBlack();
+        return;
+    }
+    
+    // 左边旋钮
+    if (knobLeft && (hitObject === knobLeft || knobLeft.children.includes(hitObject))) {
+        knobAnimTarget = knobLeft;
+        knobAnimStartRotation = knobLeftRotation;
+        knobAnimTargetRotation = knobLeftRotation + knobRotateStep;
+        knobLeftRotation = knobAnimTargetRotation;
+        knobAnimActive = true;
+        knobAnimStartTime = Date.now();
+        return;
+    }
+    
+    // 右边旋钮
+    if (knobRight && (hitObject === knobRight || knobRight.children.includes(hitObject))) {
+        knobAnimTarget = knobRight;
+        knobAnimStartRotation = knobRightRotation;
+        knobAnimTargetRotation = knobRightRotation + knobRotateStep;
+        knobRightRotation = knobAnimTargetRotation;
+        knobAnimActive = true;
+        knobAnimStartTime = Date.now();
+        return;
+    }
+    
+    // 卡片
+    let isCard = false;
+    if (cardMeshes.length) isCard = cardMeshes.includes(hitObject);
+    else if (cardGroup) isCard = (hitObject === cardGroup || cardGroup.children.includes(hitObject));
+    
+    if (isCard && !cardAnimActive && cardGroup) {
+        initialCardPos.copy(cardGroup.position);
+        initialCardRot.copy(cardGroup.rotation);
+        cardAnimActive = true;
+        cardAnimProgress = 0;
+        currentPhase = PHASE_MOVE_FORWARD;
+    }
+});
+
+// ==================== 鼠标跟踪（仅非触摸屏）====================
+let mouseX = 0, targetRotation = 0, currentRotation = 0;
+const maxRotationAngle = 0.2;
+const rotationLerpSpeed = 0.05;
+let isMouseRotationEnabled = false;
+let mouseInContainer = false;
+
+if (!istouchDevice) {
+    document.addEventListener('mousemove', (e) => {
+        const rect = modelContainer.getBoundingClientRect();
+        mouseInContainer = e.clientX >= rect.left && e.clientX <= rect.right && 
+                          e.clientY >= rect.top && e.clientY <= rect.bottom;
+        
+        if (isMouseRotationEnabled && mouseInContainer) {
+            mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+            targetRotation = mouseX * maxRotationAngle;
+        }
+    });
+    
+    modelContainer.addEventListener('mouseleave', () => {
+        mouseInContainer = false;
+    });
+}
+
+function enableMouseRotation() {
+    if (!istouchDevice) isMouseRotationEnabled = true;
+}
+
+// ==================== 视口可见性（优化）====================
+let isBannerVisible = true;
+let visibilityCheckScheduled = false;
+
+// 使用IntersectionObserver替代scroll监听
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        isBannerVisible = entry.isIntersecting;
+        rotationGroup.visible = isBannerVisible;
+    });
+}, { threshold: 0.1 });
+
+observer.observe(banner);
+
+// 备用滚动检测（兼容性）
+window.addEventListener('scroll', () => {
+    if (!visibilityCheckScheduled) {
+        visibilityCheckScheduled = true;
+        requestAnimationFrame(() => {
+            const rect = banner.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            const isVisible = rect.top < windowHeight && rect.bottom > 0;
+            
+            if (isVisible !== isBannerVisible) {
+                isBannerVisible = isVisible;
+                rotationGroup.visible = isBannerVisible;
+            }
+            visibilityCheckScheduled = false;
+        });
+    }
+}, { passive: true });
+
+// ==================== 加载模型 ====================
+const loader = new THREE.GLTFLoader();
+let computerModel = null;
+let modelsLoaded = 0;
+const totalModels = 2;
+
+function checkAllModelsLoaded() {
+    modelsLoaded++;
+    if (modelsLoaded === totalModels) {
+        console.log('🎉 所有模型加载完成，开始入场动画');
+        setTimeout(() => loadingContainer?.classList.add('hidden'), 500);
+        startEntranceAnimations();
+    }
+}
+
+// 加载电脑
+loader.load('https://lypml5jmfdky7wfp.public.blob.vercel-storage.com/computer.glb', (gltf) => {
+    computerModel = gltf.scene;
+    
+    // 查找交互元素
+    computerModel.traverse((child) => {
+        if (!child.isMesh) return;
+        const name = child.name.toLowerCase();
+        
+        if (name.includes('power') || name.includes('button') || name.includes('开关')) {
+            powerButtonMesh = child;
+        } else if (name.includes('knob')) {
+            if (name.includes('knob.2') || name.includes('knob2') || name.includes('右')) {
+                knobRight = child;
+            } else {
+                knobLeft = child;
+            }
+        }
+    });
+    
+    computerModel.position.set(HORIZONTAL_OFFSET, -2.5, 0);
+    computerModel.rotation.y = -Math.PI;
+    rotationGroup.add(computerModel);
+    
+    checkAllModelsLoaded();
+}, null, checkAllModelsLoaded);
+
+// 加载卡片
+loader.load('https://lypml5jmfdky7wfp.public.blob.vercel-storage.com/card.glb', (gltf) => {
+    const originalCard = gltf.scene;
+    
+    cardRotationWrapper = new THREE.Group();
+    const box = new THREE.Box3().setFromObject(originalCard);
+    const center = box.getCenter(new THREE.Vector3());
+    
+    originalCard.traverse((child) => {
+        if (child.isMesh) {
+            child.position.sub(center);
+            cardMeshes.push(child);
+        }
+    });
+    
+    cardRotationWrapper.add(originalCard);
+    cardRotationWrapper.position.copy(finalCardPos);
+    cardGroup = cardRotationWrapper;
+    
+    cardGroup.scale.set(0, 0, 0);
+    cardGroup.position.set(finalCardPos.x, finalCardPos.y, 1.0);
+    
+    initialCardPos.copy(cardGroup.position);
+    initialCardRot.copy(cardGroup.rotation);
+    rotationGroup.add(cardGroup);
+    
+    checkAllModelsLoaded();
+}, null, checkAllModelsLoaded);
+
+// ==================== 入场动画 ====================
+let computerAnimActive = false;
+let computerAnimStartTime = 0;
+const computerAnimDuration = 2800;
+
+function startEntranceAnimations() {
+    if (computerModel) {
+        computerAnimActive = true;
+        computerAnimStartTime = Date.now();
+        computerModel.position.set(HORIZONTAL_OFFSET, -2.5, 0);
+        computerModel.rotation.y = -Math.PI;
+    }
+}
+
+// ==================== 视频淡入 ====================
+let videoFadeStartTime = 0;
+let isVideoFading = false;
+const videoFadeDuration = 300;
+
+function startVideoFade() {
+    isVideoFading = true;
+    videoFadeStartTime = Date.now();
+    videoMaterial.opacity = 0;
+}
+
+// ==================== 动画循环（优化版）====================
+let lastFrameTime = 0;
+const FRAME_INTERVAL = 1000 / 60; // 60fps
+
+function animate(time) {
+    requestAnimationFrame(animate);
+    
+    // 帧率限制
+    if (time - lastFrameTime < FRAME_INTERVAL) return;
+    lastFrameTime = time;
+    
+    if (!isBannerVisible) return;
+    
+    const now = Date.now();
+    
+    // 电脑入场动画
+    if (computerAnimActive && computerModel) {
+        const elapsed = now - computerAnimStartTime;
+        const progress = Math.min(elapsed / computerAnimDuration, 1);
+        const eased = easeInOutCubic(progress);
+        
+        computerModel.position.y = -2.5 + 2.5 * eased;
+        computerModel.rotation.y = -Math.PI + Math.PI * eased;
+        computerModel.position.x = HORIZONTAL_OFFSET;
+        
+        if (progress >= 1) {
+            computerAnimActive = false;
+            computerModel.position.y = 0;
+            computerModel.rotation.y = 0;
+            
+            if (cardGroup && !cardEntranceActive) {
+                cardEntranceActive = true;
+                entrancePhase = ENTRANCE_PHASE_SCALE;
+                entrancePhaseStartTime = now;
+            }
+        }
+    }
+    
+    // 卡片入场动画
+    if (cardEntranceActive && cardGroup) {
+        if (entrancePhase === ENTRANCE_PHASE_SCALE) {
+            const elapsed = now - entrancePhaseStartTime;
+            const progress = Math.min(elapsed / scaleDuration, 1);
+            const eased = easeInOutCubic(progress);
+            cardGroup.scale.set(eased, eased, eased);
+            
+            if (progress >= 1) {
+                cardGroup.scale.set(1, 1, 1);
+                entrancePhase = ENTRANCE_PHASE_WAIT;
+                entrancePhaseStartTime = now;
+            }
+        } else if (entrancePhase === ENTRANCE_PHASE_WAIT) {
+            if (now - entrancePhaseStartTime >= waitDuration) {
+                entrancePhase = ENTRANCE_PHASE_Z;
+                entrancePhaseStartTime = now;
+            }
+        } else if (entrancePhase === ENTRANCE_PHASE_Z) {
+            const elapsed = now - entrancePhaseStartTime;
+            const progress = Math.min(elapsed / zDuration, 1);
+            const eased = easeInOutCubic(progress);
+            cardGroup.position.z = 1.0 - (1.0 - 0.23) * eased;
+            
+            if (progress >= 1) {
+                cardEntranceActive = false;
+                cardGroup.position.z = 0.23;
+                startVideoFade();
+                setTimeout(enableMouseRotation, 700);
+            }
+        }
+    }
+    
+    // 旋钮动画
+    if (knobAnimActive && knobAnimTarget) {
+        const elapsed = now - knobAnimStartTime;
+        const progress = Math.min(elapsed / knobAnimDuration, 1);
+        const eased = easeOutCubic(progress);
+        knobAnimTarget.rotation.z = knobAnimStartRotation + (knobAnimTargetRotation - knobAnimStartRotation) * eased;
+        
+        if (progress >= 1) {
+            knobAnimActive = false;
+            knobAnimTarget = null;
+        }
+    }
+    
+    // 视频淡入
+    if (isVideoFading && videoMaterial) {
+        const elapsed = now - videoFadeStartTime;
+        const progress = Math.min(elapsed / videoFadeDuration, 1);
+        videoMaterial.opacity = easeInOutQuad(progress);
+        
+        if (progress >= 1) {
+            isVideoFading = false;
+            videoMaterial.opacity = 1;
+        }
+    }
+    
+    // 旋转控制（根据设备类型）
+    if (istouchDevice) {
+        controls.update(); // 触摸屏用OrbitControls
+    } else if (isMouseRotationEnabled) {
+        // 非触摸屏用鼠标跟踪
+        currentRotation += (targetRotation - currentRotation) * rotationLerpSpeed;
+        rotationGroup.rotation.y = currentRotation;
+    }
+    
+    // 卡片点击动画
+    if (cardGroup && cardAnimActive) {
+        if (currentPhase === PHASE_MOVE_FORWARD) {
+            cardAnimProgress += cardAnimSpeed;
+            if (cardAnimProgress >= 1.0) {
+                cardAnimProgress = 1.0;
+                currentPhase = PHASE_DELAY_1;
+                delayStartTime = now;
+            }
+            cardGroup.position.z = initialCardPos.z + moveDistance * easeInOutQuad(cardAnimProgress);
+        } else if (currentPhase === PHASE_DELAY_1) {
+            if (now - delayStartTime >= delayBeforeRotate) {
+                currentPhase = PHASE_ROTATE_FORWARD;
+                cardAnimProgress = 0;
+            }
+        } else if (currentPhase === PHASE_ROTATE_FORWARD) {
+            cardAnimProgress += cardAnimSpeed;
+            if (cardAnimProgress >= 1.0) {
+                cardAnimProgress = 1.0;
+                currentPhase = PHASE_ROTATE_BACK;
+            }
+            cardGroup.rotation.z = initialCardRot.z + maxRotation * easeInOutQuad(cardAnimProgress);
+        } else if (currentPhase === PHASE_ROTATE_BACK) {
+            cardAnimProgress -= cardAnimSpeed;
+            if (cardAnimProgress <= 0.0) {
+                cardAnimProgress = 0.0;
+                currentPhase = PHASE_DELAY_2;
+                delayStartTime = now;
+            }
+            cardGroup.rotation.z = initialCardRot.z + maxRotation * easeInOutQuad(cardAnimProgress);
+        } else if (currentPhase === PHASE_DELAY_2) {
+            if (now - delayStartTime >= delayBeforeMoveBack) {
+                currentPhase = PHASE_MOVE_BACK;
+                cardAnimProgress = 1.0;
+            }
+        } else if (currentPhase === PHASE_MOVE_BACK) {
+            cardAnimProgress -= cardAnimSpeed;
+            if (cardAnimProgress <= 0.0) {
+                cardAnimActive = false;
+                cardAnimProgress = 0.0;
+                currentPhase = PHASE_MOVE_FORWARD;
+                cardGroup.position.copy(initialCardPos);
+                cardGroup.rotation.copy(initialCardRot);
+            }
+            cardGroup.position.z = initialCardPos.z + moveDistance * easeInOutQuad(cardAnimProgress);
+        }
+    }
+    
+    renderer.render(scene, camera);
+}
+
+requestAnimationFrame(animate);
+
+// ==================== 窗口大小改变 ====================
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    
+    // 重新计算偏移
+    const newIsMobile = window.innerWidth <= MOBILE_BREAKPOINT;
+    const newOffset = newIsMobile ? -0.6 : 0;
+    
+    if (newOffset !== HORIZONTAL_OFFSET) {
+        if (computerModel) computerModel.position.x = newOffset;
+        if (cardGroup) cardGroup.position.x = 0.54 + newOffset;
+        rotationGroup.children.forEach(child => {
+            if (child.isMesh && child.material === videoMaterial) {
+                child.position.x = newOffset;
+            }
+        });
+    }
+});
+
+
+
+
+
+
+
+//---------------------------------------------------------------------------------------
+// =============================== Header 显示/隐藏（下滑隐藏，上滑出现） ===================================
+//---------------------------------------------------------------------------------------
+
+
 let lastScrollTop = 0;
 const header = document.querySelector('.header');
 const scrollThreshold = 10; // 滚动多少像素后才触发隐藏，避免轻微滚动就触发
@@ -266,208 +866,7 @@ if (!isTouchDevice) {
     console.log('触摸屏设备，不启用平滑滚动');
 }
 
-// ==================== Spline优化器（Safari优化版） ====================
-class DualDetectionSplineOptimizer {
-    constructor() {
-        this.splineViewer = document.querySelector('spline-viewer');
-        if (!this.splineViewer) return;
-        
-        this.isSafari = isSafari();
-        this.init();
-    }
-    
-    init() {
-        this.isLoaded = true;
-        this.isVisible = true;
-        this.lastHideTime = 0;
-        
-        // Safari使用更低质量
-        if (this.splineViewer.setQuality) {
-            this.splineViewer.setQuality(this.isSafari ? 'lowest' : 'low');
-        }
-        
-        // 1. 主检测：Intersection Observer
-        this.setupIntersectionObserver();
-        
-        // 2. 备用检测：滚动位置检测
-        this.setupScrollDetection();
-    }
-    
-    setupIntersectionObserver() {
-        // Safari使用更大的rootMargin，提前加载避免卡顿
-        const rootMargin = this.isSafari ? '300px' : '200px';
-        
-        this.observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        this.showSpline();
-                    } else {
-                        setTimeout(() => {
-                            if (!entry.isIntersecting) {
-                                this.hideSpline();
-                            }
-                        }, this.isSafari ? 500 : 300); // Safari延迟更长避免频繁切换
-                    }
-                });
-            },
-            {
-                threshold: 0.1,
-                rootMargin: rootMargin
-            }
-        );
-        
-        this.observer.observe(this.splineViewer);
-    }
-    
-    setupScrollDetection() {
-        let lastScrollCheck = 0;
-        
-        if (lenis) {
-            lenis.on('scroll', () => {
-                const now = Date.now();
-                if (now - lastScrollCheck < (this.isSafari ? 300 : 500)) return;
-                lastScrollCheck = now;
-                
-                if (!this.isVisible) {
-                    this.checkShouldShow();
-                }
-            });
-        } else {
-            window.addEventListener('scroll', () => {
-                const now = Date.now();
-                if (now - lastScrollCheck < (this.isSafari ? 300 : 500)) return;
-                lastScrollCheck = now;
-                
-                if (!this.isVisible) {
-                    this.checkShouldShow();
-                }
-            }, { passive: true }); // 添加passive提高滚动性能
-        }
-        
-        window.addEventListener('resize', () => {
-            setTimeout(() => this.checkShouldShow(), 100);
-        }, { passive: true });
-    }
-    
-    checkShouldShow() {
-        const scrollY = window.scrollY || document.documentElement.scrollTop;
-        const windowHeight = window.innerHeight;
-        
-        const shouldShow = scrollY < windowHeight * 1.5;
-        
-        if (shouldShow && !this.isVisible) {
-            this.showSpline();
-            
-            if (this.observer) {
-                this.observer.unobserve(this.splineViewer);
-                this.observer.observe(this.splineViewer);
-            }
-        }
-    }
-    
-    hideSpline() {
-        if (!this.isVisible) return;
-        
-        this.isVisible = false;
-        this.lastHideTime = Date.now();
-        
-        // Safari使用更温和的隐藏方式
-        if (this.isSafari) {
-            this.splineViewer.style.opacity = '0';
-            this.splineViewer.style.pointerEvents = 'none';
-            // Safari不设置visibility hidden，避免重绘
-        } else {
-            this.splineViewer.style.visibility = 'hidden';
-            this.splineViewer.style.opacity = '0';
-            this.splineViewer.style.pointerEvents = 'none';
-        }
-        
-        // 暂停渲染
-        if (this.splineViewer.pause) {
-            this.splineViewer.pause();
-        }
-        
-        // 最低质量
-        if (this.splineViewer.setQuality) {
-            this.splineViewer.setQuality('lowest');
-        }
-        
-        // 停止观察
-        if (this.observer) {
-            this.observer.unobserve(this.splineViewer);
-        }
-        
-        // 3秒后重新准备观察
-        setTimeout(() => {
-            if (!this.isVisible && this.observer) {
-                if (this.isSafari) {
-                    this.splineViewer.style.opacity = '1';
-                    this.splineViewer.style.pointerEvents = 'auto';
-                } else {
-                    this.splineViewer.style.visibility = 'visible';
-                    this.splineViewer.style.opacity = '1';
-                    this.splineViewer.style.pointerEvents = 'auto';
-                }
-                this.observer.observe(this.splineViewer);
-                
-                setTimeout(() => {
-                    if (!this.isVisible) {
-                        if (this.isSafari) {
-                            this.splineViewer.style.opacity = '0';
-                            this.splineViewer.style.pointerEvents = 'none';
-                        } else {
-                            this.splineViewer.style.visibility = 'hidden';
-                            this.splineViewer.style.opacity = '0';
-                            this.splineViewer.style.pointerEvents = 'none';
-                        }
-                    }
-                }, 100);
-            }
-        }, 3000);
-    }
-    
-    showSpline() {
-        if (this.isVisible) return;
-        
-        this.isVisible = true;
-        
-        // 显示
-        if (this.isSafari) {
-            this.splineViewer.style.opacity = '1';
-            this.splineViewer.style.pointerEvents = 'auto';
-        } else {
-            this.splineViewer.style.visibility = 'visible';
-            this.splineViewer.style.opacity = '1';
-            this.splineViewer.style.pointerEvents = 'auto';
-        }
-        
-        // 重新开始观察
-        if (this.observer) {
-            this.observer.unobserve(this.splineViewer);
-            this.observer.observe(this.splineViewer);
-        }
-        
-        // 播放
-        if (this.splineViewer.play) {
-            setTimeout(() => {
-                this.splineViewer.play();
-            }, 100);
-        }
-        
-        // 恢复质量
-        if (this.splineViewer.setQuality) {
-            setTimeout(() => {
-                this.splineViewer.setQuality(this.isSafari ? 'low' : 'low');
-            }, 200);
-        }
-    }
-}
 
-// 初始化优化器
-document.addEventListener('DOMContentLoaded', () => {
-    new DualDetectionSplineOptimizer();
-});
 
 // --------------------------中英文----------------------------------
 const toggleLangBtn = document.getElementById('toggle-lang');
@@ -651,6 +1050,13 @@ ScrollTrigger.create({
     animation: gsap.timeline()
         .to('.portfolio-lable-box', { rotate: -15, duration: 3, ease: 'power3.out' }, '<')
 });
+
+
+
+
+
+
+
 
 // ---------------------------------------2.个人--------------------------------------------
 function initPersonalAnimation() {
@@ -964,114 +1370,108 @@ gsap.from('.skill-list', {
 // ---------------------------------------3.项目--------------------------------------------
 
 
-// 先检查 GSAP/ScrollTrigger 是否存在（避免未引入时报错）
-if (window.gsap && window.ScrollTrigger) {
-  // ========== 全局性能配置（关键：减少计算开销） ==========
-  gsap.config({
-    force3D: true, // 强制开启硬件加速，动画走 GPU
-    nullTargetWarn: false // 关闭无目标警告，减少控制台开销
-  });
+// // 先检查 GSAP/ScrollTrigger 是否存在（避免未引入时报错）
+// if (window.gsap && window.ScrollTrigger) {
+//   // ========== 全局性能配置（关键：减少计算开销） ==========
+//   gsap.config({
+//     force3D: true, // 强制开启硬件加速，动画走 GPU
+//     nullTargetWarn: false // 关闭无目标警告，减少控制台开销
+//   });
 
-  // ========== 优化1：每个 .project-right 独立创建 ScrollTrigger 实例 ==========
-  const projectRightElements = document.querySelectorAll('.project-right');
-  if (projectRightElements.length) {
-    // 遍历每个 .project-right 元素，为其创建独立的动画和触发器
-    projectRightElements.forEach((el, index) => {
-      // 给每个元素单独开启硬件加速
-      el.style.willChange = 'transform';
-      el.style.transform = 'translateZ(0)';
+//   // ========== 优化1：每个 .project-right 独立创建 ScrollTrigger 实例 ==========
+//   const projectRightElements = document.querySelectorAll('.project-right');
+//   if (projectRightElements.length) {
+//     // 遍历每个 .project-right 元素，为其创建独立的动画和触发器
+//     projectRightElements.forEach((el, index) => {
+//       // 给每个元素单独开启硬件加速
+//       el.style.willChange = 'transform';
+//       el.style.transform = 'translateZ(0)';
 
-      // 为当前元素创建专属的 ScrollTrigger 实例
-      ScrollTrigger.create({
-        trigger: el, // 触发器为当前元素本身（核心：独立触发）
-        start: 'top 80%', // 元素顶部到达视口80%位置时开始
-        end: '+=500', // 动画持续600px滚动距离
-        scrub: 0.1, // 微小延迟减少高频更新
-        animation: gsap.from(el, { // 仅针对当前元素的动画
-          y: 80,
-          duration: 1.5,
-          ease: 'power1.out',
-          force3D: true
-        }),
-        // 优化：仅在可视范围内激活
-        toggleActions: 'play none none reverse',
-        // 优化：降低刷新优先级，减少性能开销
-        refreshPriority: -1,
-        // 可选：给每个实例加唯一标识，方便调试
-        id: `project-right-${index}`
-      });
-    });
-  }
+//       // 为当前元素创建专属的 ScrollTrigger 实例
+//       ScrollTrigger.create({
+//         trigger: el, // 触发器为当前元素本身（核心：独立触发）
+//         start: 'top 80%', // 元素顶部到达视口80%位置时开始
+//         end: '+=500', // 动画持续600px滚动距离
+//         scrub: 0.1, // 微小延迟减少高频更新
+//         animation: gsap.from(el, { // 仅针对当前元素的动画
+//           y: 80,
+//           duration: 1.5,
+//           ease: 'power1.out',
+//           force3D: true
+//         }),
+//         // 优化：仅在可视范围内激活
+//         toggleActions: 'play none none reverse',
+//         // 优化：降低刷新优先级，减少性能开销
+//         refreshPriority: -1,
+//         // 可选：给每个实例加唯一标识，方便调试
+//         id: `project-right-${index}`
+//       });
+//     });
+//   }
 
-  // ========== 优化2：.project-middle 保持批量处理（仅1个） ==========
-  const projectMiddleElements = document.querySelectorAll('.project-middle');
-  if (projectMiddleElements.length) {
-    projectMiddleElements.forEach(el => {
-      el.style.willChange = 'transform';
-      el.style.transform = 'translateZ(0)';
-    });
+//   // ========== 优化2：.project-middle 保持批量处理（仅1个） ==========
+//   const projectMiddleElements = document.querySelectorAll('.project-middle');
+//   if (projectMiddleElements.length) {
+//     projectMiddleElements.forEach(el => {
+//       el.style.willChange = 'transform';
+//       el.style.transform = 'translateZ(0)';
+//     });
 
-    ScrollTrigger.create({
-      trigger: '.project-middle',
-      start: 'top 80%',
-      end: '+=500',
-      scrub: 0.1,
-      animation: gsap.timeline({
-        defaults: { duration: 1.5, ease: 'power1.out' }
-      }).from(projectMiddleElements, { 
-        y: 40,
-        stagger: 0.1,
-        force3D: true
-      }),
-      toggleActions: 'play none none reverse',
-      refreshPriority: -1
-    });
-  }
+//     ScrollTrigger.create({
+//       trigger: '.project-middle',
+//       start: 'top 80%',
+//       end: '+=500',
+//       scrub: 0.1,
+//       animation: gsap.timeline({
+//         defaults: { duration: 1.5, ease: 'power1.out' }
+//       }).from(projectMiddleElements, { 
+//         y: 40,
+//         stagger: 0.1,
+//         force3D: true
+//       }),
+//       toggleActions: 'play none none reverse',
+//       refreshPriority: -1
+//     });
+//   }
 
-  // ========== 全局优化：减少 ScrollTrigger 全局开销 ==========
-  ScrollTrigger.config({
-    limitCallbacks: true, // 限制回调频率
-    ignoreMobileResize: true // 移动端忽略频繁的 resize
-  });
+//   // ========== 全局优化：减少 ScrollTrigger 全局开销 ==========
+//   ScrollTrigger.config({
+//     limitCallbacks: true, // 限制回调频率
+//     ignoreMobileResize: true // 移动端忽略频繁的 resize
+//   });
 
-  // 页面卸载时清理所有实例，避免内存泄漏
-  window.addEventListener('beforeunload', () => {
-    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    gsap.killTweensOf('*');
-  });
-}
+//   // 页面卸载时清理所有实例，避免内存泄漏
+//   window.addEventListener('beforeunload', () => {
+//     ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+//     gsap.killTweensOf('*');
+//   });
+// }
 // --------------------------------------4.其他设计-----------------------------------
 
 
-// // 检查是否不是移动设备（屏幕宽度大于1199px）
-// if (window.innerWidth > 1199) {
+// 检查是否不是移动设备（屏幕宽度大于1199px）
+if (window.innerWidth > 1199) {
   
-//   // 检测Safari浏览器
-//   const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  // 检测Safari浏览器
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
   
-//   if (!isSafari) {
-//     // 非Safari浏览器（Chrome/Firefox等）：使用滚动驱动动画
-//     ScrollTrigger.create({
-//       trigger: '.img-roll', // 触发对象
-//       start: '-75%', // 开始位置
-//       end: '+=500', // 结束位置
-//       // markers:true,//显示位置标记
-//       scrub: true, // 随着鼠标上下滚动显示出现
-//       // pin:true,
-//       animation: gsap.timeline()
-//         .to('.img-roll', {y:-80, duration: 1, ease: 'power3.out'})
-//     });
-//   }
-//   // Safari浏览器：什么都不做，完全取消动画
-// }
+  if (!isSafari) {
+    // 非Safari浏览器（Chrome/Firefox等）：使用滚动驱动动画
+    ScrollTrigger.create({
+      trigger: '.img-roll', // 触发对象
+      start: '-75%', // 开始位置
+      end: '+=500', // 结束位置
+      // markers:true,//显示位置标记
+      scrub: true, // 随着鼠标上下滚动显示出现
+      // pin:true,
+      animation: gsap.timeline()
+        .from('.img-roll', {y:80, duration: 1, ease: 'power3.out'})
+    });
+  }
+  // Safari浏览器：什么都不做，完全取消动画
+}
 
-gsap.from('.text-scroll li', {
-    scrollTrigger: ".text-scroll",// 此行代码表示触发动画的元素，只需要增加该行代码，就可以实现想要的效果。
-    y: 20,
-    duration: 1,
-    stagger: 0.15 , // 每个元素间隔0.2秒
-    ease: 'power1.out',
-});
+
 
 
 
@@ -1457,33 +1857,64 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
 });
+
+
+
+
+
+// 【Cloudinary图片自动优化】放在你的JS文件任意位置即可
+function optimizeCloudinaryImages() {
+  // 找到所有Cloudinary图片
+  const cloudinaryImages = document.querySelectorAll('img[src*="cloudinary.com"]');
+  
+  cloudinaryImages.forEach(img => {
+    const originalSrc = img.src;
+    // 插入自适应优化参数
+    const optimizedSrc = originalSrc.replace(
+      /image\/upload\//,
+      'image/upload/w_auto,q_auto:eco,f_auto/'
+    );
+    img.src = optimizedSrc;
+  });
+}
+
+// 关键：等页面所有元素加载完成后再执行（兼容所有引入方式）
+if (document.readyState === 'complete') {
+  // 页面已加载完，直接执行
+  optimizeCloudinaryImages();
+} else {
+  // 页面还在加载，等加载完成后执行
+  window.addEventListener('load', optimizeCloudinaryImages);
+}
 // --------------------------鼠标-----------------------------------
 /// 鼠标
-const dot = document.getElementById('cursor-dot');
+// 仅保留circle光标元素
 const circle = document.getElementById('cursor-circle');
 let dotX = 0, dotY = 0, circleX = 0, circleY = 0;
-// 初始parts值
 let parts = 3;
 
-// 更新指针位置
+// 更新指针位置（核心修复：限制鼠标坐标在可视区域内）
 const updateCursorPosition = (e) => {
-  dotX = e.clientX;
-  dotY = e.clientY;
+  // 1. 获取页面可视区域的宽度和高度
+  const viewportWidth = window.innerWidth;
+  const viewportHeight = window.innerHeight;
+  
+  // 2. 限制坐标不超出可视区域范围
+  dotX = Math.min(Math.max(e.clientX, 0), viewportWidth - 1);
+  dotY = Math.min(Math.max(e.clientY, 0), viewportHeight - 1);
+  
   updateCursorStyles();
-  dot.style.opacity = circle.style.opacity = 1;
+  circle.style.opacity = 1; // 仅显示circle
 };
 
-// 更新光标样式（考虑滚动位置）
+// 更新光标样式（仅处理circle）
 const updateCursorStyles = () => {
-  dot.style.top = `${dotY + window.scrollY}px`;
-  dot.style.left = `${dotX + window.scrollX}px`;
-  circle.style.top = `${circleY + window.scrollY}px`;
-  circle.style.left = `${circleX + window.scrollX}px`;
+  circle.style.top = `${circleY}px`;
+  circle.style.left = `${circleX}px`;
 };
 
-// 平滑动画
+// 平滑动画（仅驱动circle）
 const circleAnimation = () => {
-  // 使用当前parts值进行计算
   circleX += (dotX - circleX) / parts;
   circleY += (dotY - circleY) / parts;
   updateCursorStyles();
@@ -1492,15 +1923,6 @@ const circleAnimation = () => {
 
 // 事件监听
 document.addEventListener('mousemove', updateCursorPosition);
-
-// 修改滚动事件处理 - 使用防抖优化性能
-let isScrolling;
-window.addEventListener('scroll', () => {
-  cancelAnimationFrame(isScrolling);
-  isScrolling = requestAnimationFrame(() => {
-    updateCursorStyles();
-  });
-});
 
 // 初始化动画
 requestAnimationFrame(circleAnimation);
@@ -1540,16 +1962,14 @@ document.querySelectorAll('.keyboard a,.navLinks').forEach(element => {
   });
 });
 
-
-// 图片悬停效果 - 增加parts值修改
+// 图片悬停效果（如果需要保留的话，补充上）
 document.querySelectorAll('.project-item').forEach(element => {
   element.style.cursor = 'default !important';
   
   element.addEventListener('mouseover', () => {
-    // 鼠标悬停图片时，将parts改为5（跟随速度变慢）
     parts = 6;
     circle.style.backgroundColor = '#006effd2';
-    circle.style.backgroundImage = 'url(https://portfolio-1318207515.cos.ap-hongkong.myqcloud.com/index/view.png)';
+    circle.style.backgroundImage = 'url(https://res.cloudinary.com/daurd7ca7/image/upload/v1773067752/view_y73efu.png)';
     circle.style.backgroundSize = 'cover';
     circle.style.width = '70px';
     circle.style.height = '70px';
@@ -1558,7 +1978,6 @@ document.querySelectorAll('.project-item').forEach(element => {
   });
 
   element.addEventListener('mouseleave', () => {
-    // 离开时恢复parts原值3
     parts = 3;
     circle.style.backgroundColor = '#ffffff00';
     circle.style.mixBlendMode = 'normal';
@@ -1568,12 +1987,6 @@ document.querySelectorAll('.project-item').forEach(element => {
     circle.style.backgroundImage = 'none';    
   });
 });
-
-
-
-
-
-
 
 
 // --------------------------contact鼠标-----------------------------------
