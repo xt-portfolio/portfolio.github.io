@@ -242,34 +242,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // ===================== 2. 图片懒加载逻辑（原有功能完整保留） =====================
-  const images = document.querySelectorAll('.project-img');
+  // ===================== 2. 图片懒加载逻辑（已移除）=====================
+  // 完全移除了图片懒加载相关的所有代码
   
-  // 创建图片懒加载观察器
-  const imageObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const img = entry.target;
-      if (entry.isIntersecting) {
-        img.classList.add('loaded');
-        if (img.complete) {
-          imageObserver.unobserve(img);
-        } else {
-          img.onload = () => imageObserver.unobserve(img);
-        }
-      } else {
-        if (!img.complete) {
-          img.loading = 'lazy';
-        }
-      }
-    });
-  }, { rootMargin: '50px 0px', threshold: 0.01 });
-
-  // 初始化图片懒加载
-  images.forEach(img => {
-    img.loading = 'lazy';
-    img.classList.add('lazy-image');
-    imageObserver.observe(img);
-  });
 });
 
 // =统一的页面卸载清理逻辑（整合所有清理操作） ==
@@ -286,13 +261,8 @@ window.addEventListener('beforeunload', function() {
     video.load();
   });
   
-  // 3. 额外优化：清理图片懒加载观察器（避免内存泄漏）
-  const images = document.querySelectorAll('.project-img');
-  images.forEach(img => {
-    // 取消所有 IntersectionObserver 对图片的观察
-    const observers = img._observers || [];
-    observers.forEach(observer => observer.unobserve(img));
-  });
+  // 3. 移除图片懒加载观察器的清理代码
+  // 图片懒加载已移除，不需要清理
 });
 
 
@@ -371,7 +341,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.removeEventListener('resize', updateThreshold);
   });
 });
-
 // ----------------------------------图片不能下载----------------------------------
 // document.addEventListener('contextmenu', function(e) {
 //   e.preventDefault();
