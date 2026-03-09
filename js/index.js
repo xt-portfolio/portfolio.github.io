@@ -45,11 +45,54 @@ controls.autoRotate = false;
 if (istouchDevice) {
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-    controls.enableZoom = true;
-    controls.zoomSpeed = 0.8;
+    controls.enableZoom = false; // 完全禁用缩放功能
     controls.enableRotate = true;
     controls.rotateSpeed = 0.8;
     controls.maxPolarAngle = Math.PI / 2;
+    
+    // 添加触摸事件处理，限制触摸区域并阻止页面滚动
+    renderer.domElement.addEventListener('touchstart', (e) => {
+        const rect = modelContainer.getBoundingClientRect();
+        const touch = e.touches[0];
+        const touchY = touch.clientY - rect.top;
+        const containerHeight = rect.height;
+        
+        // 计算触摸位置相对于容器高度的百分比
+        const touchPercent = (touchY / containerHeight) * 100;
+        
+        // 只在上方25vh和下方10vh之间的区域允许触摸旋转
+        // 上方25vh = 25%，下方10vh = 90% (100% - 10%)
+        if (touchPercent >= 25 && touchPercent <= 90) {
+            e.stopPropagation();
+        } else {
+            // 在边界区域，让事件传递给页面滚动
+            controls.enableRotate = false;
+        }
+    }, { passive: false });
+    
+    renderer.domElement.addEventListener('touchmove', (e) => {
+        const rect = modelContainer.getBoundingClientRect();
+        const touch = e.touches[0];
+        const touchY = touch.clientY - rect.top;
+        const containerHeight = rect.height;
+        
+        // 计算触摸位置相对于容器高度的百分比
+        const touchPercent = (touchY / containerHeight) * 100;
+        
+        // 只在上方25vh和下方10vh之间的区域允许触摸旋转
+        if (touchPercent >= 25 && touchPercent <= 90) {
+            e.stopPropagation();
+            controls.enableRotate = true;
+        } else {
+            controls.enableRotate = false;
+        }
+    }, { passive: false });
+    
+    renderer.domElement.addEventListener('touchend', (e) => {
+        // 恢复旋转功能
+        controls.enableRotate = true;
+        e.stopPropagation();
+    }, { passive: false });
 }
 
 // ==================== 光照（精简）====================
@@ -587,6 +630,8 @@ window.addEventListener('resize', () => {
         });
     }
 });
+
+
 
 
 
