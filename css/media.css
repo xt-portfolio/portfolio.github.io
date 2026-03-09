@@ -206,6 +206,9 @@
         margin-top: 0;
         margin-bottom: 30px;
     }
+    .nextProject-container {
+        padding: 30px;
+    }
     /* --------------更多项目------------------*/
     .three-columns{
         grid-template-columns: repeat(1, 1fr) !important;

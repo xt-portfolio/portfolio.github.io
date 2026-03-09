@@ -1349,23 +1349,9 @@ html,body {
         width: 100%;
     }
 
-    /* ------------其他设计----------------*/
-    .otherDesign-cards .sprite-container {
-        transform: scale(0.68);
-    }
-    .sprite-3d {
-        --sprite-width:160px !important;
-        transform: scale(0.8);
-
-    }
-    .tag-canvas {
-        height: 30vw;
-    }
-    .gravity-box {
-        min-width: 32vw;
-    }
-    .otherDesign-texts .sectionTitle-container {
-        width: 49vw;
+    /* ------------项目----------------*/
+    .content .line-box .line  {
+        height: 120vh;
     }
     /* ------------笔记----------------*/
     .notes-section .sectionTitle-box {

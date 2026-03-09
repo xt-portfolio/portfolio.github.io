@@ -785,6 +785,13 @@ button:hover {
     padding: 0; /* 重置所有内边距 */
     display: block;
 }
+
+
+
+
+
+
+
 .projectDetail-imgs-container {
   width: var(--basic-wrapper);
   margin: auto;

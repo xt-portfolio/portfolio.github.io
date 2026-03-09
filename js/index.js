@@ -50,6 +50,36 @@ if (istouchDevice) {
     controls.enableRotate = true;
     controls.rotateSpeed = 0.8;
     controls.maxPolarAngle = Math.PI / 2;
+    
+    // ===== 关键修改：让 OrbitControls 只在特定区域生效 =====
+    // 设置只有点击在模型容器内才响应
+    controls.screenSpacePanning = true;
+    
+    // 添加触摸事件处理，阻止事件冒泡到页面滚动
+    renderer.domElement.addEventListener('touchstart', (e) => {
+        e.stopPropagation(); // 阻止事件传播，防止页面滚动
+    }, { passive: false });
+    
+    renderer.domElement.addEventListener('touchmove', (e) => {
+        e.stopPropagation(); // 阻止事件传播，防止页面滚动
+    }, { passive: false });
+    
+    renderer.domElement.addEventListener('touchend', (e) => {
+        e.stopPropagation(); // 阻止事件传播
+    }, { passive: false });
+    
+    // 添加鼠标事件处理（保持一致性）
+    renderer.domElement.addEventListener('mousedown', (e) => {
+        e.stopPropagation();
+    });
+    
+    renderer.domElement.addEventListener('mousemove', (e) => {
+        e.stopPropagation();
+    });
+    
+    renderer.domElement.addEventListener('mouseup', (e) => {
+        e.stopPropagation();
+    });
 }
 
 // ==================== 光照（精简）====================
@@ -507,7 +537,8 @@ function animate(time) {
     
     // 旋转控制（根据设备类型）
     if (istouchDevice) {
-        controls.update(); // 触摸屏用OrbitControls
+        // 触摸屏用OrbitControls - 只更新不额外处理
+        controls.update();
     } else if (isMouseRotationEnabled) {
         // 非触摸屏用鼠标跟踪
         currentRotation += (targetRotation - currentRotation) * rotationLerpSpeed;
@@ -587,7 +618,6 @@ window.addEventListener('resize', () => {
         });
     }
 });
-
 
 
 
