@@ -809,7 +809,7 @@ document.querySelectorAll('.itemHover').forEach(element => {
     // 鼠标悬停图片时，将parts改为5（跟随速度变慢）
     parts = 6;
     circle.style.backgroundColor = '#006effd2';
-    circle.style.backgroundImage = 'url(../img/index/view.png)';
+    circle.style.backgroundImage = 'url(https://res.cloudinary.com/daurd7ca7/image/upload/v1773067752/view_y73efu.png)';
     circle.style.backgroundSize = 'cover';
     circle.style.width = '70px';
     circle.style.height = '70px';
