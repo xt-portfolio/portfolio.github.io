@@ -41,72 +41,62 @@ controls.enablePan = false;
 controls.enableRotate = false;
 controls.autoRotate = false;
 
-// 射线检测器用于判断触摸是否在模型上
-const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2();
-let isTouchingModel = false;
-
 // 触摸屏设备额外配置
 if (istouchDevice) {
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     controls.enableZoom = false; // 完全禁用缩放功能
-    controls.enableRotate = false; // 初始禁用，只有在触摸模型时才启用
+    controls.enableRotate = true;
     controls.rotateSpeed = 0.8;
     controls.maxPolarAngle = Math.PI / 2;
     
-    // 触摸开始事件
+    // 定义触摸区域：70vh居中，上下各15vh用于滑动
+    const TOP_MARGIN = 20; // 上方15%区域用于滑动
+    const BOTTOM_MARGIN = 15; // 下方15%区域用于滑动
+    const TOUCH_START = TOP_MARGIN; // 触摸区域开始位置
+    const TOUCH_END = 100 - BOTTOM_MARGIN; // 触摸区域结束位置
+    
+    // 添加触摸事件处理，限制触摸区域并阻止页面滚动
     renderer.domElement.addEventListener('touchstart', (e) => {
-        // 计算触摸点的归一化坐标
-        const rect = renderer.domElement.getBoundingClientRect();
+        const rect = modelContainer.getBoundingClientRect();
         const touch = e.touches[0];
-        mouse.x = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
-        mouse.y = -((touch.clientY - rect.top) / rect.height) * 2 + 1;
+        const touchY = touch.clientY - rect.top;
+        const containerHeight = rect.height;
         
-        // 发射射线检测是否点击到模型
-        raycaster.setFromCamera(mouse, camera);
+        // 计算触摸位置相对于容器高度的百分比
+        const touchPercent = (touchY / containerHeight) * 100;
         
-        // 收集所有可检测的物体
-        const detectObjects = [];
-        if (computerModel) detectObjects.push(computerModel);
-        if (cardGroup) detectObjects.push(cardGroup);
-        
-        if (detectObjects.length > 0) {
-            const intersects = raycaster.intersectObjects(detectObjects, true);
-            isTouchingModel = intersects.length > 0;
-            
-            if (isTouchingModel) {
-                // 触摸到模型：启用旋转，阻止事件传播
-                controls.enableRotate = true;
-                e.preventDefault();
-                e.stopPropagation();
-            } else {
-                // 没触摸到模型：禁用旋转，让事件传递给页面
-                controls.enableRotate = false;
-            }
-        }
-    }, { passive: false });
-    
-    // 触摸移动事件
-    renderer.domElement.addEventListener('touchmove', (e) => {
-        if (isTouchingModel) {
-            // 正在触摸模型时，阻止页面滚动
-            e.preventDefault();
+        // 只在中间70vh区域允许触摸旋转（上下各留15vh滑动）
+        if (touchPercent >= TOUCH_START && touchPercent <= TOUCH_END) {
             e.stopPropagation();
+            controls.enableRotate = true;
+        } else {
+            // 在边界区域，让事件传递给页面滚动
+            controls.enableRotate = false;
         }
     }, { passive: false });
     
-    // 触摸结束事件
-    renderer.domElement.addEventListener('touchend', (e) => {
-        isTouchingModel = false;
-        controls.enableRotate = false;
-        e.stopPropagation();
+    renderer.domElement.addEventListener('touchmove', (e) => {
+        const rect = modelContainer.getBoundingClientRect();
+        const touch = e.touches[0];
+        const touchY = touch.clientY - rect.top;
+        const containerHeight = rect.height;
+        
+        // 计算触摸位置相对于容器高度的百分比
+        const touchPercent = (touchY / containerHeight) * 100;
+        
+        // 只在中间70vh区域允许触摸旋转
+        if (touchPercent >= TOUCH_START && touchPercent <= TOUCH_END) {
+            e.stopPropagation();
+            controls.enableRotate = true;
+        } else {
+            controls.enableRotate = false;
+        }
     }, { passive: false });
     
-    // 触摸取消事件
-    renderer.domElement.addEventListener('touchcancel', (e) => {
-        isTouchingModel = false;
-        controls.enableRotate = false;
+    renderer.domElement.addEventListener('touchend', (e) => {
+        // 恢复旋转功能
+        controls.enableRotate = true;
         e.stopPropagation();
     }, { passive: false });
 }
@@ -245,6 +235,8 @@ const easeInOutCubic = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3
 const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
 
 // ==================== 射线检测 ====================
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
 let powerButtonMesh = null;
 
 renderer.domElement.addEventListener('click', (event) => {
@@ -312,8 +304,8 @@ renderer.domElement.addEventListener('click', (event) => {
 
 // ==================== 鼠标跟踪（仅非触摸屏）====================
 let mouseX = 0, targetRotation = 0, currentRotation = 0;
-const maxRotationAngle = 0.2;
-const rotationLerpSpeed = 0.05;
+const maxRotationAngle = 0.3;// 数值越大，旋转角度越大
+const rotationLerpSpeed = 0.05;// 旋转的顺滑度（速度），不影响角度大小
 let isMouseRotationEnabled = false;
 let mouseInContainer = false;
 
@@ -651,7 +643,6 @@ window.addEventListener('resize', () => {
 
 
 
-
 //---------------------------------------------------------------------------------------
 // =============================== Header 显示/隐藏（下滑隐藏，上滑出现） ===================================
 //---------------------------------------------------------------------------------------
@@ -973,56 +964,6 @@ toggleLangBtn?.addEventListener('click', switchLanguage);
 document.addEventListener('DOMContentLoaded', initLanguage);
 
 // ------------------------------------1.首页---------------------------------
-document.addEventListener('DOMContentLoaded', function() {
-    const bannerBox = document.querySelector('.banner');
-    const keycap = document.querySelector('.move-bg');
-    
-    if (!bannerBox || !keycap) return;
-    
-    const parallaxStrength = 10;
-    let rafId = null;
-    let mouseX = 0, mouseY = 0;
-    let currentX = 0, currentY = 0;
-    
-    function updateParallax() {
-        // 使用requestAnimationFrame平滑更新
-        currentX += (mouseX - currentX) * 0.1;
-        currentY += (mouseY - currentY) * 0.1;
-        
-        keycap.style.transform = `translateY(0%) translate(${currentX}px, ${currentY}px)`;
-        
-        rafId = requestAnimationFrame(updateParallax);
-    }
-    
-    bannerBox.addEventListener('mousemove', function(e) {
-        const rect = this.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        const relX = x / rect.width;
-        const relY = y / rect.height;
-        
-        const moveX = (relX - 0.5) * 1.5;
-        const moveY = (relY - 0.5) * 1.5;
-        
-        mouseX = moveX * parallaxStrength;
-        mouseY = moveY * parallaxStrength;
-        
-        if (!rafId) {
-            rafId = requestAnimationFrame(updateParallax);
-        }
-    });
-
-    bannerBox.addEventListener('mouseleave', function() {
-        mouseX = 0;
-        mouseY = 0;
-        if (rafId) {
-            cancelAnimationFrame(rafId);
-            rafId = null;
-        }
-        keycap.style.transform = 'translateY(0%)';
-    });
-});
 
 //skill克隆
 document.addEventListener('DOMContentLoaded', function() {

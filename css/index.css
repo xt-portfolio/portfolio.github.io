@@ -305,7 +305,7 @@ html,body {
 .sprite-keycap {
     right: 11%;
     top: 9.5%;
-    transform: scale(0.9);
+    transform: scale(0.95);
     filter: contrast(1.1);
 
 }
@@ -1254,8 +1254,7 @@ html,body {
         transform: translate(-10%, -40%) scale(2.6);
     }
     .sprite-keycap {
-        right: 3%;
-        top: 7%;
+        display: none;
     }    
     .sprite-garbage {
         right: 6%;
@@ -1305,7 +1304,7 @@ html,body {
     .sprite-computer, .computer-box {
         transform: translate(-50%, -60%) scale(2.8);
     }
-    .sprite-bucket, .sprite-garbage {
+    .sprite-bucket, .sskill-container {
         display: none;
     }
     .banner .wrapper {
@@ -1393,9 +1392,7 @@ html,body {
         transform-origin: left center;
         z-index: 3;
     }
-    .banner .move-bg, .sprite-keycap {
-        opacity: 0;
-    }
+
     .banner-bottom-box{
         width: 100%;
     }
