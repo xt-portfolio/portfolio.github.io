@@ -41,56 +41,72 @@ controls.enablePan = false;
 controls.enableRotate = false;
 controls.autoRotate = false;
 
+// 射线检测器用于判断触摸是否在模型上
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+let isTouchingModel = false;
+
 // 触摸屏设备额外配置
 if (istouchDevice) {
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     controls.enableZoom = false; // 完全禁用缩放功能
-    controls.enableRotate = true;
+    controls.enableRotate = false; // 初始禁用，只有在触摸模型时才启用
     controls.rotateSpeed = 0.8;
     controls.maxPolarAngle = Math.PI / 2;
     
-    // 添加触摸事件处理，限制触摸区域并阻止页面滚动
+    // 触摸开始事件
     renderer.domElement.addEventListener('touchstart', (e) => {
-        const rect = modelContainer.getBoundingClientRect();
+        // 计算触摸点的归一化坐标
+        const rect = renderer.domElement.getBoundingClientRect();
         const touch = e.touches[0];
-        const touchY = touch.clientY - rect.top;
-        const containerHeight = rect.height;
+        mouse.x = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((touch.clientY - rect.top) / rect.height) * 2 + 1;
         
-        // 计算触摸位置相对于容器高度的百分比
-        const touchPercent = (touchY / containerHeight) * 100;
+        // 发射射线检测是否点击到模型
+        raycaster.setFromCamera(mouse, camera);
         
-        // 只在上方25vh和下方10vh之间的区域允许触摸旋转
-        // 上方25vh = 25%，下方10vh = 90% (100% - 10%)
-        if (touchPercent >= 25 && touchPercent <= 90) {
-            e.stopPropagation();
-        } else {
-            // 在边界区域，让事件传递给页面滚动
-            controls.enableRotate = false;
+        // 收集所有可检测的物体
+        const detectObjects = [];
+        if (computerModel) detectObjects.push(computerModel);
+        if (cardGroup) detectObjects.push(cardGroup);
+        
+        if (detectObjects.length > 0) {
+            const intersects = raycaster.intersectObjects(detectObjects, true);
+            isTouchingModel = intersects.length > 0;
+            
+            if (isTouchingModel) {
+                // 触摸到模型：启用旋转，阻止事件传播
+                controls.enableRotate = true;
+                e.preventDefault();
+                e.stopPropagation();
+            } else {
+                // 没触摸到模型：禁用旋转，让事件传递给页面
+                controls.enableRotate = false;
+            }
         }
     }, { passive: false });
     
+    // 触摸移动事件
     renderer.domElement.addEventListener('touchmove', (e) => {
-        const rect = modelContainer.getBoundingClientRect();
-        const touch = e.touches[0];
-        const touchY = touch.clientY - rect.top;
-        const containerHeight = rect.height;
-        
-        // 计算触摸位置相对于容器高度的百分比
-        const touchPercent = (touchY / containerHeight) * 100;
-        
-        // 只在上方25vh和下方10vh之间的区域允许触摸旋转
-        if (touchPercent >= 25 && touchPercent <= 90) {
+        if (isTouchingModel) {
+            // 正在触摸模型时，阻止页面滚动
+            e.preventDefault();
             e.stopPropagation();
-            controls.enableRotate = true;
-        } else {
-            controls.enableRotate = false;
         }
     }, { passive: false });
     
+    // 触摸结束事件
     renderer.domElement.addEventListener('touchend', (e) => {
-        // 恢复旋转功能
-        controls.enableRotate = true;
+        isTouchingModel = false;
+        controls.enableRotate = false;
+        e.stopPropagation();
+    }, { passive: false });
+    
+    // 触摸取消事件
+    renderer.domElement.addEventListener('touchcancel', (e) => {
+        isTouchingModel = false;
+        controls.enableRotate = false;
         e.stopPropagation();
     }, { passive: false });
 }
@@ -229,8 +245,6 @@ const easeInOutCubic = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3
 const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
 
 // ==================== 射线检测 ====================
-const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2();
 let powerButtonMesh = null;
 
 renderer.domElement.addEventListener('click', (event) => {
@@ -630,7 +644,6 @@ window.addEventListener('resize', () => {
         });
     }
 });
-
 
 
 
