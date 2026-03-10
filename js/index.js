@@ -35,11 +35,14 @@ modelContainer.appendChild(renderer.domElement);
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 // 基础配置：禁用所有功能，后面根据设备类型选择性开启
-controls.enableDamping = false;
-controls.enableZoom = false;
-controls.enablePan = false;
-controls.enableRotate = false;
-controls.autoRotate = false;
+
+
+// 注意：启用阻尼(enableDamping=true)时，需要在动画循环中调用 controls.update()
+controls.enableDamping = false;// 阻尼/惯性效果：设为false时，模型拖动/旋转后会立即停止；设为true时会有“惯性滑行”的顺滑效果
+controls.enableZoom = false;// 缩放控制
+controls.enablePan = false;// 平移控制
+controls.enableRotate = false;// 旋转控制
+controls.autoRotate = false;// 自动旋转：设为true时，模型会以默认速度持续自转
 
 // 触摸屏设备额外配置
 if (istouchDevice) {
