@@ -288,8 +288,8 @@ html,body {
 .sprite-bucket {
     filter: brightness(1.24);
     left: 10%;
-    bottom: 16%;
-    transform: scale(1);
+    bottom: 16.5%;
+    transform: scale(1.05);
 
 }
 
@@ -1170,7 +1170,7 @@ html,body {
         transform: scale(1.2);
     }
     .sprite-bucket {
-        transform: scale(0.94);
+        transform: scale(1);
     }
     .sprite-keycap {
         right: 9%;
