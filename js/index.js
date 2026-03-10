@@ -35,9 +35,6 @@ modelContainer.appendChild(renderer.domElement);
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 // 基础配置：禁用所有功能，后面根据设备类型选择性开启
-
-
-// 注意：启用阻尼(enableDamping=true)时，需要在动画循环中调用 controls.update()
 controls.enableDamping = false;// 阻尼/惯性效果：设为false时，模型拖动/旋转后会立即停止；设为true时会有“惯性滑行”的顺滑效果
 controls.enableZoom = false;// 缩放控制
 controls.enablePan = false;// 平移控制
@@ -187,7 +184,7 @@ let cardGroup = null;
 let cardMeshes = [];
 let cardAnimActive = false;
 let cardAnimProgress = 0;
-const cardAnimSpeed = 0.06; // 加快动画速度
+const cardAnimSpeed = 0.05; // 加快动画速度
 const moveDistance = 0.8;
 const maxRotation = Math.PI;
 const delayBeforeRotate = 300;
@@ -219,18 +216,6 @@ let knobAnimStartTime = 0;
 const knobAnimDuration = 300;
 
 let cardRotationWrapper = null;
-
-// ==================== 卡片入场动画 ====================
-let cardEntranceActive = false;
-let cardEntranceStartTime = 0;
-const ENTRANCE_PHASE_SCALE = 0;
-const ENTRANCE_PHASE_WAIT = 1;
-const ENTRANCE_PHASE_Z = 2;
-let entrancePhase = ENTRANCE_PHASE_SCALE;
-let entrancePhaseStartTime = 0;
-const scaleDuration = 400;
-const waitDuration = 200;
-const zDuration = 600;
 
 // ==================== 缓动函数 ====================
 const easeInOutQuad = t => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
@@ -400,6 +385,7 @@ loader.load('https://lypml5jmfdky7wfp.public.blob.vercel-storage.com/computer.gl
         }
     });
     
+    // 初始位置：电脑和卡片一起在下方
     computerModel.position.set(HORIZONTAL_OFFSET, -2.5, 0);
     computerModel.rotation.y = -Math.PI;
     rotationGroup.add(computerModel);
@@ -423,15 +409,19 @@ loader.load('https://lypml5jmfdky7wfp.public.blob.vercel-storage.com/card.glb', 
     });
     
     cardRotationWrapper.add(originalCard);
+    // 卡片固定位置，跟随电脑一起入场
     cardRotationWrapper.position.copy(finalCardPos);
     cardGroup = cardRotationWrapper;
     
-    cardGroup.scale.set(0, 0, 0);
-    cardGroup.position.set(finalCardPos.x, finalCardPos.y, 1.0);
+    // 移除卡片独立缩放动画：直接设置正常大小
+    cardGroup.scale.set(1, 1, 1);
+    cardGroup.position.copy(finalCardPos);
+    
+    // 绑定到电脑模型，同步运动
+    computerModel ? computerModel.add(cardGroup) : rotationGroup.add(cardGroup);
     
     initialCardPos.copy(cardGroup.position);
     initialCardRot.copy(cardGroup.rotation);
-    rotationGroup.add(cardGroup);
     
     checkAllModelsLoaded();
 }, null, checkAllModelsLoaded);
@@ -445,8 +435,14 @@ function startEntranceAnimations() {
     if (computerModel) {
         computerAnimActive = true;
         computerAnimStartTime = Date.now();
+        // 初始状态：电脑+卡片都在下方
         computerModel.position.set(HORIZONTAL_OFFSET, -2.5, 0);
         computerModel.rotation.y = -Math.PI;
+        
+        // 确保卡片绑定到电脑模型
+        if (cardGroup && !computerModel.children.includes(cardGroup)) {
+            computerModel.add(cardGroup);
+        }
     }
 }
 
@@ -476,12 +472,13 @@ function animate(time) {
     
     const now = Date.now();
     
-    // 电脑入场动画
+    // 电脑+卡片同步入场动画（核心修改）
     if (computerAnimActive && computerModel) {
         const elapsed = now - computerAnimStartTime;
         const progress = Math.min(elapsed / computerAnimDuration, 1);
         const eased = easeInOutCubic(progress);
         
+        // 电脑向上移动 + 旋转
         computerModel.position.y = -2.5 + 2.5 * eased;
         computerModel.rotation.y = -Math.PI + Math.PI * eased;
         computerModel.position.x = HORIZONTAL_OFFSET;
@@ -491,44 +488,9 @@ function animate(time) {
             computerModel.position.y = 0;
             computerModel.rotation.y = 0;
             
-            if (cardGroup && !cardEntranceActive) {
-                cardEntranceActive = true;
-                entrancePhase = ENTRANCE_PHASE_SCALE;
-                entrancePhaseStartTime = now;
-            }
-        }
-    }
-    
-    // 卡片入场动画
-    if (cardEntranceActive && cardGroup) {
-        if (entrancePhase === ENTRANCE_PHASE_SCALE) {
-            const elapsed = now - entrancePhaseStartTime;
-            const progress = Math.min(elapsed / scaleDuration, 1);
-            const eased = easeInOutCubic(progress);
-            cardGroup.scale.set(eased, eased, eased);
-            
-            if (progress >= 1) {
-                cardGroup.scale.set(1, 1, 1);
-                entrancePhase = ENTRANCE_PHASE_WAIT;
-                entrancePhaseStartTime = now;
-            }
-        } else if (entrancePhase === ENTRANCE_PHASE_WAIT) {
-            if (now - entrancePhaseStartTime >= waitDuration) {
-                entrancePhase = ENTRANCE_PHASE_Z;
-                entrancePhaseStartTime = now;
-            }
-        } else if (entrancePhase === ENTRANCE_PHASE_Z) {
-            const elapsed = now - entrancePhaseStartTime;
-            const progress = Math.min(elapsed / zDuration, 1);
-            const eased = easeInOutCubic(progress);
-            cardGroup.position.z = 1.0 - (1.0 - 0.23) * eased;
-            
-            if (progress >= 1) {
-                cardEntranceActive = false;
-                cardGroup.position.z = 0.23;
-                startVideoFade();
-                setTimeout(enableMouseRotation, 700);
-            }
+            // 入场完成后启动视频淡入
+            startVideoFade();
+            setTimeout(enableMouseRotation, 700);
         }
     }
     
@@ -566,7 +528,7 @@ function animate(time) {
         rotationGroup.rotation.y = currentRotation;
     }
     
-    // 卡片点击动画
+    // 卡片点击动画（保留）
     if (cardGroup && cardAnimActive) {
         if (currentPhase === PHASE_MOVE_FORWARD) {
             cardAnimProgress += cardAnimSpeed;
@@ -639,8 +601,6 @@ window.addEventListener('resize', () => {
         });
     }
 });
-
-
 
 
 
